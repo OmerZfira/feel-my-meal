@@ -8,6 +8,7 @@ import Cart from './components/cart';
 import Admin from './components/admin/admin';
 import Users from './components/admin/users';
 import Contacts from './components/admin/contact/contact';
+import MyMeals from './components/my-meals';
 
 const routes = [{
   path: '/',
@@ -32,6 +33,11 @@ const routes = [{
   path: '/cart',
   name: 'cart',
   component: Cart
+},
+{
+  path: '/my-meals',
+  name: 'my-meals',
+  component: MyMeals
 },
 {
   path: '/admin',
