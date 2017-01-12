@@ -1,6 +1,11 @@
+import moment from 'moment';
+
 export default {
     data: () => {
         return {
+            dayInMonthNum: +moment().format().substr(5,5).substr(3,5),
+            dayInMonthStr: moment().format('dddd'),
+            // tomorrow: moment().weekday(0),
             meals: [{
                         _id: "58773fb3036f4b25abe93b9c",
                         foods: [
@@ -22,12 +27,21 @@ export default {
         }
     },
     methods: {
-
+        translateTime() {
+            this.meals.forEach((meal) => {
+                console.log('meal.time', meal.time);  
+            })
+        }
     },
     components: {
-
+        moment,
+        
     },
     mounted() {
-        console.log('mashu');
+        console.log('mashu', this.$refs);
+        this.meals.forEach((meal) => {
+                // console.log('meal.time', new Date(meal.time));  
+                // console.log('meal.time', +moment(meal.time).format('hh'));  
+            })
     }
 }

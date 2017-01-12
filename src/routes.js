@@ -9,6 +9,7 @@ import Admin from './components/admin/admin';
 import Users from './components/admin/users';
 import Contacts from './components/admin/contact/contact';
 import MyMeals from './components/my-meals';
+import Settings from './components/settings';
 
 const routes = [{
   path: '/',
@@ -23,6 +24,11 @@ const routes = [{
   path: '/signup',
   name: 'signup',
   component: Signup
+},
+{
+  path: '/settings',
+  name: 'settings',
+  component: Settings
 },
 {
   path: '/shop',

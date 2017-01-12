@@ -5,12 +5,12 @@
     </div>
     <div>
       <ul class="nav navbar-nav">
-        <li>
+        <!--<li>
           <router-link :to="{ name: 'shop' }">Shop</router-link>
         </li>
         <li>
           <router-link :to="{name: 'cart'}">My Cart</router-link>
-        </li>
+        </li>-->
 
         <li>
           <router-link :to="{name: 'my-meals'}">My Meals</router-link>
@@ -18,7 +18,7 @@
         <li>
 
           <router-link :to="{name: 'admin'}">Admin</router-link>
-        </li>-->
+        </li>
         <li>
           <router-link :to="{name: 'admin'}">My Statistics</router-link>
         </li>
@@ -28,6 +28,9 @@
 
       </ul>
       <ul class="nav navbar-nav navbar-right">
+        <li>
+          <router-link :to="{ name: 'settings' }">Settings</router-link>
+        </li>
         <li v-if="!isLoggedIn">
           <router-link :to="{ name: 'signin' }">Sign in</router-link>
         </li>
