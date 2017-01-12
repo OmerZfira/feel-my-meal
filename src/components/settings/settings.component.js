@@ -1,4 +1,6 @@
+
 export default {
+
     data: () => {
         return {
             shouldPush: true
@@ -8,9 +10,9 @@ export default {
     methods: {
     },
     components: {
-
+        
     },
     computed: {
-        
+
     }
 }
