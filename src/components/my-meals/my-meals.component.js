@@ -1,4 +1,6 @@
 import moment from 'moment';
+import FullCalendar from 'fullcalendar';
+
 
 export default {
     data: () => {
@@ -27,21 +29,19 @@ export default {
         }
     },
     methods: {
-        translateTime() {
-            this.meals.forEach((meal) => {
-                console.log('meal.time', meal.time);  
-            })
-        }
+
     },
     components: {
         moment,
-        
+        FullCalendar,
+
     },
     mounted() {
-        console.log('mashu', this.$refs);
-        this.meals.forEach((meal) => {
-                // console.log('meal.time', new Date(meal.time));  
-                // console.log('meal.time', +moment(meal.time).format('hh'));  
-            })
+        $('.calendar').fullCalendar({
+     
+            hiddenDays: [ 4,5,6 ],
+            // hiddenDays: [ 0,1,2 ]
+        });
+
     }
 }
