@@ -24,6 +24,9 @@ export default {
     methods: {
 
     },
+    components: {
+
+    },
     mounted() {
         console.log('mashu');
     }
