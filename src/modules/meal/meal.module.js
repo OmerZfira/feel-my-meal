@@ -21,38 +21,12 @@ const state = {
 const mutations = {
   [ADDING_MEAL](state, meal) {
     state.currMeal = meal;
-    console.log('meal in mutation: ', meal);
     state.isloadingMeal = !state.isloadingMeal;
   },
   [ADDING_MEAL_ERR](state, error) {
     state.error = error;
     state.isloadingMeal = !state.isloadingMeal;
   },
-  // [CHECKOUT_SUCCESS]( state ) {
-  //   state.items = [];
-  //   state.loading = false;
-  // },
-  // [ADD_TO_CART]( state, item ) {
-  //   let itemExists = state.items.indexOf(item) > -1;
-  //   if( !itemExists ) {
-  //     state.items.push(item);
-  //   }
-  // },
-  // [REMOVE_FROM_CART]( state, item ) {
-  //   item.quantity = 0;
-  //   state.items.splice(state.items.indexOf(item), 1);
-  // },
-  // [CHECKOUT]( state ) {
-  //   state.loading = true;
-  // },
-  // [CHECKOUT_SUCCESS]( state ) {
-  //   state.items = [];
-  //   state.loading = false;
-  // },
-  // [CHECKOUT_ERROR]( state, error ) {
-  //   state.error = error;
-  //   state.loading = false;
-  // }
 }
 
 const actions = {
@@ -60,45 +34,14 @@ const actions = {
     commit(ADDING_MEAL, meal);
     mealService.submitMeal(meal).then(meal => {
       commit(ADDING_MEAL, meal);
-      // swal({
-      //   title: "Meal was ADDED!!!!",
-      //   type : "success",
-      //   text : "I took all your money",
-      // });
     }).catch(err => {
       commit(ADDING_MEAL_ERR, err);
     });
   },
-  // checkout( { commit } ) {
-  //   commit(CHECKOUT);
-  //   shopService.checkout().then(_ => {
-  //     commit(CHECKOUT_SUCCESS);
-  //     swal({
-  //       title: "Busted!!!!",
-  //       type : "success",
-  //       text : "I took all your money",
-  //     });
-  //   }).catch(err => {
-  //     commit(CHECKOUT_ERROR, err);
-  //   });
-  // },
 };
 
 const getters = {
   isloadingMeal: state => state.isloadingMeal,
-  // checkoutPending: state => state.loading,
-  // error          : state => state.error,
-  // cart( state ) {
-  //   return state.items.filter(i => i.quantity);
-  // },
-  // cartTotal( _, getters ) {
-  //   return getters.cart.reduce(( acc, item ) => {
-  //     return acc + (parseInt(item.quantity) * item.price);
-  //   }, 0);
-  // },
-  // cartLength( _, getters ) {
-  //   return getters.cart.length;
-  // }
 }
 
 export default {

@@ -1,6 +1,6 @@
 <template>
     <section class="add-meal" v-show="!isloadingMeal">
-        <div @click="toogleSpeechReco" class="record" :class="{recording : isRec}">
+        <div @mousedown="startSpeechReco" @mouseup="stopSpeechReco" @mouseleave="stopSpeechReco" class="record" :class="{recording : isRec}">
             <div class="fa fa-microphone fa-5x" aria-hidden="true"></div>
         </div>
         <div class="recControls">
@@ -8,13 +8,16 @@
             <button v-if="recFb" @click="addFood" class="btn btn-primary btn-lg">Add Food</button>
             <button @click="submitFood" class="btn btn-success btn-lg">Finish Meal</button>
         </div>
-        {{meal}}
+        <ul class="list-group">
+            <li v-for="(food, index) of foods" class="list-group-item">
+                <span class="badge">{{index}}</span> {{food}}
+            </li>
+        </ul>
     </section>
 </template>
 
 <script>
     import { mapGetters, mapActions } from 'vuex';
-    // import { ADD_MEAL } from '../../modules/meal/meal.module';
 
     export default {
         data() {
@@ -22,38 +25,34 @@
                 recognition: {},
                 isRec: false,
                 speechElText: '',
-                meal: [],
+                foods: [],
                 recFb: true
             }
         },
         computed: {
-            // isLoading() {
-            //     console.log(this.$store.state.meal.loadingMeal);
-            //     return this.$store.state.meal.loadingMeal
-            // },
             ...mapGetters(['isloadingMeal', 'user'])
-            // ...mapActions(['products', 'loading'])
         },
         methods: {
-            toogleSpeechReco() {
-                if (this.isRec) {
-                    this.recognition.stop();
-                    this.isRec = false;
-                }
-                else this.recognition.start();
+            startSpeechReco() {
+                this.isRec = true;
+                this.recognition.start();
+            },
+            stopSpeechReco() {
+                this.recognition.stop();
+                this.isRec = false;
             },
             addFood() {
                 this.recognition.stop();
                 // this.isRec = false;
                 if (this.speechElText) {
-                    this.meal.push(this.speechElText);
+                    this.foods.push(this.speechElText);
                     this.speechElText = '';
                 }
             },
             submitFood() {
-                if (this.meal) {
-                    this.$store.dispatch('addMeal', { foods: this.meal, userId: this.user._id });
-                    this.meal = [];
+                if (this.foods) {
+                    this.$store.dispatch('addMeal', { foods: this.foods, userId: this.user._id });
+                    this.foods = [];
                     this.speechElText = '';
                 }
             }
