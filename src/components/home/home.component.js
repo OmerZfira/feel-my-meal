@@ -1,15 +1,16 @@
  import addContact from '../add-contact';
+ import addMeal from '../add-meal/add-meal';
 
 export default  {
   data: () => {
     return {
-      items: []
+
     }
   },
   methods : {
-
   },
   components: {
-    addContact
+    addContact,
+    addMeal
   }
 }
