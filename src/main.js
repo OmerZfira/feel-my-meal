@@ -9,13 +9,21 @@ window.jQuery = jQuery;
 import store from './store';
 import router from './routes';
 import MainNav from './components/main-nav';
+import BottomNav from './components/bottom-nav/bottom-nav';
+import ModalFeeling from './components/modal-feeling/modal-feeling';
+
 
 const app = new Vue({
   router,
   store,
   moment,
   components: {
-    MainNav
-  }
+    MainNav,
+    BottomNav,
+    ModalFeeling,
+  },
+  data: {
+    showModal: false
+  },
 }).$mount('#app');
 

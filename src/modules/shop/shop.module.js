@@ -6,14 +6,14 @@ export const UPDATE_QUANTITY = 'store/UPDATE_QUANTITY';
 import shopService from '../../services/shop.service.js';
 
 const state = {
-  loading : false,
+  loading: false,
   products: [],
 };
 
 
 const actions = {
-  getProducts ( { commit } ) {
-    if( state.products.length ) {
+  getProducts({ commit }) {
+    if (state.products.length) {
       commit(GET_PRODUCTS_SUCCESS, state.products);
       return;
     }
@@ -27,24 +27,24 @@ const actions = {
 }
 
 const mutations = {
-  [GET_PRODUCTS]( state ) {
+  [GET_PRODUCTS](state) {
     state.loading = true;
   },
-  [GET_PRODUCTS_SUCCESS] ( state, products ) {
+  [GET_PRODUCTS_SUCCESS](state, products) {
     state.products = products;
     state.loading = false;
   },
-  [GET_PRODUCTS_ERROR] ( state, products ) {
+  [GET_PRODUCTS_ERROR](state, products) {
     state.loading = false;
   },
-  [UPDATE_QUANTITY]( _, { product, quantity } ) {
+  [UPDATE_QUANTITY](_, { product, quantity }) {
     product.quantity = quantity;
   }
 }
 
 const getters = {
   products: state => state.products,
-  loading : state => state.loading
+  loading: state => state.loading
 }
 
 export default {
