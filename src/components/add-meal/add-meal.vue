@@ -137,7 +137,12 @@
     &.recording {
         background-color: red;
     }
+    
+    .fa-microphone {
+        margin: auto;
+    }
  }
+
 
 .recControls {
     margin-top: 30px;
@@ -158,10 +163,5 @@
         }
     }
 } 
-
-
-.fa-microphone {
-    margin: auto;
-}
 
 </style>

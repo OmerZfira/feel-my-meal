@@ -1,11 +1,6 @@
 export const ADD_MEAL = 'meal/ADD_MEAL';
 export const ADDING_MEAL = 'meal/ADDING_MEAL';
 export const ADDING_MEAL_ERR = 'meal/ADDING_MEAL_ERR';
-export const ADD_TO_CART = 'cart/ADD_TO_CART';
-export const REMOVE_FROM_CART = 'cart/REMOVE_FROM_CART';
-export const CHECKOUT = 'cart/CHECKOUT';
-export const CHECKOUT_SUCCESS = 'cart/CHECKOUT_SUCCESS';
-export const CHECKOUT_ERROR = 'cart/CHECKOUT_ERROR';
 
 import mealService from '../../services/meal.service';
 import { mapGetters } from 'vuex';
@@ -13,7 +8,6 @@ import { mapGetters } from 'vuex';
 const state = {
   currMeal: {},
   isloadingMeal: false,
-  items: [],
   loading: false,
   error: null
 }
