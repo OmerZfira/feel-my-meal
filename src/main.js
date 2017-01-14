@@ -9,6 +9,7 @@ window.jQuery = jQuery;
 import store from './store';
 import router from './routes';
 import MainNav from './components/main-nav';
+
 const app = new Vue({
   router,
   store,
