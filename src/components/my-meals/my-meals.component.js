@@ -1,47 +1,47 @@
 import moment from 'moment';
+import FullCalendar from 'fullcalendar';
 
 export default {
     data: () => {
         return {
-            dayInMonthNum: +moment().format().substr(5,5).substr(3,5),
-            dayInMonthStr: moment().format('dddd'),
-            // tomorrow: moment().weekday(0),
+            
             meals: [{
-                        _id: "58773fb3036f4b25abe93b9c",
-                        foods: [
-                            "Banana",
-                            "Apple"
-                        ],
-                        time: 1484210059985,
-                        userId: "58773eec036f4b25abe93b03"
-                    },
-                    {
-                        _id: "58773eb3036f4b25abe93b9c",
-                        foods: [
-                            "Pasta",
-                            "Tortilla"
-                        ],
-                        time: 1484710359985,
-                        userId: "58773fec036f4b25abe93b03"
-                    }]
+                id: "1",
+                title: "Banana, Apple",
+                start: moment(1484210059985).format(),
+                end: moment(1484223059985).format(),
+                backgroundColor: 'red'
+                // allDay: true
+            }],
+
         }
     },
     methods: {
-        translateTime() {
-            this.meals.forEach((meal) => {
-                console.log('meal.time', meal.time);  
-            })
-        }
+
     },
     components: {
         moment,
-        
+        FullCalendar,
+
     },
     mounted() {
-        console.log('mashu', this.$refs);
-        this.meals.forEach((meal) => {
-                // console.log('meal.time', new Date(meal.time));  
-                // console.log('meal.time', +moment(meal.time).format('hh'));  
-            })
+        $('.calendar').fullCalendar({
+            // put your options and callbacks here
+
+            // hiddenDays: [  4, 5,6 ], //choose which days to hide
+            // hiddenDays: [ 0, 1,2,3 ],
+
+            header: { center: 'month, agendaWeek' }, // buttons for switching between views
+            views: {
+                month: { // name of view
+                    titleFormat: 'YYYY, MM, DD' // name of view
+                    // other view-specific options here
+                },
+                agendaWeek: {
+                    titleFormat: 'YYYY, MM, DD'
+                }
+            },
+            events: this.meals,
+        })
     }
 }

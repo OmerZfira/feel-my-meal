@@ -10,8 +10,6 @@ function submitMeal({ foods, userId }) {
         });
 }
 
-
-
 export default {
     submitMeal
 }
