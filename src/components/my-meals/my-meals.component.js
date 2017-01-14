@@ -1,30 +1,56 @@
 import moment from 'moment';
 import FullCalendar from 'fullcalendar';
+import { mapGetters, mapActions } from 'vuex';
 
 export default {
     data: () => {
         return {
-            
-            meals: [{
-                id: "1",
-                title: "Banana, Apple",
-                start: moment(1484210059985).format(),
-                end: moment(1484223059985).format(),
-                backgroundColor: 'red'
+            events: [
+            {
+                id: '1',
+                title: 'Banana, Apple',
+                start: 1484210059985,
+                end: 1484223059985,
+                backgroundColor: '2a3744'
                 // allDay: true
-            }],
-
+            },
+            {
+                id: '1',
+                title: 'feeling',
+                rating: 5,
+                start: 1484230059985,
+                end: 1484223559985,
+                textColor: 'black'
+            }]
+            
         }
     },
     methods: {
-
+        setFeelingColor(){
+            let colors = ['','red','red','yellow','yellow','yellow'
+                            ,'blue','blue','blue','green','green']
+            this.events.forEach(event => {
+                if(!event['backgroundColor'] && event['title'] === 'feeling'){
+                   event['backgroundColor'] = colors[event['rating']];
+                } 
+                console.log('events', event);
+            })
+        },
     },
     components: {
         moment,
         FullCalendar,
 
     },
+    created () {
+         this.$store.dispatch('getMeals');
+         
+    },
+    computed  : {
+        ...mapGetters(['meals', 'loading'])
+     },
     mounted() {
+        this.setFeelingColor();
         $('.calendar').fullCalendar({
             // put your options and callbacks here
 
@@ -41,7 +67,8 @@ export default {
                     titleFormat: 'YYYY, MM, DD'
                 }
             },
-            events: this.meals,
+            events: this.events,       
         })
+        console.log('this.meals',  this.meals);
     }
 }
