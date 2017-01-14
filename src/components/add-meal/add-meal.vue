@@ -1,20 +1,29 @@
 <template>
+    <div class="wrapper">
     <section class="add-meal" v-show="!isloadingMeal">
-        <div @click="toogleSpeechReco" class="record" :class="{recording : isRec}">
+        <div @mousedown="startSpeechReco" @mouseup="stopSpeechReco" @mouseleave="stopSpeechReco" class="record" :class="{recording : isRec}">
             <div class="fa fa-microphone fa-5x" aria-hidden="true"></div>
         </div>
         <div class="recControls">
-            <input type="text" v-model="speechElText" class="recInput" placeholder="Next Food Item">
+            <input type="text" v-model="speechElText" @keyup.enter="addFood" class="recInput" placeholder="Next Food Item">
             <button v-if="recFb" @click="addFood" class="btn btn-primary btn-lg">Add Food</button>
             <button @click="submitFood" class="btn btn-success btn-lg">Finish Meal</button>
         </div>
-        {{meal}}
+        <ul class="list-group">
+            <li v-for="(food, index) of foods" class="list-group-item">
+                <button @click="deleteFood(index)" class="btn btn-danger btn-lg badge btn-red">X</button>
+                <div contenteditable="true">{{food}}
+                </div>
+
+            </li>
+        </ul>
     </section>
+
+    </div>
 </template>
 
 <script>
     import { mapGetters, mapActions } from 'vuex';
-    // import { ADD_MEAL } from '../../modules/meal/meal.module';
 
     export default {
         data() {
@@ -22,38 +31,37 @@
                 recognition: {},
                 isRec: false,
                 speechElText: '',
-                meal: [],
+                foods: [],
                 recFb: true
             }
         },
         computed: {
-            // isLoading() {
-            //     console.log(this.$store.state.meal.loadingMeal);
-            //     return this.$store.state.meal.loadingMeal
-            // },
             ...mapGetters(['isloadingMeal', 'user'])
-            // ...mapActions(['products', 'loading'])
         },
         methods: {
-            toogleSpeechReco() {
-                if (this.isRec) {
-                    this.recognition.stop();
-                    this.isRec = false;
-                }
-                else this.recognition.start();
+            startSpeechReco() {
+                this.isRec = true;
+                this.recognition.start();
+            },
+            stopSpeechReco() {
+                this.recognition.stop();
+                this.isRec = false;
             },
             addFood() {
                 this.recognition.stop();
                 // this.isRec = false;
                 if (this.speechElText) {
-                    this.meal.push(this.speechElText);
+                    this.foods.unshift(this.speechElText);
                     this.speechElText = '';
                 }
             },
+            deleteFood(idx) {
+                this.foods.splice(idx, 1);
+            },
             submitFood() {
-                if (this.meal) {
-                    this.$store.dispatch('addMeal', { foods: this.meal, userId: this.user._id });
-                    this.meal = [];
+                if (this.foods) {
+                    this.$store.dispatch('addMeal', { foods: this.foods, userId: this.user._id });
+                    this.foods = [];
                     this.speechElText = '';
                 }
             }
@@ -100,9 +108,14 @@
 </script>
 
 <style scoped lang="scss">
-    
+
+.wrapper {
+    margin-top: 150px;
+    display:flex;
+    justify-content: center;
+}
 .add-meal {
-    margin-top: 40px;
+    max-width: 600px;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -124,7 +137,12 @@
     &.recording {
         background-color: red;
     }
+    
+    .fa-microphone {
+        margin: auto;
+    }
  }
+
 
 .recControls {
     margin-top: 30px;
@@ -136,9 +154,14 @@
     }
 }
 
+.list-group{
+    width: 100%;
+    .btn-red {
+        background-color: #d9534f;
+        &:hover {
+            background-color: #c9302c;
+        }
+    }
+} 
 
-
-.fa-microphone {
-    margin: auto;
-}
 </style>

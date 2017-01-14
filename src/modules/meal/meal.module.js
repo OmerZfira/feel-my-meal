@@ -10,6 +10,7 @@ export const GET_MEALS_ERROR = 'meal/GET_MEALS_ERROR';
 // export const CHECKOUT_SUCCESS = 'cart/CHECKOUT_SUCCESS';
 // export const CHECKOUT_ERROR = 'cart/CHECKOUT_ERROR';
 
+
 import mealService from '../../services/meal.service';
 import { mapGetters } from 'vuex';
 
@@ -17,7 +18,6 @@ const state = {
   meals: [],
   currMeal: {},
   isloadingMeal: false,
-  items: [],
   loading: false,
   error: null
 }
@@ -25,13 +25,13 @@ const state = {
 const mutations = {
   [ADDING_MEAL](state, meal) {
     state.currMeal = meal;
-    console.log('meal in mutation: ', meal);
     state.isloadingMeal = !state.isloadingMeal;
   },
   [ADDING_MEAL_ERR](state, error) {
     state.error = error;
     state.isloadingMeal = !state.isloadingMeal;
   },
+
   [GET_MEALS]( state ) {
     state.loading = true;
   },
@@ -71,6 +71,7 @@ const mutations = {
   //   state.error = error;
   //   state.loading = false;
   // }
+
 }
 
 const actions = {
@@ -78,16 +79,12 @@ const actions = {
     commit(ADDING_MEAL, meal);
     mealService.submitMeal(meal).then(meal => {
       commit(ADDING_MEAL, meal);
-      // swal({
-      //   title: "Meal was ADDED!!!!",
-      //   type : "success",
-      //   text : "I took all your money",
-      // });
     }).catch(err => {
       commit(ADDING_MEAL_ERR, err);
     });
 
   },
+
   getMeals({ commit }) {
     if (state.meals.length) {
       commit(GET_PRODUCTS_SUCCESS, state.meals);
@@ -113,6 +110,7 @@ const actions = {
   //     commit(CHECKOUT_ERROR, err);
   //   });
   // },
+
 };
 
 const getters = {
@@ -132,6 +130,7 @@ const getters = {
   // cartLength( _, getters ) {
   //   return getters.cart.length;
   // }
+
 }
 
 export default {
