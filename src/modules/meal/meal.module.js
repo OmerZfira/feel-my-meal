@@ -1,16 +1,20 @@
 export const ADD_MEAL = 'meal/ADD_MEAL';
 export const ADDING_MEAL = 'meal/ADDING_MEAL';
 export const ADDING_MEAL_ERR = 'meal/ADDING_MEAL_ERR';
-export const ADD_TO_CART = 'cart/ADD_TO_CART';
-export const REMOVE_FROM_CART = 'cart/REMOVE_FROM_CART';
-export const CHECKOUT = 'cart/CHECKOUT';
-export const CHECKOUT_SUCCESS = 'cart/CHECKOUT_SUCCESS';
-export const CHECKOUT_ERROR = 'cart/CHECKOUT_ERROR';
+export const GET_MEALS = 'meal/GET_MEALS';
+export const GET_MEALS_SUCCESS = 'meal/GET_MEALS_SUCCESS';
+export const GET_MEALS_ERROR = 'meal/GET_MEALS_ERROR';
+// export const ADD_TO_CART = 'cart/ADD_TO_CART';
+// export const REMOVE_FROM_CART = 'cart/REMOVE_FROM_CART';
+// export const CHECKOUT = 'cart/CHECKOUT';
+// export const CHECKOUT_SUCCESS = 'cart/CHECKOUT_SUCCESS';
+// export const CHECKOUT_ERROR = 'cart/CHECKOUT_ERROR';
 
 import mealService from '../../services/meal.service';
 import { mapGetters } from 'vuex';
 
 const state = {
+  meals: [],
   currMeal: {},
   isloadingMeal: false,
   items: [],
@@ -28,6 +32,20 @@ const mutations = {
     state.error = error;
     state.isloadingMeal = !state.isloadingMeal;
   },
+  [GET_MEALS]( state ) {
+    state.loading = true;
+  },
+  [GET_MEALS_SUCCESS] ( state, meals ) {
+    state.meals = meals;
+    state.loading = false;
+  },
+  [GET_MEALS_ERROR] ( state, meals ) {
+    state.loading = false;
+  },
+  // [UPDATE_QUANTITY]( _, { meal, quantity } ) {
+  //   meal.quantity = quantity;
+  // }
+
   // [CHECKOUT_SUCCESS]( state ) {
   //   state.items = [];
   //   state.loading = false;
@@ -68,10 +86,23 @@ const actions = {
     }).catch(err => {
       commit(ADDING_MEAL_ERR, err);
     });
+
   },
+  getMeals({ commit }) {
+    if (state.meals.length) {
+      commit(GET_PRODUCTS_SUCCESS, state.meals);
+      return;
+    }
+    commit(GET_MEALS);
+    mealService.getMeals().then(meals => {
+      commit(GET_MEALS_SUCCESS, meals);
+    }).catch(err => {
+      commit(GET_MEALS_ERROR, err);
+    });
+  }
   // checkout( { commit } ) {
   //   commit(CHECKOUT);
-  //   shopService.checkout().then(_ => {
+  //   mealService.checkout().then(_ => {
   //     commit(CHECKOUT_SUCCESS);
   //     swal({
   //       title: "Busted!!!!",
@@ -86,6 +117,8 @@ const actions = {
 
 const getters = {
   isloadingMeal: state => state.isloadingMeal,
+  meals: state => state.meals,
+  // loading : state => state.loading
   // checkoutPending: state => state.loading,
   // error          : state => state.error,
   // cart( state ) {

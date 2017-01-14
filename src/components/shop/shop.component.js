@@ -21,6 +21,5 @@ export default {
   components: {
     Product,
   }
-
 }
 
