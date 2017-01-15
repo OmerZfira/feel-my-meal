@@ -1,23 +1,24 @@
 <template>
     <div class="wrapper">
-    <section class="add-meal" v-show="!isloadingMeal">
-        <div @mousedown="startSpeechReco" @mouseup="stopSpeechReco" @mouseleave="stopSpeechReco" class="record" :class="{recording : isRec}">
-            <div class="fa fa-microphone fa-5x" aria-hidden="true"></div>
-        </div>
-        <div class="recControls">
-            <input type="text" v-model="speechElText" @keyup.enter="addFood" class="recInput" placeholder="Next Food Item">
-            <button v-if="recFb" @click="addFood" class="btn btn-primary btn-lg">Add Food</button>
-            <button @click="submitFood" class="btn btn-success btn-lg">Finish Meal</button>
-        </div>
-        <ul class="list-group">
-            <li v-for="(food, index) of foods" class="list-group-item">
-                <button @click="deleteFood(index)" class="btn btn-danger btn-lg badge btn-red">X</button>
-                <div contenteditable="true">{{food}}
-                </div>
+        <section class="add-meal" v-show="!isloadingMeal">
+            <div @touchstart="startSpeechReco" @touchend="stopSpeechReco" @touchcancel="stopSpeechReco" @mousedown="startSpeechReco"
+                @mouseup="stopSpeechReco" @mouseleave="stopSpeechReco" class="record" :class="{recording : isRec}">
+                <div class="fa fa-microphone fa-5x" aria-hidden="true"></div>
+            </div>
+            <div class="recControls">
+                <input type="text" v-model="speechElText" @keyup.enter="addFood" class="recInput" placeholder="Next Food Item">
+                <button v-if="recFb" @click="addFood" class="btn btn-primary btn-lg">Add Food</button>
+                <button @click="submitFood" class="btn btn-success btn-lg">Finish Meal</button>
+            </div>
+            <ul class="list-group">
+                <li v-for="(food, index) of foods" class="list-group-item">
+                    <button @click="deleteFood(index)" class="btn btn-danger btn-lg badge btn-red">X</button>
+                    <div contenteditable="true">{{food}}
+                    </div>
 
-            </li>
-        </ul>
-    </section>
+                </li>
+            </ul>
+        </section>
 
     </div>
 </template>
@@ -110,9 +111,10 @@
 <style scoped lang="scss">
 
 .wrapper {
-    margin-top: 150px;
+    /*margin-top: 150px;*/
     display:flex;
     justify-content: center;
+    color: #333;
 }
 .add-meal {
     max-width: 600px;
@@ -147,15 +149,19 @@
 .recControls {
     margin-top: 30px;
     display: flex;
+        margin-bottom: 10px;
+    
 
     .recInput {
         font-size: 1.5em;
         font-weight: 700;
+        margin-right: 10px;
     }
 }
 
 .list-group{
     width: 100%;
+    font-size: 1.2em;
     .btn-red {
         background-color: #d9534f;
         &:hover {

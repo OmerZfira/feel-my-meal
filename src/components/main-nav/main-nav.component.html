@@ -1,36 +1,27 @@
 <nav class="navbar navbar-default">
   <section class="container">
     <div class="navbar-header" style="margin-top: -4px;">
-<router-link to="/" class="navbar-brand" exact>CodingAcadmey</router-link>
+<router-link to="/" class="navbar-brand" exact>Feel My Meal</router-link>
 </div>
 <div>
-  <ul class="nav navbar-nav">
-    <!--<li>
-          <router-link :to="{ name: 'shop' }">Shop</router-link>
-        </li>
-        <li>
-          <router-link :to="{name: 'cart'}">My Cart</router-link>
-        </li>-->
 
+  <ul class="nav navbar-nav">
     <li>
       <router-link :to="{name: 'my-meals'}">My Meals</router-link>
     </li>
     <li>
-
-
-          <router-link :to="{name: 'admin'}">Admin</router-link>
-        </li>
-        <li>
-          <router-link :to="{name: 'my-statistics'}">My Statistics</router-link>
-        </li>
-        <li>
-          <router-link :to="{name: 'admin'}">Global Statistics</router-link>
-        </li>
-
-
-  </ul>
-  <ul class="nav navbar-nav navbar-right">
+      <router-link :to="{name: 'admin'}">Admin</router-link>
+    </li>
     <li>
+      <router-link :to="{name: 'my-statistics'}">My Statistics</router-link>
+    </li>
+    <li>
+      <router-link :to="{name: 'admin'}">Global Statistics</router-link>
+    </li>
+  </ul>
+
+  <ul class="nav navbar-nav navbar-right">
+    <li v-if="isLoggedIn">
       <router-link :to="{ name: 'settings' }">Settings</router-link>
     </li>
     <li v-if="!isLoggedIn">
@@ -46,7 +37,15 @@
       <img src="~assets/profile.png" :title="user.username" class="profile-img" />
     </li>
 
-    <li class="dropdown" v-if="cartLength">
+</ul>
+</div>
+</section>
+
+</nav>
+
+
+
+    <!--<li class="dropdown" v-if="cartLength">
       <a href="#" class="dropdown-toggle">
         <span class="glyphicon glyphicon-shopping-cart"></span> {{cartLength}} - Items<span class="caret"></span>
       </a>
@@ -70,9 +69,4 @@
 
 </li>
 </ul>
-</li>
-</ul>
-</div>
-</section>
-
-</nav>
+</li>-->

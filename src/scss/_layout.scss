@@ -14,7 +14,7 @@
 @media (max-width: #{$container-width - 10}) {
   .container,
   .inner-container {
-    max-width: 98%;
+    // max-width: 98%;
   }
 }
 
@@ -50,6 +50,12 @@
 
 @mixin for-mobile-only {
   @media (max-width: $mobile-breakpoint) {
+    @content;
+  }
+}
+
+@mixin for-tablet-only {
+  @media (max-width: $tablet-breakpoint) {
     @content;
   }
 }

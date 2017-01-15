@@ -1,7 +1,6 @@
 <template>
 
-    <nav>
-
+    <nav class="bottom-nav">
         <router-link class="nav-record" :to="{name: 'home'}" v-show="$route.name !== 'home'">
             <div class="record">
                 <div class="fa fa-microphone fa-2x" aria-hidden="true"></div>
@@ -33,6 +32,8 @@
   position: fixed;
   bottom: 50px;
   right: 50px;
+  z-index: 999;
+  
 
   &:hover, &:active {
     text-decoration: none;
@@ -70,6 +71,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  z-index: 999;
 
   }
 
