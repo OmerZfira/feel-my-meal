@@ -1,10 +1,12 @@
 <nav class="navbar navbar-default">
-  <section class="container">
+  <section class="section_container">
     <div class="navbar-header" style="margin-top: -4px;">
-<router-link to="/" class="navbar-brand" exact>Feel My Meal</router-link>
-</div>
-<div>
+      <input id="nav-bar-mobile-checkbox" type="checkbox">
+      <label for="nav-bar-mobile-checkbox" class="nav-bar-mobile-icon fa fa-bars" aria-hidden="true"></label>
+      <router-link to="/" class="navbar-brand" exact>CodingAcadmey</router-link>
+    </div>
 
+<div class="nav-bar_container">
   <ul class="nav navbar-nav">
     <li>
       <router-link :to="{name: 'my-meals'}">My Meals</router-link>
@@ -37,36 +39,8 @@
       <img src="~assets/profile.png" :title="user.username" class="profile-img" />
     </li>
 
-</ul>
+  </ul>
 </div>
 </section>
 
 </nav>
-
-
-
-    <!--<li class="dropdown" v-if="cartLength">
-      <a href="#" class="dropdown-toggle">
-        <span class="glyphicon glyphicon-shopping-cart"></span> {{cartLength}} - Items<span class="caret"></span>
-      </a>
-      <ul class="dropdown-menu dropdown-cart" role="menu">
-        <li v-for="item in cart">
-          <span class="item">
-                    <span class="item-left">
-                        <img :src="item.img" alt="" style="height: 80px;width: 200px;"/>
-<span class="item-info">
-                            <span>{{item.title}}</span>
-<b>{{item.price}}{{item.currency}}</b>
-</span>
-</span>
-
-<span class="item-right">
-                        <button class="btn btn-xs btn-danger pull-right" @click.stop="removeFromCart(item)">x</button>
-                    </span>
-
-</span>
-<p class="item">Quantity: {{item.quantity}}</p>
-
-</li>
-</ul>
-</li>-->

@@ -1,7 +1,7 @@
 /*----------  Containers  ----------*/
 
 .container {
-  width: var(--container-width);
+  // width: var(--container-width);
   margin: 0 auto;
   padding: 0 1em;
 }
@@ -14,7 +14,7 @@
 @media (max-width: #{$container-width - 10}) {
   .container,
   .inner-container {
-    // max-width: 98%;
+    max-width: 98%;
   }
 }
 
