@@ -17,8 +17,7 @@
 </template>
 
 <script>
-    export default {
-        name: 'feeling-rating',
+    export default {  name: 'feeling-rating',
         data() {
             return {
                 temp_value: null,
@@ -47,7 +46,7 @@
                 this.value = this.temp_value;
             },
             set(value) {
-                if (this.disabled == "true") {
+                if (this.d== "true") {
                     return;
                 }
                 this.temp_value = value;
