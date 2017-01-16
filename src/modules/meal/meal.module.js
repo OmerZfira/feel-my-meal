@@ -87,7 +87,7 @@ const actions = {
 
   getMeals({ commit }) {
     if (state.meals.length) {
-      commit(GET_PRODUCTS_SUCCESS, state.meals);
+      commit(GET_MEALS_SUCCESS, state.meals);
       return;
     }
     commit(GET_MEALS);

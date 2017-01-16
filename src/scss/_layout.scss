@@ -1,7 +1,7 @@
 /*----------  Containers  ----------*/
 
 .container {
-  width: var(--container-width);
+  // width: var(--container-width);
   margin: 0 auto;
   padding: 0 1em;
 }
@@ -50,6 +50,12 @@
 
 @mixin for-mobile-only {
   @media (max-width: $mobile-breakpoint) {
+    @content;
+  }
+}
+
+@mixin for-tablet-only {
+  @media (max-width: $tablet-breakpoint) {
     @content;
   }
 }

@@ -33,7 +33,7 @@ export default {
                 if(!event['backgroundColor'] && event['title'] === 'feeling'){
                    event['backgroundColor'] = colors[event['rating']];
                 } 
-                console.log('events', event);
+                // console.log('events', event);
             })
         },
     },
@@ -43,6 +43,7 @@ export default {
 
     },
     created () {
+        // console.log('dispatching getmeals');
          this.$store.dispatch('getMeals');
          
     },
@@ -51,6 +52,7 @@ export default {
      },
     mounted() {
         this.setFeelingColor();
+        setTimeout(() => this.events = this.meals);
         $('.calendar').fullCalendar({
             // put your options and callbacks here
 
@@ -69,6 +71,6 @@ export default {
             },
             events: this.events,       
         })
-        console.log('this.meals',  this.meals);
+        console.log('this.meals',  this.events);
     }
 }

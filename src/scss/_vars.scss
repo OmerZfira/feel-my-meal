@@ -1,10 +1,11 @@
 $container-width: 1063px;
-$mobile-breakpoint: 642px;
+$tablet-breakpoint: 865px;
+$mobile-breakpoint: 620px;
 
 :root {
   /* Layout */
   --container-width: $container-width;
-  --inner-container-width: 900px;
+  // --inner-container-width: 900px;
   /* Fonts */
   --primary-font: Playfair;
   --secondary-font: Ubuntu;
