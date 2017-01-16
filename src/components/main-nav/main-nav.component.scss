@@ -1,3 +1,4 @@
+
 .router-link-active {
   color: lightgreen !important;
 }
@@ -14,6 +15,81 @@
   width:100%;
   top: 0;
   z-index: 1000;
+
+}
+
+.wrapper {
+  width: 85%;
+  margin: 0 auto;
+}
+
+#nav-bar-mobile-checkbox, .nav-bar-mobile-icon {
+    display: none;
+    color: white;
+    font-size: 2.8rem;
+    line-height: 1;
+    cursor: pointer;
+    
+}
+
+@media (max-width: 1231px) {
+    .wrapper {
+        width: 95%;
+    }
+}
+
+@media (max-width: 1102px) {
+    .navbar-right img {
+        display:none;
+    }
+}
+
+@media (max-width: 1001px) {
+    .nav-bar_container {
+        max-width: 50%;
+        display: flex;
+        flex-wrap: nowrap;
+        flex-direction: column;
+        justify-content: space-between;
+        position: absolute;
+        top: 100px;
+        left: 0;
+        z-index: 9999;
+        padding: 1em;
+        padding-top: 0px;
+        transition: all 0.4s ease-in-out;
+        transform: scaleX(0);
+        opacity: 0;
+        transform-origin: left;
+        border-bottom-right-radius: 5px;
+    }
+
+    .navbar-right {
+        display: flex;
+        flex-wrap: nowrap;
+        flex-direction: column;
+ 
+    }
+    .navbar-nav {
+        display: flex;
+        flex-direction: column;
+        flex-wrap: nowrap;
+    }
+
+    .nav-bar-mobile-icon {
+        display: inline-block;
+        margin-left: 10px;
+    }
+
+    #nav-bar-mobile-checkbox:checked ~ .nav-bar_container {
+        background-color: #2C3E50;
+        transform: scaleY(1);
+        opacity: 1;
+    }
+    
+    .navbar-brand {
+      float: right;
+    }
 
 }
 

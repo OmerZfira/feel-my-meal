@@ -135,7 +135,7 @@
     cursor: pointer;
     background-color: darkred;
     transition: all 0.5s ease;
-    box-shadow:inset -4px -7px 5px 3px rgba(0,0,0,0.6);
+    box-shadow: 4px 4px 5px 3px rgba(0,0,0,0.6);
     border-radius: 50%;
     margin: auto;
     display: flex;
@@ -143,12 +143,14 @@
     align-items: center;
     
     &.recording {
+        box-shadow: none;
+
         background-color: red;
         animation-name: pulse;
         animation-duration: 2s;
         animation-iteration-count: infinite;
         animation-timing-function: linear;
-        transform: translateY(2px);
+        transform: translateY(4px);
     
     }
     
