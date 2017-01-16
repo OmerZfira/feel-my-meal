@@ -91,8 +91,9 @@ const actions = {
       return;
     }
     commit(GET_MEALS);
-    mealService.getMeals().then(meals => {
+    return mealService.getMeals().then(meals => {
       commit(GET_MEALS_SUCCESS, meals);
+      return meals;
     }).catch(err => {
       commit(GET_MEALS_ERROR, err);
     });
@@ -116,6 +117,7 @@ const actions = {
 const getters = {
   isloadingMeal: state => state.isloadingMeal,
   meals: state => state.meals,
+  
   // loading : state => state.loading
   // checkoutPending: state => state.loading,
   // error          : state => state.error,
