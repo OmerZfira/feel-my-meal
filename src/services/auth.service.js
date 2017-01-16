@@ -14,8 +14,6 @@ function signin( {email,password} ) {
       setSession(token, user);
       return user;
     })
-
-
 }
 // function signinDummy( { email, password } ) {
 //   return new Promise(( resolve, reject ) => {
@@ -39,7 +37,16 @@ function signin( {email,password} ) {
  * @param email
  * @param password
  */
-function signup( user ) {
+
+function signup({ email: username, password: pass }) {
+    return Vue.http.post('http://localhost:3003/signup', { username , pass })
+        .then(res => res.json())
+        .then(user => {
+            return user;
+        });
+}
+
+function signup1( user ) {
   const token = 'JWT';
   return new Promise(resolve => {
     resolve({
