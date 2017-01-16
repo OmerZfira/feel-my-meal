@@ -25,7 +25,6 @@ const mutations = {
 
 const actions = {
   addFeeling({ commit, state }, feeling) {
-    console.log('feeling module: ', feeling);
     commit(ADDING_FEELING, feeling);
     feelingService.submitFeeling(feeling).then(feeling => {
       commit(ADDING_FEELING, feeling);

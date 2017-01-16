@@ -53,6 +53,7 @@
                 if (this.currRating) {
                     this.$store.dispatch('addFeeling', { rating: this.currRating, userId: this.user._id });
                 }
+                this.$emit('close');
             }
         }
     }

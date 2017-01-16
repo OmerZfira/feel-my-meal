@@ -11,6 +11,9 @@ export default {
       this.$store.commit(SIGN_OUT);
       this.$router.push('/');
     },
+    closeMenu() {
+      this.$refs.checkbox.checked = false;
+    },
     ...mapMutations({
       removeFromCart: REMOVE_FROM_CART
     })

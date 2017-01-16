@@ -16,9 +16,8 @@
             <ul class="list-group">
                 <li v-for="(food, index) of foods" class="list-group-item">
                     <button @click="deleteFood(index)" class="btn btn-danger btn-lg badge btn-red">X</button>
-                    <div contenteditable="true">{{food}}
+                    <div contenteditable="true" @keyup="updateFood(index, $event)">{{food}}
                     </div>
-
                 </li>
             </ul>
         </section>
@@ -35,11 +34,14 @@
                 recognition: {},
                 isRec: false,
                 speechElText: '',
-                foods: [],
+                foodsData: [],
                 recFb: true
             }
         },
         computed: {
+            foods() {
+                return this.foodsData;
+            },
             ...mapGetters(['isloadingMeal', 'user'])
         },
         methods: {
@@ -53,19 +55,21 @@
             },
             addFood() {
                 this.recognition.stop();
-                // this.isRec = false;
                 if (this.speechElText) {
-                    this.foods.unshift(this.speechElText);
+                    this.foodsData.unshift(this.speechElText);
                     this.speechElText = '';
                 }
             },
             deleteFood(idx) {
-                this.foods.splice(idx, 1);
+                this.foodsData.splice(idx, 1);
+            },
+            updateFood(idx, event) {
+                this.foodsData[idx] = event.target.innerText;
             },
             submitFood() {
                 if (this.foods) {
                     this.$store.dispatch('addMeal', { foods: this.foods, userId: this.user._id });
-                    this.foods = [];
+                    this.foodsData = [];
                     this.speechElText = '';
                 }
             }
@@ -144,14 +148,12 @@
     
     &.recording {
         box-shadow: none;
-
         background-color: red;
         animation-name: pulse;
         animation-duration: 2s;
         animation-iteration-count: infinite;
         animation-timing-function: linear;
         transform: translateY(4px);
-    
     }
     
     .fa-microphone {
