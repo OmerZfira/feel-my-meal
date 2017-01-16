@@ -198,28 +198,8 @@ header nav li:last-child{
 	color: #fff;
 	text-align: center;
 	margin-top: 30px;
-}
-
-.hero .background-image{
-	position: absolute;
-	top: 0;
-	left: 0;
-	width: 100%;
-	height: 100%;
-	background-size: cover;
-	background-color: #2196F3;
-	z-index: -1;
-}
-
-.hero .background-image:after{
-	content: '';
-	position: absolute;
-	top: 0;
-	left: 0;
-	width: 100%;
-	height: 100%;
-	background-color: #414a4f;
-	opacity: 0.2;
+	background: fixed center no-repeat url(https://1.bp.blogspot.com/-CreT1QNGTDY/V3noHMpHRsI/AAAAAAAAAaQ/bA2dcjjFBpw1RLIFsOFZtPJQ5u3fYqikwCLcB/s1600/Healthy%2Bfood.jpg);
+	background-size: cover ;
 }
 
 .hero h1{

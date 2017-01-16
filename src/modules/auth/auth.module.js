@@ -1,6 +1,7 @@
 export const SIGN_IN = 'auth/SIGN_IN';
 export const SIGN_OUT = 'auth/SIGN_OUT';
 
+
 const state = {
   isLoggedIn: !!localStorage.getItem('token'),
   user: JSON.parse(localStorage.getItem('user'))
@@ -13,7 +14,7 @@ const mutations = {
   },
   [SIGN_OUT]( state ) {
     state.isLoggedIn = false;
-  }
+  },
 }
 
 const actions = {};

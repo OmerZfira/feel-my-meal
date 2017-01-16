@@ -1,38 +1,43 @@
 <nav class="navbar navbar-default">
   <div class="wrapper">
     <!--<div class="navbar-header" style="margin-top: -4px;">-->
-      <input id="nav-bar-mobile-checkbox" type="checkbox">
+      <input id="nav-bar-mobile-checkbox" type="checkbox" ref="checkbox">
       <label for="nav-bar-mobile-checkbox" class="nav-bar-mobile-icon fa fa-bars" aria-hidden="true"></label>
-      <router-link to="/" class="navbar-brand" exact>CodingAcadmey</router-link>
+      
+        
+      <!--<label for="nav-bar-mobile-checkbox" aria-hidden="true">
+      </label>-->
+      <router-link to="/" class="navbar-brand" exact>Coding Acadmey</router-link>
+
     <!--</div>-->
 
 <div class="nav-bar_container">
   <ul class="nav navbar-nav">
-    <li>
+    <li @click="closeMenu">
       <router-link :to="{name: 'my-meals'}">My Meals</router-link>
     </li>
-    <li>
+    <li @click="closeMenu">
       <router-link :to="{name: 'admin'}">Admin</router-link>
     </li>
-    <li>
+    <li @click="closeMenu">
       <router-link :to="{name: 'my-statistics'}">My Statistics</router-link>
     </li>
-    <li>
+    <li @click="closeMenu">
       <router-link :to="{name: 'admin'}">Global Statistics</router-link>
     </li>
   </ul>
 
   <ul class="nav navbar-nav navbar-right">
-    <li v-if="isLoggedIn">
+    <li @click="closeMenu" v-if="isLoggedIn">
       <router-link :to="{ name: 'settings' }">Settings</router-link>
     </li>
-    <li v-if="!isLoggedIn">
+    <li @click="closeMenu" v-if="!isLoggedIn">
       <router-link :to="{ name: 'signin' }">Sign in</router-link>
     </li>
-    <li v-if="!isLoggedIn">
+    <li @click="closeMenu" v-if="!isLoggedIn">
       <router-link :to="{ name: 'signup' }">Sign up</router-link>
     </li>
-    <li v-if="isLoggedIn">
+    <li @click="closeMenu" v-if="isLoggedIn">
       <a href="#" @click="signout">Sign out</a>
     </li>
     <li v-if="isLoggedIn">
