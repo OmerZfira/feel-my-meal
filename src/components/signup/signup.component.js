@@ -14,7 +14,7 @@ export default  {
       if( this.errors.any() ) return;
 
       authService.signup(user).then(res => {
-        this.$store.commit(SIGN_IN);
+        // this.$store.commit(SIGN_IN);
         this.$router.push({ name: 'signin' });
       });
     }
