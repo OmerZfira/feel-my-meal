@@ -10,25 +10,18 @@ function submitMeal({ foods, userId }) {
         });
 }
 
-export function getMeals() {
-  return Vue.http.get('http://localhost:3003/data/meal')
+
+export function getMealsByUser({user}) {
+
+    
+  return Vue.http.post('http://localhost:3003/getMealByUser',user )
         .then(res => res.json())
         .then(meal => {
             return meal;   
         });
 }
-// export function generateMeals() {
-//   const meals = [{
-//                     id: '1',
-//                     title: 'Banana, Apple',
-//                     start: moment(1484210059985).format(),
-//                     end: moment(1484223059985).format(),
-//                     backgroundColor: '2a3744'
-//                     // allDay: true
-//                 }];
-//   return meals;
-// }
+
 export default {
     submitMeal,
-    getMeals
+    getMealsByUser
 }
