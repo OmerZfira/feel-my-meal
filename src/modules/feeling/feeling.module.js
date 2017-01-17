@@ -1,9 +1,9 @@
 export const ADD_FEELING = 'feeling/ADD_FEELING';
 export const ADDING_FEELING = 'feeling/ADDING_FEELING';
 export const ADDING_FEELING_ERR = 'feeling/ADDING_FEELING_ERR';
-export const GET_FEELINGS = 'meal/GET_FEELINGS';
-export const GET_FEELINGS_SUCCESS = 'meal/GET_FEELINGS_SUCCESS';
-export const GET_FEELINGS_ERROR = 'meal/GET_FEELINGS_ERROR';
+export const GET_FEELINGS_BY_USER = 'meal/GET_FEELINGS_BY_USER';
+export const GET_FEELINGS_BY_USER_SUCCESS = 'meal/GET_FEELINGS_BY_USER_SUCCESS';
+export const GET_FEELINGS_BY_USER_ERROR = 'meal/GET_FEELINGS_BY_USER_ERROR';
 
 import feelingService from '../../services/feeling.service';
 import { mapGetters } from 'vuex';
@@ -25,30 +25,30 @@ const mutations = {
     state.error = error;
     state.isloadingFeeling = !state.isloadingFeeling;
   },
-  [GET_FEELINGS]( state ) {
+  [GET_FEELINGS_BY_USER]( state ) {
     state.loading = true;
   },
-  [GET_FEELINGS_SUCCESS] ( state, feelings ) {
+  [GET_FEELINGS_BY_USER_SUCCESS] ( state, feelings ) {
     state.feelings = feelings;
     state.loading = false;
   },
-  [GET_FEELINGS_ERROR] ( state, feelings ) {
+  [GET_FEELINGS_BY_USER_ERROR] ( state, feelings ) {
     state.loading = false;
   }
 }
 
 const actions = {
-  getFeelings({ commit }) {
+  getFeelingsByUser({ commit, state }, user) {
     if (state.feelings.length) {
-      commit(GET_FEELINGS_SUCCESS, state.feelings);
-      return;
+      commit(GET_FEELINGS_BY_USER_SUCCESS, state.feelings);
+      return state.feelings;
     }
-    commit(GET_FEELINGS);
-    return feelingService.getFeelings().then(feelings => {
-      commit(GET_FEELINGS_SUCCESS, feelings);
+    commit(GET_FEELINGS_BY_USER);
+    return feelingService.getFeelingsByUser({user}).then(feelings => {
+      commit(GET_FEELINGS_BY_USER_SUCCESS, feelings);
       return feelings;
     }).catch(err => {
-      commit(GET_FEELINGS_ERROR, err);
+      commit(GET_FEELINGS_BY_USER_ERROR, err);
     });
   },
 

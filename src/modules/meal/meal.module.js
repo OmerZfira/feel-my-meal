@@ -1,9 +1,9 @@
 export const ADD_MEAL = 'meal/ADD_MEAL';
 export const ADDING_MEAL = 'meal/ADDING_MEAL';
 export const ADDING_MEAL_ERR = 'meal/ADDING_MEAL_ERR';
-export const GET_MEALS = 'meal/GET_MEALS';
-export const GET_MEALS_SUCCESS = 'meal/GET_MEALS_SUCCESS';
-export const GET_MEALS_ERROR = 'meal/GET_MEALS_ERROR';
+export const GET_MEALS_BY_USER = 'meal/GET_MEALS_BY_USER';
+export const GET_MEALS_BY_USER_SUCCESS = 'meal/GET_MEALS_BY_USER_SUCCESS';
+export const GET_MEALS_BY_USER_ERROR = 'meal/GET_MEALS_BY_USER_ERROR';
 // export const ADD_TO_CART = 'cart/ADD_TO_CART';
 // export const REMOVE_FROM_CART = 'cart/REMOVE_FROM_CART';
 // export const CHECKOUT = 'cart/CHECKOUT';
@@ -15,7 +15,8 @@ import mealService from '../../services/meal.service';
 import { mapGetters } from 'vuex';
 
 const state = {
-  meals: [],
+  latestMeals: [],
+  userId: '',
   currMeal: {},
   isloadingMeal: false,
   loading: false,
@@ -32,14 +33,15 @@ const mutations = {
     state.isloadingMeal = !state.isloadingMeal;
   },
 
-  [GET_MEALS]( state ) {
+
+  [GET_MEALS_BY_USER]( state ) {
     state.loading = true;
   },
-  [GET_MEALS_SUCCESS] ( state, meals ) {
-    state.meals = meals;
+  [GET_MEALS_BY_USER_SUCCESS] ( state, latestMeals ) {
+    state.latestMeals = latestMeals;
     state.loading = false;
   },
-  [GET_MEALS_ERROR] ( state, meals ) {
+  [GET_MEALS_BY_USER_ERROR] ( state, latestMeals ) {
     state.loading = false;
   },
   // [UPDATE_QUANTITY]( _, { meal, quantity } ) {
@@ -85,17 +87,19 @@ const actions = {
 
   },
 
-  getMeals({ commit }) {
-    if (state.meals.length) {
-      commit(GET_MEALS_SUCCESS, state.meals);
-      return;
+
+  getMealsByUser({ commit, state }, user) {
+    if (state.latestMeals.length) {
+      commit(GET_MEALS_BY_USER_SUCCESS, state.latestMeals);
+      return state.latestMeals;
     }
-    commit(GET_MEALS);
-    return mealService.getMeals().then(meals => {
-      commit(GET_MEALS_SUCCESS, meals);
-      return meals;
+    commit(GET_MEALS_BY_USER);
+    
+    return mealService.getMealsByUser({user}).then(latestMeals => {
+      commit(GET_MEALS_BY_USER_SUCCESS, latestMeals);
+      return latestMeals;
     }).catch(err => {
-      commit(GET_MEALS_ERROR, err);
+      commit(GET_MEALS_BY_USER_ERROR, err);
     });
   }
   // checkout( { commit } ) {
@@ -116,7 +120,7 @@ const actions = {
 
 const getters = {
   isloadingMeal: state => state.isloadingMeal,
-  meals: state => state.meals,
+  latestMeals: state => state.latestMeals,
   
   // loading : state => state.loading
   // checkoutPending: state => state.loading,

@@ -8,16 +8,15 @@ function submitFeeling({ rating, userId }) {
             
         });
 }
-export function getFeelings() {
-  return Vue.http.get('http://localhost:3003/data/feeling')
+export function getFeelingsByUser({user}) {
+  return Vue.http.post('http://localhost:3003/getFeelingsByUser',user )
         .then(res => res.json())
         .then(feeling => {
             return feeling;   
         });
 }
 
-
 export default {
     submitFeeling,
-    getFeelings
+    getFeelingsByUser
 }
