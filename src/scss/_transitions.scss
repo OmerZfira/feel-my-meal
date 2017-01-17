@@ -1,0 +1,6 @@
+.scale-enter-active, .scale-leave-active {
+  transition: all .5s
+}
+.scale-enter, .scale-leave-to {
+  opacity: 0;
+}
