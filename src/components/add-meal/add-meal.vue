@@ -67,11 +67,18 @@
                 this.foodsData[idx] = event.target.innerText;
             },
             submitFood() {
-                if (this.foods) {
-                    this.$store.dispatch('addMeal', { foods: this.foods, userId: this.user._id });
+                if (this.foods.length) {
+                    console.log('user: ', this.user);
+                    let meal = { foods: this.foods, user: this.user.username, pushTimer: 4000 }
+                    this.$store.dispatch('addMeal', meal);
+
+                    let mealAsStr = JSON.stringify(meal)
+                    navigator.serviceWorker.controller.postMessage(mealAsStr)
+
                     this.foodsData = [];
                     this.speechElText = '';
-                }
+            
+            }
             }
 
         },
