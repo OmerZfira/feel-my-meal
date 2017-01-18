@@ -20,7 +20,7 @@ Please tell us how do you feel?`,
 
 // Handle Notification clicks
 self.addEventListener('notificationclick', function (event) {
-  if (event.action === 'open') clients.openWindow('http://localhost:8080/#', '_blank');
+  clients.openWindow('http://localhost:8080/#', '_blank');
   event.notification.close();
 });
 

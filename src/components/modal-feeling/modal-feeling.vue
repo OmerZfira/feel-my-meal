@@ -97,6 +97,8 @@
 
 .modal-body {
   margin: 20px 0;
+  display: flex;
+  justify-content: center;
 }
 
 .modal-footer {

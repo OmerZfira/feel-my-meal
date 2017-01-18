@@ -9,7 +9,7 @@ import Admin from './components/admin/admin';
 import Users from './components/admin/users';
 import Contacts from './components/admin/contact/contact';
 import MyMeals from './components/my-meals';
-import Settings from './components/settings';
+import Settings from './components/settings/settings';
 import MyStatistics from './components/my-statistics/my-statistics.vue';
 
 const routes = [{
@@ -74,9 +74,9 @@ const routes = [{
 const router = new VueRouter({
   mode: 'history',
   routes,
-  scrollBehavior (to, from, savedPosition) {
-         return { x: 0, y: 0 }
-     }
+  // scrollBehavior (to, from, savedPosition) {
+  //        return { x: 0, y: 0 }
+  //    }
 });
 
 export default router
