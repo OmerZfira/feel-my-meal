@@ -17,7 +17,8 @@
 </template>
 
 <script>
-    export default {  name: 'feeling-rating',
+    export default {
+        name: 'feeling-rating',
         data() {
             return {
                 temp_value: null,
@@ -46,7 +47,7 @@
                 this.value = this.temp_value;
             },
             set(value) {
-                if (this.d== "true") {
+                if (this.d == "true") {
                     return;
                 }
                 this.temp_value = value;
@@ -58,6 +59,7 @@
 </script>
 
 <style>
+
     .star-rating__checkbox {
         position: absolute;
         overflow: hidden;
@@ -70,20 +72,27 @@
     }
     .star-rating__star {
         display: inline-block;
-        padding: 3px;
+        padding: 4px;
         vertical-align: middle;
         line-height: 1;
-        font-size: 1.5em;
+        font-size: 4em;
         color: #ABABAB;
         -webkit-transition: color;
-        transition: color;
+        transition: color .8s ease;
     }
+@media (max-width: 640px) {
+    .star-rating__star {
+        font-size: 2.8em;
+    }
+}
+
     .star-rating__star:hover {
         cursor: pointer;
     }
     .star-rating__star.is-selected {
         color: gold;
     }
+
     .star-rating__star.is-disabled:hover {
         cursor: default;
     }

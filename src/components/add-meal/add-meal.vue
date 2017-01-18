@@ -10,7 +10,7 @@
                 <input type="text" v-model="speechElText" @keyup.enter="addFood" class="recInput" placeholder="Next Food Item">
                 <div class="recControls-btns">
                     <button v-if="recFb" @click="addFood" class="btn btn-primary btn-lg">Add Food</button>
-                    <button @click="submitFood" class="btn btn-success btn-lg">Finish Meal</button>
+                    <button @click="submitFood" @touch="submitFood" class="btn btn-success btn-lg">Finish Meal</button>
                 </div>
             </div>
             <ul class="list-group">
@@ -68,17 +68,16 @@
             },
             submitFood() {
                 if (this.foods.length) {
-                    console.log('user: ', this.user);
-                    let meal = { foods: this.foods, user: this.user.username, pushTimer: 4000 }
-                    this.$store.dispatch('addMeal', meal);
+                    // console.log('user: ', this.user);
+                    this.$store.dispatch('addMeal', { foods: this.foods, user: this.user._id });
 
+                    let meal = { foods: this.foods, user: this.user.username, pushTimer: 4000 }
                     let mealAsStr = JSON.stringify(meal)
                     navigator.serviceWorker.controller.postMessage(mealAsStr)
 
                     this.foodsData = [];
                     this.speechElText = '';
-            
-            }
+                }
             }
 
         },
