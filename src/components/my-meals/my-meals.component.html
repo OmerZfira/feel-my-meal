@@ -1,7 +1,10 @@
 <section class="below-nav">
-    <h2>My Meals Component</h2>
-    <button @click="changeDays('next')" class="btn">next</button>
-    <button @click="changeDays('prev')" class="btn prev">prev</button>
+    
+    <filtercom @getMeals="filteredMeals = $event"></filtercom>
+    <button @click="changeDays('next')" class="btn next ">next</button>
+    <button @click="changeDays('prev')" class="btn prev ">prev</button>
+    <button @click="changeView('month')" class="btn month">Month</button>
+    <button @click="changeView('agendaWeek')" class="btn week ">Week</button>
     <div class="calendar"></div>
 
 </section>
