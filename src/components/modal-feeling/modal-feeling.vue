@@ -37,13 +37,13 @@
 
     export default {
         name: 'modal-feeling',
+        components: {
+            FeelingRating
+        },
         data() {
             return {
                 currRating: 0
             }
-        },
-        components: {
-            FeelingRating
         },
         computed: {
             ...mapGetters(['isloadingFeeling', 'user'])
