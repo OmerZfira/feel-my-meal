@@ -20,8 +20,10 @@ var app = express()
 var compiler = webpack(webpackConfig)
 
 
+
 app.get('/swPush.js', (req, res)=>{
  res.sendFile(__dirname + '/swPush.js');
+
 });
 
 var devMiddleware = require('webpack-dev-middleware')(compiler, {
