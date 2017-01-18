@@ -3,6 +3,7 @@ import FullCalendar from 'fullcalendar';
 import { mapGetters, mapActions } from 'vuex';
 import authService from '../../services/auth.service';
 import {SIGN_IN} from '../../modules/auth/auth.module';
+
 const TIME_DIFF = 1600000;
 const dayOfTheWeek = moment().day();
 
@@ -13,6 +14,7 @@ export default {
             isTurnPrevPage: false,
             isTurnNextPage: false,
             daysStack: 0,
+            daysToHide: [0,1,2],
             events: [],
             firstMeals: [],
             firstFeelings: []
@@ -35,17 +37,15 @@ export default {
             } 
 
             var hiddenDays =  $('.calendar').fullCalendar('option', 'hiddenDays');
-            if(hiddenDays[0] === 4) {
-                $('.calendar').fullCalendar('option', 'hiddenDays', [0,1,2]);
-            } else {
-                $('.calendar').fullCalendar('option', 'hiddenDays', [4,5,6]);
-            }
+            (hiddenDays[0] === 0)? this.daysToHide = [4,5,6] : this.daysToHide = [0,1,2];
+            
+            $('.calendar').fullCalendar('option', 'hiddenDays', this.daysToHide);
+            
             
             if(this.daysStack === 0 && diff === 'prev' && this.isTurnPrevPage){
                 $('.calendar').fullCalendar(diff);
                 this.daysStack = 1;
-            } 
-            if(this.daysStack === 1 && diff === 'next' && this.isTurnNextPage){
+            } else if(this.daysStack === 1 && diff === 'next' && this.isTurnNextPage){
                 $('.calendar').fullCalendar(diff);
                 this.daysStack = 0;
             } 
@@ -93,10 +93,21 @@ export default {
             
                 $('.calendar').fullCalendar({
                     // put your options and callbacks here
-                    
+                      customButtons: {
+                            myCustomButtonNext: {
+                                text: '',
+                                click: function() {
+             
+                                }
+                            },
+                        
+                        },
+               
                     hiddenDays: daysToShow, //choose which days to hide
 
-                    header: { center: 'month, agendaWeek' }, // buttons for switching between views
+                    header: {
+                         right: 'month, agendaWeek',
+                    }, 
                     views: {
                         month: { // name of view
                             titleFormat: 'YYYY, MM, DD' // name of view
