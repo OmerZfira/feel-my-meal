@@ -1,6 +1,7 @@
 export const SIGN_IN = 'auth/SIGN_IN';
 export const SIGN_OUT = 'auth/SIGN_OUT';
 
+import store from '../../store';
 
 const state = {
   isLoggedIn: !!localStorage.getItem('token'),
@@ -14,6 +15,11 @@ const mutations = {
   },
   [SIGN_OUT]( state ) {
     state.isLoggedIn = false;
+    //ACTIVATE MUTATIONS!
+    // store.getters.feelings = [];
+    // store.getters.latestMeals = [];
+    console.log('feelings getter: ', store.getters.feelings);
+    console.log('feelings getter: ', store.getters.latestMeals);
   },
 }
 

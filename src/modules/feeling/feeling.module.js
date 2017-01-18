@@ -67,8 +67,13 @@ const getters = {
   feelings: state => state.feelings,
 }
 
+const setters = {
+  isloadingFeeling: state => state.isloadingFeeling,
+  feelings: state => state.feelings,
+}
 export default {
   state,
+  setters,
   getters,
   actions,
   mutations
