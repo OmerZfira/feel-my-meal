@@ -12,7 +12,7 @@
     <!--</div>-->
 
 <div class="nav-bar_container">
-  <ul class="nav navbar-nav">
+  <ul class="nav navbar-nav" v-if="isLoggedIn">
     <li @click="closeMenu">
       <router-link :to="{name: 'my-meals'}">My Meals</router-link>
     </li>
