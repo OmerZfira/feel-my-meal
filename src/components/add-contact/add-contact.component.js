@@ -14,7 +14,7 @@ export default {
     },
     methods: {
         submitForm(contactDetails) {
-                this.$http.post('http://localhost:3003/data/contact', contactDetails)
+                this.$http.post('data/contact', contactDetails)
                     .then(res => res.json())
                     .then(data => {
                         this.shouldShowForm = false

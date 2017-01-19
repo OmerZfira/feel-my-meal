@@ -55,7 +55,7 @@ function updateBtn() {
 }
 
 function subscribeUser() {
-    const applicationServerKey = urlB64ToUint8Array(applicationServerPublicKey);
+    const applicationSer7verKey = urlB64ToUint8Array(applicationServerPublicKey);
     swRegistration.pushManager.subscribe({
         userVisibleOnly: true,
         applicationServerKey: applicationServerKey
@@ -85,15 +85,13 @@ function updateSubscriptionOnServer(subscription) {
     }
 }
 
+
 if ('serviceWorker' in navigator && 'PushManager' in window) {
     // console.log('Service Worker and Push is supported');
     navigator.serviceWorker.register('swPush.js')
         .then(function (swReg) {
             // console.log('Service Worker is registered', swReg);
             swRegistration = swReg;
-
-            // navigator.serviceWorker.controller.postMessage('hi')
-
         })
 } else {
     console.warn('Push messaging is not supported');

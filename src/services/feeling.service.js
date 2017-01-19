@@ -1,7 +1,7 @@
 import Vue from 'vue';
 
 function submitFeeling({ rating, userId }) {
-    return Vue.http.post('http://localhost:3003/data/feeling', { rating, userId, time: Date.now() })
+    return Vue.http.post('data/feeling', { rating, userId, time: Date.now() })
         .then(res => res.json())
         .then(feeling => {
             return feeling;
@@ -9,7 +9,7 @@ function submitFeeling({ rating, userId }) {
         });
 }
 export function getFeelingsByUser({user}) {
-  return Vue.http.post('http://localhost:3003/getFeelingsByUser',user )
+  return Vue.http.post('getFeelingsByUser',user )
         .then(res => res.json())
         .then(feeling => {
             return feeling;   

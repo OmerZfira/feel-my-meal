@@ -68,15 +68,26 @@
             },
             submitFood() {
                 if (this.foods.length) {
-                    // console.log('user: ', this.user);
-                    this.$store.dispatch('addMeal', { foods: this.foods, user: this.user._id });
-
-                    let meal = { foods: this.foods, user: this.user.username, pushTimer: 4000 }
-                    let mealAsStr = JSON.stringify(meal)
-                    navigator.serviceWorker.controller.postMessage(mealAsStr)
-
+                    this.$store.dispatch('addMeal', { foods: this.foods, userId: this.user._id });
+                    this.pushNotification();
                     this.foodsData = [];
                     this.speechElText = '';
+                }
+            },
+            pushNotification() {
+                let meal = { foods: this.foods, user: this.user.username, pushTimer: 4000 };
+                let mealAsStr = JSON.stringify(meal);
+
+                if (!("Notification" in window)) {
+                    console.warn("This browser does not support system notifications");
+                } else if (Notification.permission === "granted") {
+                    navigator.serviceWorker.controller.postMessage(mealAsStr);
+                } else if (Notification.permission !== 'denied') {
+                    Notification.requestPermission().then(function (res) {
+                        if (res === "granted") {
+                            navigator.serviceWorker.controller.postMessage(mealAsStr);
+                        }
+                    });
                 }
             }
 
