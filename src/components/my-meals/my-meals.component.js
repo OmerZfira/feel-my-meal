@@ -184,8 +184,9 @@ export default {
                 this.filteredMeals.forEach((meal) => {
                     this.translateMeals(meal);
                 });
+                this.events = this.firstMeals.concat(this.firstFeelings);
                 $('.calendar').fullCalendar( 'removeEvents' );
-                $('.calendar').fullCalendar( 'renderEvents', this.firstMeals );
+                $('.calendar').fullCalendar( 'renderEvents', this.events );
         },
     }
 }
