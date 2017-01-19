@@ -111,22 +111,47 @@ export default {
             Promise.all([prmMeals, prmFeelings]).then(values => {
                 this.events = this.firstMeals.concat(this.firstFeelings);
                 let daysToShow = (dayOfTheWeek > 3)? [0,1,2] : [4,5,6];
-
+                let self = this;
                     $('.calendar').fullCalendar({
                         // put your options and callbacks here
                         
                         hiddenDays: daysToShow, //choose which days to hide
                         customButtons: {
-                            myCustomButton: {
+                            todayButton: {
                                 text: 'Today',
                                 click: function() {
                                     $('.calendar').fullCalendar( 'changeView', 'basicDay' );
                                     
                                 }
+                            },
+                            weekButton: {
+                                text: 'Week',
+                                click: function() {
+                                    self.changeView('agendaWeek');
+                                }
+                            },
+                            monthButton: {
+                                text: 'Month',
+                                click: function() {
+                                    self.changeView('month');
+                                }
+                            },
+                            nextButton: {
+                                text: 'Next >',
+                                click: function() {
+                                    self.changeDays('next');
+                                }
+                            },
+                            prevButton: {
+                                text: '< Prev',
+                                click: function() {
+                                    self.changeDays('prev');
+                                }
                             }
                         },
                         header: {
-                            right: 'myCustomButton',
+                            right: 'prevButton nextButton',
+                            center: 'todayButton weekButton monthButton'
                         }, 
                         views: {
                             month: { // name of view
@@ -146,7 +171,7 @@ export default {
         },
 
         computed: {
-            ...mapGetters(['meals', 'feelings', 'loading', 'user', 'latestMeals']),
+            ...mapGetters([ 'feelings', 'user', 'latestMeals']),
         },
         components: {
             moment,
