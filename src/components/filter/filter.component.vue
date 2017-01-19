@@ -21,7 +21,7 @@ export default {
 
             this.filteredMeals = this.latestMeals.filter((meal) => {
                 return meal.foods.some((food) => {
-                    return food.includes(foodName);
+                    return food.toLowerCase().includes(foodName.toLowerCase());
                 });
             });
             
