@@ -12,7 +12,9 @@ import MainNav from './components/main-nav';
 import BottomNav from './components/bottom-nav/bottom-nav';
 import ModalFeeling from './components/modal-feeling/modal-feeling';
 
-
+if(process.env.NODE_ENV === 'development'){
+  Vue.http.options.root = 'http://localhost:3003';
+} else  console.log(process.env.NODE_ENV);
 const app = new Vue({
   router,
   store,

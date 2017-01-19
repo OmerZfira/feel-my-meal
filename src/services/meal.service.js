@@ -2,7 +2,7 @@ import Vue from 'vue';
 import moment from 'moment';
 function submitMeal({ foods, userId }) {
     console.log('SUBMITTING NEW MEAL TO SERVER');
-    return Vue.http.post('http://localhost:3003/data/meal', { foods, userId, time: Date.now() })
+    return Vue.http.post('data/meal', { foods, userId, time: Date.now() })
         .then(res => res.json())
         .then(meal => {
             return meal;
@@ -12,10 +12,7 @@ function submitMeal({ foods, userId }) {
 
 
 export function getMealsByUser({user}) {
-
-       
-    
-  return Vue.http.post('http://localhost:3003/getMealByUser',user )
+  return Vue.http.post('getMealByUser',user )
         
         .then(res => res.json())
         .then(meal => {
