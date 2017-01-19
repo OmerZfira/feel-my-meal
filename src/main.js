@@ -28,7 +28,8 @@ const app = new Vue({
     showModal: false
   },
   mounted() {
-    if (window.location.href === 'http://localhost:8080/#') this.showModal = true;
+    var path = (process.env.NODE_ENV === 'development') ? 'http://localhost:8080' : 'https://feelmymeal.herokuapp.com';
+    if (window.location.href === (path + '/#')) this.showModal = true;
   }
 }).$mount('#app');
 

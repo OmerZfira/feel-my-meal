@@ -77,18 +77,30 @@
             pushNotification() {
                 let meal = { foods: this.foods, user: this.user.username, pushTimer: 4000 };
                 let mealAsStr = JSON.stringify(meal);
+                // if (navigator.serviceWorker.controller) {
 
-                if (!("Notification" in window)) {
-                    console.warn("This browser does not support system notifications");
-                } else if (Notification.permission === "granted") {
-                    navigator.serviceWorker.controller.postMessage(mealAsStr);
-                } else if (Notification.permission !== 'denied') {
-                    Notification.requestPermission().then(function (res) {
-                        if (res === "granted") {
-                            navigator.serviceWorker.controller.postMessage(mealAsStr);
-                        }
-                    });
-                }
+                //    navigator.serviceWorker.ready.then(function(registration){
+                //        console.dir('reg? ', registration);
+                //        console.log('reg? ', registration);
+                //     console.log('ready? ', navigator.serviceWorker.ready);
+                //     console.log('no active navigator.serviceWorker.controller.postMessage ', navigator.serviceWorker.controller.postMessage);
+
+                    if (!("Notification" in window)) {
+                        console.warn("This browser does not support system notifications");
+                    } else if (Notification.permission === "granted") {
+                        navigator.serviceWorker.controller.postMessage(mealAsStr);
+                    } else if (Notification.permission !== 'denied') {
+                        Notification.requestPermission().then(function (res) {
+                            if (res === "granted") {
+                                navigator.serviceWorker.controller.postMessage(mealAsStr);
+                            }
+                        });
+                    }
+                //    });
+
+                // } else {
+                    // console.log('no active navigator.serviceWorker.controller ', navigator.serviceWorker.controller);
+                // }
             }
 
         },
