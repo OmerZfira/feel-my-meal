@@ -1,7 +1,9 @@
 <template>
    <section>
-       <h4>Filter Meals</h4> <input type="text" v-model="filterInput">
-       
+       <div class="form-group">
+        <label for="usr">Filter Meals</label> 
+        <input class="form-control" type="text" v-model="filterInput" id="usr">
+       </div>
    </section>
 </template>
 
@@ -38,3 +40,13 @@ export default {
     }
 }
 </script>
+
+<style type="scss">
+    h4{
+        margin-left: 30px;
+    }
+    label{
+        margin-left: 30px;
+    }
+
+</style>
