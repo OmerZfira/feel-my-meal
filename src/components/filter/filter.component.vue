@@ -41,7 +41,7 @@ export default {
 }
 </script>
 
-<style type="scss" >
+<style type="scss" scoped>
     h4{
         margin-left: 30px;
 

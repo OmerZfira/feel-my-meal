@@ -18,7 +18,9 @@
 
                     <div class="modal-footer">
                         <slot name="footer">
-                            <button @click="submitFeeling" class="btn btn-success btn-lg">Save My Feeling</button>
+                            <button @click="submitFeeling" class="btn btn-success btn-lg">
+                                Save My Feeling
+                            </button>
 
                             <button class="modal-default-button btn btn-warning btn-lg" @click="$emit('close')">
                                 Cancel
@@ -62,7 +64,7 @@
 <style scoped lang="scss">
     
 
-  .modal-mask {
+.modal-mask {
   position: fixed;
   z-index: 9998;
   top: 0;
@@ -104,6 +106,7 @@
 .modal-footer {
     display: flex;
     flex-wrap: nowrap;
+    justify-content: space-between;
 }
 
 /*

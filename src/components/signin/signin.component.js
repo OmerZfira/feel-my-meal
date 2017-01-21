@@ -1,25 +1,25 @@
 import authService from '../../services/auth.service';
-import {SIGN_IN, SIGN_OUT} from '../../modules/auth/auth.module';
+import { SIGN_IN, SIGN_OUT } from '../../modules/auth/auth.module';
 
-export default  {
+export default {
   mounted() {
     // console.log(this.$router);
     // console.log(this.$route);
   },
-  data   : () => {
+  data() {
     return {
-      user : { email: 'w@w.com', password: '123456' },
+      user: { email: 'w@w.com', password: '123456' },
       error: ""
     }
   },
   methods: {
-    signin( user ) {
+    signin(user) {
       this.$validator.validateAll();
-      if( this.errors.any() ) return;
+      if (this.errors.any()) return;
 
       authService.signin(user).then(res => {
         this.$store.commit(SIGN_IN, res);
-        this.$router.go(-1);
+        this.$router.push({ name: 'home' });
       }).catch(err => {
         err.json().then(res => this.error = res.error);
       })
