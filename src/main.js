@@ -31,6 +31,11 @@ const app = new Vue({
   mounted() {
     let path = (process.env.NODE_ENV === 'development') ? 'http://localhost:8080' : 'https://feelmymeal.herokuapp.com';
     if (window.location.href === (path + '/#')) this.showModal = true;
+  //   const navCheckbox = document.querySelector('#nav-bar-mobile-checkbox');
+  //   document.querySelector('body').onclick = (ev) => {
+  //     navCheckbox.checked = false;
+  // console.log(ev);  
+  // }
   }
 }).$mount('#app');
 

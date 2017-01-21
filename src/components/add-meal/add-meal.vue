@@ -4,7 +4,7 @@
         <section class="add-meal" v-show="!isloadingMeal">
             <div @touchstart="startSpeechReco" @touchend="stopSpeechReco" @touchcancel="stopSpeechReco" @mousedown="startSpeechReco"
                 @mouseup="stopSpeechReco" @mouseleave="stopSpeechReco" class="record" :class="{recording : isRec}">
-                <div class="fa fa-microphone fa-5x" aria-hidden="true"></div>
+                <div class="fa fa-microphone fa-4x" aria-hidden="true"></div>
             </div>
             <div class="recControls-cont">
                 <input type="text" v-model="speechElText" @keyup.enter="addFood" class="recInput" placeholder="Next Food Item">
@@ -90,11 +90,11 @@
                             if (this.checkSwController()) initSwReg.swActive().postMessage(pushObjAsStr);
                         }
                     });
-                // }
-                //    });
+                    // }
+                    //    });
 
                 } else {
-                console.info('Push notifications were denied by user');
+                    console.info('Push notifications were denied by user');
                 }
             },
             checkSwController() {
@@ -215,7 +215,6 @@
     justify-content: space-between;
     
     .recInput {
-        font-size: 1.5em;
         font-weight: 700;
         margin-right: 10px;
         flex: 0 1 50%;
@@ -254,6 +253,24 @@
     .wrapper {
         width: 85%;
     }
+
+    .record { 
+        width: 160px;
+        height: 160px;
+    }
+
+    .recControls-cont {
+        .recInput {
+            padding: 12px;
+            font-size: 15px;
+            color: #555;
+        }
+
+        .recControls-btns > button.btn-lg {
+            padding: 12px;
+            font-size: 15px;
+        }
+    }
 }
 
 @media (max-width: 750px) {
@@ -261,16 +278,28 @@
         width: 95%;
     }
 
+    .record { 
+        width: 120px;
+        height: 120px;
+    }
+
     .recControls-cont {
         flex-direction: column;
  
         .recInput {
             margin-right: 0;
-                   margin-bottom: 10px;
+            margin-bottom: 10px;
+            padding: 8px;
+            font-size: 12px;
+            color: #555;
         }
         .recControls-btns {
             justify-content: space-between;
-            min-height: 55px;
+
+            button.btn-lg {
+                padding: 7px;
+                font-size: 12px;
+            }
         }
     }
 }

@@ -2,16 +2,18 @@
   <div class="wrapper">
     <!--<div class="navbar-header" style="margin-top: -4px;">-->
       <input id="nav-bar-mobile-checkbox" type="checkbox" ref="checkbox">
-      <label for="nav-bar-mobile-checkbox" class="nav-bar-mobile-icon fa fa-bars" aria-hidden="true"></label>
+      <label for="nav-bar-mobile-checkbox" @onclick.stop="'1'" class="nav-bar-mobile-icon fa fa-bars" aria-hidden="true"></label>
       
         
       <!--<label for="nav-bar-mobile-checkbox" aria-hidden="true">
       </label>-->
-      <router-link to="/" class="navbar-brand" exact>Feel My Meal</router-link>
+
+      <router-link to="/" class="navbar-brand"  @click.native="closeMenu" exact>Feel My Meal</router-link>
 
     <!--</div>-->
 
 <div @click="closeMenu" class="nav-bar_container">
+  <div class="close-menu-wrapper"></div>
   <ul class="nav navbar-nav" v-if="isLoggedIn">
     <li>
       <router-link :to="{name: 'my-meals'}">My Meals</router-link>
@@ -40,9 +42,9 @@
     <li v-if="isLoggedIn">
       <a href="#" @click="signout">Sign out</a>
     </li>
-    <li v-if="isLoggedIn">
+    <!--<li v-if="isLoggedIn">
       <img src="~assets/profile.png" :title="user.username" class="profile-img" />
-    </li>
+    </li>-->
 
   </ul>
 </div>
