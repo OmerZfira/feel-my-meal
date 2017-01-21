@@ -1,28 +1,85 @@
+'Use Strict';
+
+//Global Environment
+let redirectUrl = '';
+const ONE_HOUR = 3600000;
+
+
 // Handle messages (push requests) from client
 self.addEventListener('message', function (event) {
   var pushObj = JSON.parse(event.data);
-  console.log(pushObj);
 
+  redirectUrl = pushObj.url;
   const title = 'Feel My Meal';
   const options = {
     actions: [
-      {action: 'open', title: 'Open Feel My Meal App'}
+      { action: 'open', title: 'Open Feel My Meal' },
+      { action: '30min', title: 'Remind me in 30 minutes' },
+      { action: '1hr', title: 'Remind me in 1 hour' },
+      // Use msgChannel API to make the notification interactive wihtout opening the app
+      // { action: '1', title: '❤' },
+      // { action: '2', title: '❤❤' },
+      // { action: '3', title: '❤❤❤' },
+      // { action: '4', title: '❤❤❤❤' },
+      // { action: '5', title: '❤❤❤❤❤' },
     ],
-    body: 
-`Hi ${pushObj.user}!
-Please tell us how do you feel?`,
+    data: { user: pushObj.user, pushTimer: pushObj.pushTimer },
+    body:
+    `Hi ${pushObj.user}!
+Please tell us how do you feel`,
+
   };
 
-  setTimeout(function () {
-    self.registration.showNotification(title, options)
-  }, pushObj.pushTimer);
+  pushNotification({ title, options, pushTimer: pushObj.pushTimer })
 });
 
 // Handle Notification clicks
 self.addEventListener('notificationclick', function (event) {
-  clients.openWindow('http://localhost:8080/#', '_blank');
+  let evNote = event.notification
+  let remindPushMsg = {
+    title: evNote.title,
+    options: {
+      actions: evNote.actions.slice(0, 1),
+      data: evNote.data,
+      body:
+      `Hi ${evNote.data.user}!
+Please tell us how do you feel`
+    }
+  }
+  // Handle actions
+  switch (event.action) {
+    case 'open':
+      clients.openWindow(redirectUrl, '_blank');
+      break;
+    case '30min':
+      // remindPushMsg.pushTimer = 0.5; // 30min reminder
+      remindPushMsg.pushTimer = evNote.data.pushTimer;
+      pushNotification(remindPushMsg)
+      break;
+    case '1hr':
+      // remindPushMsg.pushTimer = 1; // 1 hour reminder
+      remindPushMsg.pushTimer = evNote.data.pushTimer;
+      pushNotification(remindPushMsg)
+      break;
+  }
+
   event.notification.close();
 });
+
+// Handle starting the sw without the need to reload page
+self.addEventListener('install', function (event) {
+  event.waitUntil(self.skipWaiting());
+});
+self.addEventListener('activate', function (event) {
+  event.waitUntil(clients.claim());
+
+});
+
+function pushNotification({title, options, pushTimer}) {
+  setTimeout(function () {
+    self.registration.showNotification(title, options)
+  }, (pushTimer * ONE_HOUR));
+}
 
 // self.addEventListener('push', function(event) {
 //   console.log('[Service Worker] testtest Received.');

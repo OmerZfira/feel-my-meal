@@ -16,6 +16,9 @@ export default  {
       authService.signup(user).then(res => {
         // this.$store.commit(SIGN_IN);
         this.$router.push({ name: 'signin' });
+      })
+      .catch(err => {
+        console.log('error is: ', err);
       });
     }
   }

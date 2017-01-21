@@ -27,6 +27,7 @@
 
 <script>
     import { mapGetters, mapActions } from 'vuex';
+    import initSwReg from '../../sw-init';
 
     export default {
         data() {
@@ -75,32 +76,41 @@
                 }
             },
             pushNotification() {
-                let meal = { foods: this.foods, user: this.user.username, pushTimer: 4000 };
-                let mealAsStr = JSON.stringify(meal);
-                // if (navigator.serviceWorker.controller) {
+                let redirectUrl = (process.env.NODE_ENV === 'development') ? 'http://localhost:8080/#' : 'https://feelmymeal.herokuapp.com/#';
+                let pushObj = { foods: this.foods, user: this.user.username, pushTimer: 0.001, url: redirectUrl };
+                let pushObjAsStr = JSON.stringify(pushObj);
 
-                //    navigator.serviceWorker.ready.then(function(registration){
-                //        console.dir('reg? ', registration);
-                //        console.log('reg? ', registration);
-                //     console.log('ready? ', navigator.serviceWorker.ready);
-                //     console.log('no active navigator.serviceWorker.controller.postMessage ', navigator.serviceWorker.controller.postMessage);
-
-                    if (!("Notification" in window)) {
-                        console.warn("This browser does not support system notifications");
-                    } else if (Notification.permission === "granted") {
-                        navigator.serviceWorker.controller.postMessage(mealAsStr);
-                    } else if (Notification.permission !== 'denied') {
-                        Notification.requestPermission().then(function (res) {
-                            if (res === "granted") {
-                                navigator.serviceWorker.controller.postMessage(mealAsStr);
-                            }
-                        });
-                    }
+                if (!("Notification" in window)) {
+                    console.info("This browser does not support system notifications");
+                } else if (Notification.permission === "granted") {
+                    if (this.checkSwController()) initSwReg.swActive().postMessage(pushObjAsStr);
+                } else if (Notification.permission !== 'denied') {
+                    Notification.requestPermission().then(function (res) {
+                        if (res === "granted") {
+                            if (this.checkSwController()) initSwReg.swActive().postMessage(pushObjAsStr);
+                        }
+                    });
+                // }
                 //    });
 
-                // } else {
-                    // console.log('no active navigator.serviceWorker.controller ', navigator.serviceWorker.controller);
-                // }
+                } else {
+                console.info('Push notifications were denied by user');
+                }
+            },
+            checkSwController() {
+                if (initSwReg.swActive()) {
+                    return true;
+                } else {
+                    // TODO: promise based!
+                    setTimeout(() => {
+                        if (initSwReg.swActive()) {
+                            return true;
+                        } else {
+                            console.info('There was a problem with enabling Push Notifications on your device. Please try to refresh the page.');
+                            return false;
+                        }
+                    }, 3000);
+                }
             }
 
         },
