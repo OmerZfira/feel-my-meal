@@ -1,24 +1,29 @@
-import {mapMutations, mapGetters} from 'vuex';
+import { mapMutations, mapGetters } from 'vuex';
 import authService from '../../services/auth.service';
-import {SIGN_OUT} from '../../modules/auth/auth.module';
+import { SIGN_OUT } from '../../modules/auth/auth.module';
 
 export default {
-  name    : 'main-nav',
-  methods : {
+  name: 'main-nav',
+  data() {
+    return {
+      checkboxVal: false
+    }
+  },
+  methods: {
     signout() {
       authService.signout();
       this.$store.commit(SIGN_OUT);
       this.$router.push('/');
     },
     closeMenu() {
-      this.$refs.checkbox.checked = false;
+      this.checkboxVal = false;
     },
   },
   computed: {
     ...mapGetters({
-        isLoggedIn: 'isLoggedIn',
-        user: 'user'
-      }
+      isLoggedIn: 'isLoggedIn',
+      user: 'user'
+    }
     ),
   },
 }

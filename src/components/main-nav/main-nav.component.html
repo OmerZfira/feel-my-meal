@@ -1,53 +1,48 @@
 <nav class="navbar navbar-default">
   <div class="wrapper">
-    <!--<div class="navbar-header" style="margin-top: -4px;">-->
-      <input id="nav-bar-mobile-checkbox" type="checkbox" ref="checkbox">
-      <label for="nav-bar-mobile-checkbox" @onclick.stop="'1'" class="nav-bar-mobile-icon fa fa-bars" aria-hidden="true"></label>
-      
-        
-      <!--<label for="nav-bar-mobile-checkbox" aria-hidden="true">
-      </label>-->
+    <input id="nav-bar-mobile-checkbox" type="checkbox" ref="checkbox" v-model="checkboxVal">
+    <label for="nav-bar-mobile-checkbox" class="nav-bar-mobile-icon fa fa-bars" aria-hidden="true"></label>
 
-      <router-link to="/" class="navbar-brand"  @click.native="closeMenu" exact>Feel My Meal</router-link>
+    <router-link to="/" class="navbar-brand" @click.native="closeMenu" exact>Feel My Meal</router-link>
 
-    <!--</div>-->
+    <transition name="fade-long">
+      <div v-show="checkboxVal" @click="closeMenu" class="close-menu-mask"></div>
+    </transition>
+    <div @click="closeMenu" class="nav-bar_container">
+      <ul v-if="isLoggedIn" class="nav navbar-nav">
+        <li>
+          <router-link :to="{name: 'my-meals'}">My Meals</router-link>
+        </li>
+        <li>
+          <router-link :to="{name: 'admin'}">Admin</router-link>
+        </li>
+        <li>
+          <router-link :to="{name: 'my-statistics'}">My Statistics</router-link>
+        </li>
+        <li>
+          <router-link :to="{name: 'admin'}">Global Statistics</router-link>
+        </li>
+      </ul>
 
-<div @click="closeMenu" class="nav-bar_container">
-  <div class="close-menu-wrapper"></div>
-  <ul class="nav navbar-nav" v-if="isLoggedIn">
-    <li>
-      <router-link :to="{name: 'my-meals'}">My Meals</router-link>
-    </li>
-    <li>
-      <router-link :to="{name: 'admin'}">Admin</router-link>
-    </li>
-    <li>
-      <router-link :to="{name: 'my-statistics'}">My Statistics</router-link>
-    </li>
-    <li>
-      <router-link :to="{name: 'admin'}">Global Statistics</router-link>
-    </li>
-  </ul>
-
-  <ul class="nav navbar-nav navbar-right">
-    <li v-if="isLoggedIn">
-      <router-link :to="{ name: 'settings' }">Settings</router-link>
-    </li>
-    <li v-if="!isLoggedIn">
-      <router-link :to="{ name: 'signin' }">Sign in</router-link>
-    </li>
-    <li v-if="!isLoggedIn">
-      <router-link :to="{ name: 'signup' }">Sign up</router-link>
-    </li>
-    <li v-if="isLoggedIn">
-      <a href="#" @click="signout">Sign out</a>
-    </li>
-    <!--<li v-if="isLoggedIn">
+      <ul class="nav navbar-nav navbar-right">
+        <li v-if="isLoggedIn">
+          <router-link :to="{ name: 'settings' }">Settings</router-link>
+        </li>
+        <li v-if="!isLoggedIn">
+          <router-link :to="{ name: 'signin' }">Sign in</router-link>
+        </li>
+        <li v-if="!isLoggedIn">
+          <router-link :to="{ name: 'signup' }">Sign up</router-link>
+        </li>
+        <li v-if="isLoggedIn">
+          <a href="#" @click="signout">Sign out</a>
+        </li>
+        <!--<li v-if="isLoggedIn">
       <img src="~assets/profile.png" :title="user.username" class="profile-img" />
     </li>-->
 
-  </ul>
-</div>
-</div>
+      </ul>
+    </div>
+  </div>
 
 </nav>

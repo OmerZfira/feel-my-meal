@@ -13,9 +13,9 @@ self.addEventListener('message', function (event) {
   const title = 'Feel My Meal';
   const options = {
     actions: [
-      { action: 'open', title: 'Open Feel My Meal' },
-      { action: '30min', title: 'Remind me in 30 minutes' },
-      { action: '1hr', title: 'Remind me in 1 hour' },
+      // { action: 'open', title: 'Open app' },
+      { action: 'later', title: 'Remind me Later' },
+      // { action: '1hr', title: 'Remind me in 1 hour' },
       // Use msgChannel API to make the notification interactive wihtout opening the app
       // { action: '1', title: '❤' },
       // { action: '2', title: '❤❤' },
@@ -35,34 +35,35 @@ Please tell us how do you feel`,
 
 // Handle Notification clicks
 self.addEventListener('notificationclick', function (event) {
-  let evNote = event.notification
-  let remindPushMsg = {
-    title: evNote.title,
-    options: {
-      actions: evNote.actions.slice(0, 1),
-      data: evNote.data,
-      body:
-      `Hi ${evNote.data.user}!
-Please tell us how do you feel`
-    }
-  }
-  // Handle actions
-  switch (event.action) {
-    case 'open':
-      clients.openWindow(redirectUrl, '_blank');
-      break;
-    case '30min':
-      // remindPushMsg.pushTimer = 0.5; // 30min reminder
-      remindPushMsg.pushTimer = evNote.data.pushTimer;
-      pushNotification(remindPushMsg)
-      break;
-    case '1hr':
-      // remindPushMsg.pushTimer = 1; // 1 hour reminder
-      remindPushMsg.pushTimer = evNote.data.pushTimer;
-      pushNotification(remindPushMsg)
-      break;
-  }
 
+  // Handle actions
+  if (event.action === 'later') {
+    // case 'open':
+    //   clients.openWindow(redirectUrl, '_blank');
+    //   break;
+    // case '30min':
+    //   // remindPushMsg.pushTimer = 0.5; // 30min reminder
+    //   remindPushMsg.pushTimer = evNote.data.pushTimer;
+    //   pushNotification(remindPushMsg)
+    //   break;
+    // case :
+    let evNote = event.notification
+    let remindPushMsg = {
+      title: evNote.title,
+      options: {
+        actions: evNote.actions.slice(0, 1),
+        data: evNote.data,
+        body:
+        `Hi ${evNote.data.user}!
+Please tell us how do you feel`
+      }
+    }
+    // remindPushMsg.pushTimer = 1; // 1 hour reminder
+    remindPushMsg.pushTimer = evNote.data.pushTimer;
+    pushNotification(remindPushMsg)
+    break;
+  }
+  clients.openWindow(redirectUrl, '_blank');
   event.notification.close();
 });
 
