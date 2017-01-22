@@ -1,6 +1,31 @@
-.scale-enter-active, .scale-leave-active {
+//router-view
+.fade-enter-active, .fade-leave-active {
   transition: all .5s
 }
-.scale-enter, .scale-leave-to {
+.fade-enter, .fade-leave-to {
   opacity: 0;
 }
+
+
+//menu
+.fade-long-enter-active, .fade-long-leave-active {
+  transition: opacity .5s
+}
+.fade-long-enter, .fade-long-leave-to {
+  opacity: 0;
+}
+
+//add-meal-list
+// .list-group-item {
+//   transition: all 1s;
+// }
+// .foods-transition-enter-active, .foods-transition-leave-active {
+//   transition: all 1s;
+// }
+// .foods-transition-move {
+//   transition: transform 1s;
+// }
+// .foods-transition-enter, .foods-transition-leave-to {
+//   opacity: 0;
+//   transform: translateY(30px);
+// }

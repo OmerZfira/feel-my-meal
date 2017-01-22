@@ -13,13 +13,13 @@
                     <button @click="submitFood" @touch="submitFood" class="btn btn-success btn-lg">Finish Meal</button>
                 </div>
             </div>
-            <ul class="list-group">
-                <li v-for="(food, index) of foods" class="list-group-item">
+            <transition-group name="foods" tag="ul" class="list-group">
+                <li v-for="(food, index) of foods" key="food" class="list-group-item">
                     <button @click="deleteFood(index)" class="btn btn-danger btn-lg badge btn-red">X</button>
                     <div contenteditable="true" @keyup="updateFood(index, $event)">{{food}}
                     </div>
                 </li>
-            </ul>
+            </transition-group>
         </section>
 
     </div>
@@ -246,7 +246,12 @@
 
     .list-group-item {
         padding: 7px;
+        position: static;
+        .badge {
+            float: left;
+        }
     }
+
 } 
 
 @media (max-width: 1000px) {
