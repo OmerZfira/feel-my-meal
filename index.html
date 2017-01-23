@@ -4,12 +4,25 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!--android manifest-->
+  <link rel="manifest" href="/manifest.json">
+
+  <!--ios manifest-->
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <!--<link rel="apple-touch-icon" href="~assets/logo.png" />-->
+
+
+<!--<link rel="icon" sizes="128x128" href="niceicon.png">-->
+
   <title>Feel My Meal App</title>
 </head>
 
 <body>
   <div id="app">
     <main-nav></main-nav>
+    <!--<img src="~assets/logo.png" alt="">-->
     <modal-feeling v-if="showModal" @close="showModal = false"></modal-feeling>
     <bottom-nav @shoulddisplay="showModal = true"></bottom-nav>
     <transition name="fade" mode="out-in">

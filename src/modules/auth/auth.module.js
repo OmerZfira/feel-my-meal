@@ -15,15 +15,11 @@ const mutations = {
   },
   [SIGN_OUT]( state ) {
     state.isLoggedIn = false;
-    //ACTIVATE MUTATIONS!
-    // store.getters.feelings = [];
-    // store.getters.latestMeals = [];
-    console.log('feelings getter: ', store.getters.feelings);
-    console.log('feelings getter: ', store.getters.latestMeals);
   },
 }
 
 const actions = {};
+
 const getters = {
   isLoggedIn: state => state.isLoggedIn,
   user: state => state.user

@@ -1,0 +1,155 @@
+.wrapper {
+    width: 75%;
+    display:flex;
+    justify-content: center;
+    color: #333;
+}
+.add-meal {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    flex: 1 0;
+
+}
+
+.record { 
+    width: 200px;
+    height: 200px;
+    color: black;
+    cursor: pointer;
+    background-color: darkred;
+    transition: all 0.5s ease;
+    box-shadow: 4px 4px 5px 3px rgba(0,0,0,0.6);
+    border-radius: 50%;
+    margin: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    &.recording {
+        box-shadow: none;
+        background-color: red;
+        animation-name: pulse;
+        animation-duration: 2s;
+        animation-iteration-count: infinite;
+        animation-timing-function: linear;
+        transform: translateY(4px);
+    }
+    
+    .fa-microphone {
+        margin: auto;
+    }
+ }
+ 
+@keyframes pulse{
+	0% { box-shadow: 0px 0px 5px 0px rgba(173,0,0,.3); }
+	65% { box-shadow: 0px 0px 5px 26px rgba(173,0,0,.3); }
+	90% { box-shadow: 0px 0px 5px 26px rgba(173,0,0,0); }
+}
+
+.recControls-cont {
+    margin-top: 30px;
+    display: flex;
+    margin-bottom: 10px;
+    width: 100%;
+    flex: 1;
+    justify-content: space-between;
+    
+    .recInput {
+        font-weight: 700;
+        margin-right: 10px;
+        flex: 0 1 50%;
+        padding: 15px;
+        font-size: 18px;
+        color: #555;
+    }
+
+    .recControls-btns {
+        flex: 0 0 45%;
+        display: flex;
+        flex-wrap: nowrap;
+        justify-content: space-between;
+    }
+    button {
+        flex-basis: 45%;
+    }
+}
+
+.list-group{
+    display:flex;
+    flex-direction: column;
+    position: relative;
+    width: 100%;
+    font-size: 1.4em;
+    .btn-red {
+        background-color: #d9534f;
+        &:hover {
+            background-color: #c9302c;
+        }
+    }
+
+    .list-group-item {
+        padding: 7px;
+        flex-basis: 100%;
+        .badge {
+            float: left;
+        }
+    }
+
+} 
+
+@media (max-width: 1000px) {
+    .wrapper {
+        width: 85%;
+    }
+
+    .record { 
+        width: 160px;
+        height: 160px;
+    }
+
+    .recControls-cont {
+        .recInput {
+            padding: 12px;
+            font-size: 15px;
+            color: #555;
+        }
+
+        .recControls-btns > button.btn-lg {
+            padding: 12px;
+            font-size: 15px;
+        }
+    }
+}
+
+@media (max-width: 750px) {
+    .wrapper {
+        width: 95%;
+    }
+
+    .record { 
+        width: 120px;
+        height: 120px;
+    }
+
+    .recControls-cont {
+        flex-direction: column;
+ 
+        .recInput {
+            margin-right: 0;
+            margin-bottom: 10px;
+            padding: 8px;
+            font-size: 12px;
+            color: #555;
+        }
+        .recControls-btns {
+            justify-content: space-between;
+
+            button.btn-lg {
+                padding: 7px;
+                font-size: 12px;
+            }
+        }
+    }
+}

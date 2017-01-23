@@ -12,9 +12,9 @@ import MainNav from './components/main-nav';
 import BottomNav from './components/bottom-nav/bottom-nav';
 import ModalFeeling from './components/modal-feeling/modal-feeling';
 
-if(process.env.NODE_ENV === 'development'){
+if (process.env.NODE_ENV === 'development') {
   Vue.http.options.root = 'http://localhost:3003';
-} else  console.log(process.env.NODE_ENV);
+} else console.log(process.env.NODE_ENV);
 
 const app = new Vue({
   router,
@@ -31,11 +31,6 @@ const app = new Vue({
   mounted() {
     let path = (process.env.NODE_ENV === 'development') ? 'http://localhost:8080' : 'https://feelmymeal.herokuapp.com';
     if (window.location.href === (path + '/#')) this.showModal = true;
-  //   const navCheckbox = document.querySelector('#nav-bar-mobile-checkbox');
-  //   document.querySelector('body').onclick = (ev) => {
-  //     navCheckbox.checked = false;
-  // console.log(ev);  
-  // }
   }
 }).$mount('#app');
 
