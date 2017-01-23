@@ -4,7 +4,7 @@
         <section class="add-meal" v-show="!isloadingMeal">
             <div @touchstart="startSpeechReco" @touchend="stopSpeechReco" @touchcancel="stopSpeechReco" @mousedown="startSpeechReco"
                 @mouseup="stopSpeechReco" @mouseleave="stopSpeechReco" class="record" :class="{recording : isRec}">
-                <div class="fa fa-microphone fa-5x" aria-hidden="true"></div>
+                <div class="fa fa-microphone fa-4x" aria-hidden="true"></div>
             </div>
             <div class="recControls-cont">
                 <input type="text" v-model="speechElText" @keyup.enter="addFood" class="recInput" placeholder="Next Food Item">
@@ -13,13 +13,13 @@
                     <button @click="submitFood" @touch="submitFood" class="btn btn-success btn-lg">Finish Meal</button>
                 </div>
             </div>
-            <ul class="list-group">
-                <li v-for="(food, index) of foods" class="list-group-item">
+            <transition-group name="foods" tag="ul" class="list-group">
+                <li v-for="(food, index) of foods" key="food" class="list-group-item">
                     <button @click="deleteFood(index)" class="btn btn-danger btn-lg badge btn-red">X</button>
                     <div contenteditable="true" @keyup="updateFood(index, $event)">{{food}}
                     </div>
                 </li>
-            </ul>
+            </transition-group>
         </section>
 
     </div>
@@ -27,6 +27,7 @@
 
 <script>
     import { mapGetters, mapActions } from 'vuex';
+    import initSwReg from '../../sw-init';
 
     export default {
         data() {
@@ -75,19 +76,40 @@
                 }
             },
             pushNotification() {
-                let meal = { foods: this.foods, user: this.user.username, pushTimer: 4000 };
-                let mealAsStr = JSON.stringify(meal);
+                let redirectUrl = (process.env.NODE_ENV === 'development') ? 'http://localhost:8080/#' : 'https://feelmymeal.herokuapp.com/#';
+                let pushObj = { foods: this.foods, user: this.user.username, pushTimer: 0.001, url: redirectUrl };
+                let pushObjAsStr = JSON.stringify(pushObj);
 
                 if (!("Notification" in window)) {
-                    console.warn("This browser does not support system notifications");
+                    console.info("This browser does not support system notifications");
                 } else if (Notification.permission === "granted") {
-                    navigator.serviceWorker.controller.postMessage(mealAsStr);
+                    if (this.checkSwController()) initSwReg.swActive().postMessage(pushObjAsStr);
                 } else if (Notification.permission !== 'denied') {
                     Notification.requestPermission().then(function (res) {
                         if (res === "granted") {
-                            navigator.serviceWorker.controller.postMessage(mealAsStr);
+                            if (this.checkSwController()) initSwReg.swActive().postMessage(pushObjAsStr);
                         }
                     });
+                    // }
+                    //    });
+
+                } else {
+                    console.info('Push notifications were denied by user');
+                }
+            },
+            checkSwController() {
+                if (initSwReg.swActive()) {
+                    return true;
+                } else {
+                    // TODO: promise based!
+                    setTimeout(() => {
+                        if (initSwReg.swActive()) {
+                            return true;
+                        } else {
+                            console.info('There was a problem with enabling Push Notifications on your device. Please try to refresh the page.');
+                            return false;
+                        }
+                    }, 3000);
                 }
             }
 
@@ -193,7 +215,6 @@
     justify-content: space-between;
     
     .recInput {
-        font-size: 1.5em;
         font-weight: 700;
         margin-right: 10px;
         flex: 0 1 50%;
@@ -225,12 +246,35 @@
 
     .list-group-item {
         padding: 7px;
+        position: static;
+        .badge {
+            float: left;
+        }
     }
+
 } 
 
 @media (max-width: 1000px) {
     .wrapper {
         width: 85%;
+    }
+
+    .record { 
+        width: 160px;
+        height: 160px;
+    }
+
+    .recControls-cont {
+        .recInput {
+            padding: 12px;
+            font-size: 15px;
+            color: #555;
+        }
+
+        .recControls-btns > button.btn-lg {
+            padding: 12px;
+            font-size: 15px;
+        }
     }
 }
 
@@ -239,16 +283,28 @@
         width: 95%;
     }
 
+    .record { 
+        width: 120px;
+        height: 120px;
+    }
+
     .recControls-cont {
         flex-direction: column;
  
         .recInput {
             margin-right: 0;
-                   margin-bottom: 10px;
+            margin-bottom: 10px;
+            padding: 8px;
+            font-size: 12px;
+            color: #555;
         }
         .recControls-btns {
             justify-content: space-between;
-            min-height: 55px;
+
+            button.btn-lg {
+                padding: 7px;
+                font-size: 12px;
+            }
         }
     }
 }

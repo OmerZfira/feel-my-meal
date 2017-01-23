@@ -11,7 +11,7 @@
                     v-bind:id="$index+1"
                     v-bind:disabled="disabled"
                     v-model="value">
-            ❤
+            <div class="fa fa-heart" aria-hidden="true"></div>
         </label>
     </div>
 </template>

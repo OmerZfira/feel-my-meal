@@ -2,7 +2,7 @@
   "name": "coding-acadmy-vue",
   "version": "1.0.0",
   "description": "CodingAcadmy vue js",
-  "author": "",
+  "author": "Omer Zfira",
   "private": true,
   "scripts": {
     "dev": "node build/dev-server.js",
