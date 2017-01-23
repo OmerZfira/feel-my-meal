@@ -12,7 +12,7 @@
     <main-nav></main-nav>
     <modal-feeling v-if="showModal" @close="showModal = false"></modal-feeling>
     <bottom-nav @shoulddisplay="showModal = true"></bottom-nav>
-    <transition name="scale" mode="out-in">
+    <transition name="fade" mode="out-in">
     <router-view></router-view>
     </transition>
   </div>

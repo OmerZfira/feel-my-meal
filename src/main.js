@@ -16,6 +16,7 @@ import toastr from 'toastr';
 if(process.env.NODE_ENV === 'development'){
   Vue.http.options.root = 'http://localhost:3003';
 } else  console.log(process.env.NODE_ENV);
+
 const app = new Vue({
   router,
   store,
@@ -30,7 +31,13 @@ const app = new Vue({
     showModal: false
   },
   mounted() {
-    if (window.location.href === 'http://localhost:8080/#') this.showModal = true;
+    let path = (process.env.NODE_ENV === 'development') ? 'http://localhost:8080' : 'https://feelmymeal.herokuapp.com';
+    if (window.location.href === (path + '/#')) this.showModal = true;
+  //   const navCheckbox = document.querySelector('#nav-bar-mobile-checkbox');
+  //   document.querySelector('body').onclick = (ev) => {
+  //     navCheckbox.checked = false;
+  // console.log(ev);  
+  // }
   }
 }).$mount('#app');
 

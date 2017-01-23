@@ -1,8 +1,7 @@
 <section class="contact">
   <h3 class="title">Contact Us</h3>
   <hr class="star-primary">
-  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam id felis et ipsum bibendum ultrices. Morbi vitae pulvinar
-    velit. Sed aliquam dictum sapien, id sagittis augue malesuada eu.</p>
+  <p>Please share your thoughts with us.<br>We would appreciate your input. </p><br>
 
 <form v-show="shouldShowForm" name="sentMessage" id="contactForm" @submit.prevent="submitForm(contactDetails)">
             <label class="sr-only">Name</label>
@@ -24,7 +23,7 @@
         </div>
       </form>
       <div class="formGreeting" v-show="!shouldShowForm">
-        <h3> You are adorable! <br/>Thanks for being such a great person</h3>
+        <br><h3> You are adorable! <br/>Thanks for being such a great person</h3>
       </div>
 
 </section>

@@ -27,6 +27,13 @@ function signup({ email: username, password: pass }) {
         .then(res => res.json())
         .then(user => {
             return user;
+        })
+        .catch(err =>  {
+          console.warning('stat: ', err.status);
+          return err.json();
+        })
+        .then(res => {
+          console.warning('err: ', res.error);
         });
 }
 
