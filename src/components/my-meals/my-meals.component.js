@@ -112,6 +112,7 @@ export default {
                 this.events = this.firstMeals.concat(this.firstFeelings);
                 let daysToShow = (dayOfTheWeek > 3)? [0,1,2] : [4,5,6];
                 let self = this;
+                    
                     $('.calendar').fullCalendar({
                         // put your options and callbacks here
                         
@@ -149,6 +150,7 @@ export default {
                                 }
                             }
                         },
+                        height: 800,
                         header: {
                             right: 'prevButton nextButton',
                             center: 'todayButton weekButton monthButton'

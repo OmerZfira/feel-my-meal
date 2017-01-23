@@ -1,22 +1,11 @@
-.calendar {
 
-};
-.btn {
-    float: right;   
-    border: solid 1px;
-    margin: 0 10px;
-    
-    background-color: #e9e9e9;
-}
-.next {
-    margin-right: 30px;
-}
-.prev {
-    margin-left: 300px;
-}
 .calendar {
     margin: 0 30px;
+    @media (max-width: 620px) {
+        margin: auto;
+
+    }
 }
-.week {
-    margin-left: 20px;
+.below-nav2 {
+    margin-top: 105px;
 }
