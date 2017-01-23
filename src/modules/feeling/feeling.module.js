@@ -7,7 +7,7 @@ export const GET_FEELINGS_BY_USER_ERROR = 'meal/GET_FEELINGS_BY_USER_ERROR';
 
 import feelingService from '../../services/feeling.service';
 import { mapGetters } from 'vuex';
-
+import toastr from 'toastr';
 const state = {
   feelings: [],
   currFeeling: {},
@@ -18,10 +18,15 @@ const state = {
 
 const mutations = {
   [ADDING_FEELING](state, feeling) {
+    toastr.options.closeButton = true;
+    toastr.success('Great! Your feeling was added!');
     state.currFeeling = feeling;
+    state.feelings.push(feeling);
     state.isloadingFeeling = !state.isloadingFeeling;
   },
   [ADDING_FEELING_ERR](state, error) {
+    toastr.options.closeButton = true;
+    toastr.error('There was a problem to add a feeling.');
     state.error = error;
     state.isloadingFeeling = !state.isloadingFeeling;
   },
@@ -53,7 +58,6 @@ const actions = {
   },
 
   addFeeling({ commit, state }, feeling) {
-    commit(ADDING_FEELING, feeling);
     feelingService.submitFeeling(feeling).then(feeling => {
       commit(ADDING_FEELING, feeling);
     }).catch(err => {

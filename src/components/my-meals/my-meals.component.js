@@ -4,7 +4,7 @@ import { mapGetters, mapActions } from 'vuex';
 import authService from '../../services/auth.service';
 import {SIGN_IN} from '../../modules/auth/auth.module';
 import filtercom from '../filter/filter.component';
-
+import toastr from 'toastr';
 const TIME_DIFF = 1600000;
 const dayOfTheWeek = moment().day();
 
@@ -91,13 +91,16 @@ export default {
             newFeeling['textColor'] = 'black';
             newFeeling['backgroundColor'] = this.setFeelingColor(feeling.rating);
             this.firstFeelings.push(newFeeling);
-        }
+        },
+         onDeleteSuccess(){
+            toastr.options.closeButton = true;
+            toastr.success('Product Deleted!');
+         }
     }, 
     
         mounted() {
             
             var prmMeals = this.$store.dispatch('getMealsByUser', this.user).then(meals => {
-                
                 meals.forEach(meal => { 
                     this.translateMeals(meal);
                 });
@@ -110,8 +113,10 @@ export default {
             });
             Promise.all([prmMeals, prmFeelings]).then(values => {
                 this.events = this.firstMeals.concat(this.firstFeelings);
+                // console.log('this.events in pormise all', this.events)
                 let daysToShow = (dayOfTheWeek > 3)? [0,1,2] : [4,5,6];
                 let self = this;
+                    
                     $('.calendar').fullCalendar({
                         // put your options and callbacks here
                         
@@ -149,6 +154,7 @@ export default {
                                 }
                             }
                         },
+                        height: 800,
                         header: {
                             right: 'prevButton nextButton',
                             center: 'todayButton weekButton monthButton'
@@ -171,7 +177,7 @@ export default {
         },
 
         computed: {
-            ...mapGetters([ 'feelings', 'user', 'latestMeals']),
+            ...mapGetters([ 'feelings', 'user', 'currMeal']),
         },
         components: {
             moment,
@@ -187,6 +193,6 @@ export default {
                 this.events = this.firstMeals.concat(this.firstFeelings);
                 $('.calendar').fullCalendar( 'removeEvents' );
                 $('.calendar').fullCalendar( 'renderEvents', this.events );
-        },
+            },
     }
 }

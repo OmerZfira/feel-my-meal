@@ -5,6 +5,7 @@ export const GET_MEALS_BY_USER = 'meal/GET_MEALS_BY_USER';
 export const GET_MEALS_BY_USER_SUCCESS = 'meal/GET_MEALS_BY_USER_SUCCESS';
 export const GET_MEALS_BY_USER_ERROR = 'meal/GET_MEALS_BY_USER_ERROR';
 
+import toastr from 'toastr';
 import mealService from '../../services/meal.service';
 import { mapGetters } from 'vuex';
 
@@ -19,10 +20,18 @@ const state = {
 
 const mutations = {
   [ADDING_MEAL](state, meal) {
+    toastr.options.closeButton = true;
+    toastr.success('Great! Your meal was added!');
+
     state.currMeal = meal;
+    state.latestMeals.push(meal);
+
     state.isloadingMeal = !state.isloadingMeal;
+    
   },
   [ADDING_MEAL_ERR](state, error) {
+    toastr.options.closeButton = true;
+    toastr.error('There was a problem to add a meal');
     state.error = error;
     state.isloadingMeal = !state.isloadingMeal;
   },
@@ -42,7 +51,7 @@ const mutations = {
 
 const actions = {
   addMeal({ commit, state }, meal) {
-    commit(ADDING_MEAL, meal);
+    // commit(ADDING_MEAL, meal);
     mealService.submitMeal(meal).then(meal => {
       commit(ADDING_MEAL, meal);
     }).catch(err => {
