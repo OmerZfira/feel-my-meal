@@ -194,11 +194,5 @@ export default {
                 $('.calendar').fullCalendar( 'removeEvents' );
                 $('.calendar').fullCalendar( 'renderEvents', this.events );
             },
-            // currMeal: function() {
-            //         this.translateMeals(this.currMeal);
-            //         this.events = this.firstMeals.concat(this.firstFeelings);
-            //         $('.calendar').fullCalendar( 'removeEvents' );
-            //         $('.calendar').fullCalendar( 'renderEvents', this.events );
-            // }
     }
 }
