@@ -16,16 +16,26 @@
 }
 
 //add-meal-list
-// .list-group-item {
-//   transition: all 1s;
-// }
-// .foods-transition-enter-active, .foods-transition-leave-active {
-//   transition: all 1s;
-// }
-// .foods-transition-move {
-//   transition: transform 1s;
-// }
-// .foods-transition-enter, .foods-transition-leave-to {
-//   opacity: 0;
-//   transform: translateY(30px);
-// }
+.list-group-item {
+  transition: all 1s;
+}
+
+.foods-enter-active, .foods-leave-active {
+  transition: all 1s ease;
+}
+
+.foods-move {
+  transition: transform 1s ease;
+}
+
+.foods-enter, .foods-leave-to {
+  opacity: 0;
+  transform: translateY(-25px);
+}
+
+.foods-leave-active {
+ width: 100%;
+  position: absolute;
+}
+
+

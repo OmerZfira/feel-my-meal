@@ -75,6 +75,7 @@ const setters = {
   isloadingFeeling: state => state.isloadingFeeling,
   feelings: state => state.feelings,
 }
+
 export default {
   state,
   setters,

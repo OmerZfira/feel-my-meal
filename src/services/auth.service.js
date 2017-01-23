@@ -74,6 +74,14 @@ function protectRoute( next ) {
   }
 }
 
+function redirectToSignin( next ) {
+  if( isLoggedIn() ) {
+    next();
+  } else {
+    next({ name: 'signin' });
+  }
+}
+
 export default {
   signin,
   signup,
@@ -81,4 +89,5 @@ export default {
   setSession,
   isLoggedIn,
   protectRoute,
+  redirectToSignin,
 }

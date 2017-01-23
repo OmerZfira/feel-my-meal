@@ -1,0 +1,23 @@
+<div class="wrapper">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <section class="add-meal" v-show="!isloadingMeal">
+        <div @touchstart="startSpeechReco" @touchend="stopSpeechReco" @touchcancel="stopSpeechReco" @mousedown="startSpeechReco"
+            @mouseup="stopSpeechReco" @mouseleave="stopSpeechReco" class="record" :class="{recording : isRec}">
+            <div class="fa fa-microphone fa-4x" aria-hidden="true"></div>
+        </div>
+        <div class="recControls-cont">
+            <input type="text" v-model="speechElText" @keyup.enter="addFood" class="recInput" placeholder="Next Food Item">
+            <div class="recControls-btns">
+                <button v-if="recFb" @click="addFood" class="btn btn-primary btn-lg">Add Food</button>
+                <button @click="submitFood" @touch="submitFood" class="btn btn-success btn-lg">Finish Meal</button>
+            </div>
+        </div>
+        <transition-group name="foods" tag="ul" class="list-group">
+            <li v-for="(food, index) of foods" :key="food" class="list-group-item">
+                <button @click="deleteFood(index)" class="btn btn-danger btn-lg badge btn-red">X</button>
+                <div contenteditable="true" @keyup="updateFood(index, $event)">{{food}}
+                </div>
+            </li>
+        </transition-group>
+    </section>
+</div>

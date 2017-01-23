@@ -1,16 +1,14 @@
 import Vue from 'vue';
-import moment from 'moment';
 
-
-function submitSettings({ foods, userId }) {
-    console.log('SUBMITTING NEW SETTINGS TO SERVER');
-    return Vue.http.put('data/meal', { foods, userId, time: Date.now() })
+function saveSettings({ pushTimer, lang, _id }) {
+    console.log('SUBMITTING NEW SETTINGS TO SERVER', { pushTimer, lang, _id });
+    return Vue.http.put('data/user', { pushTimer, lang, _id })
         .then(res => res.json())
-        .then(meal => {
-            return meal;  
+        .then(user => {
+            return user;  
         });
 }
 
 export default {
-    submitSettings
+    saveSettings
 }

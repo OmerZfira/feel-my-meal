@@ -5,7 +5,6 @@ export const GET_MEALS_BY_USER = 'meal/GET_MEALS_BY_USER';
 export const GET_MEALS_BY_USER_SUCCESS = 'meal/GET_MEALS_BY_USER_SUCCESS';
 export const GET_MEALS_BY_USER_ERROR = 'meal/GET_MEALS_BY_USER_ERROR';
 
-
 import toastr from 'toastr';
 import mealService from '../../services/meal.service';
 import { mapGetters } from 'vuex';
@@ -48,7 +47,6 @@ const mutations = {
   [GET_MEALS_BY_USER_ERROR] ( state, latestMeals ) {
     state.loading = false;
   },
-
 }
 
 const actions = {
@@ -77,28 +75,11 @@ const actions = {
       commit(GET_MEALS_BY_USER_ERROR, err);
     });
   }
-
 };
 
 const getters = {
   isloadingMeal: state => state.isloadingMeal,
   latestMeals: state => state.latestMeals,
-  currMeal: state => state.currMeal
-  // loading : state => state.loading
-  // checkoutPending: state => state.loading,
-  // error          : state => state.error,
-  // cart( state ) {
-  //   return state.items.filter(i => i.quantity);
-  // },
-  // cartTotal( _, getters ) {
-  //   return getters.cart.reduce(( acc, item ) => {
-  //     return acc + (parseInt(item.quantity) * item.price);
-  //   }, 0);
-  // },
-  // cartLength( _, getters ) {
-  //   return getters.cart.length;
-  // }
-
 }
 
 export default {

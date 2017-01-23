@@ -1,70 +1,81 @@
 <template>
     <section class="below-nav">
-        <div class="wrapper">
+        <div class="wrapper flex-column flex-center">
 
             <h2>Settings</h2>
-            <h3 class="title">Enable notifications</h3>
+            <h3 class="title">Enable notifications:</h3>
             <label class="custom-check">
                 <input v-model="shouldPush" type="checkbox" name="onOff">
                 <i></i> 
                 <span></span>
             </label>
             <h3 class="title">Notification delay after every meal:</h3>
-            <range-slider v-model="sliderValue" :disabled="!shouldPush" :class="{isdisabled : !shouldPush}"
-                          class="slider" min="1" max="10" step="1" ></range-slider>
+            <range-slider v-model="sliderValue" :disabled="!shouldPush" :class="{isdisabled : !shouldPush}" class="slider" min="1" max="10"
+                step="1"></range-slider>
             <span class="slider-value"> {{sliderValue}} </span>
-            <input type="radio" name="notify">&nbsp1 Hour</br>
-            <input type="radio" name="notify" checked>&nbsp3 hours</br>
-            <input type="radio" name="notify">&nbsp6 hours
-
+            <button @click="saveSettings" @touch="saveSettings" class="btn btn-success btn-lg">Save Settings</button>
         </div>
     </section>
 </template>
 
 <script>
+    import { mapGetters } from 'vuex';
     import RangeSlider from 'vue-range-slider'
-    // import 'vue-range-slider/dist/vue-range-slider.css'
 
     export default {
 
         data: () => {
             return {
-                sliderValue: 5,
                 shouldPush: true,
+                sliderValue: 0,
+                lang: null,
             }
-        },
-        methods: {
         },
         components: {
             RangeSlider
         },
         computed: {
+            ...mapGetters(['user', 'settings', 'isLoadingSettings'])
+        },
+        methods: {
+            saveSettings() {
+                let pushTimer = (this.shouldPush) ? this.sliderValue : -1;
+                this.$store.dispatch('saveSettings', { pushTimer: pushTimer, lang: null, _id: this.user._id });
+            },
+        },
+        mounted() {
 
+            //get settings from db
+            if (this.settings.pushTimer === -1) {
+                this.shouldPush = false;
+                this.sliderValue = 4;
+            } else {
+                this.shouldPush = true;
+                this.sliderValue = this.settings.pushTimer;
+            }
         }
     }
 </script>
 
-<style lang="scss" >
-$knob-size: 10px !important;
-
+<style lang="scss" scoped>
 
 .slider {
-    margin: 0 auto;
     width: 60%;
 }
- 
 
-
-</style>
-
-<style lang="scss" scoped>
  $activeColor: #27ae60;
+
+.btn-success {
+    margin-top: 30px;
+    min-width: 80px;
+    width: 30%;
+}
 
 section{
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-    background-color: $activeColor;
+    /*background-color: $activeColor;*/
 	padding: 125px 100px;
 
     h3.title {
@@ -88,10 +99,6 @@ section{
 	}
 }
 
-.wrapper {
-    display: flex;
-    flex-direction: column;
-}
 
 $width: 100px;
 $height: 40px;
