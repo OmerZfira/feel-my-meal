@@ -4,13 +4,9 @@ export const ADDING_MEAL_ERR = 'meal/ADDING_MEAL_ERR';
 export const GET_MEALS_BY_USER = 'meal/GET_MEALS_BY_USER';
 export const GET_MEALS_BY_USER_SUCCESS = 'meal/GET_MEALS_BY_USER_SUCCESS';
 export const GET_MEALS_BY_USER_ERROR = 'meal/GET_MEALS_BY_USER_ERROR';
-// export const ADD_TO_CART = 'cart/ADD_TO_CART';
-// export const REMOVE_FROM_CART = 'cart/REMOVE_FROM_CART';
-// export const CHECKOUT = 'cart/CHECKOUT';
-// export const CHECKOUT_SUCCESS = 'cart/CHECKOUT_SUCCESS';
-// export const CHECKOUT_ERROR = 'cart/CHECKOUT_ERROR';
 
 
+import toastr from 'toastr';
 import mealService from '../../services/meal.service';
 import { mapGetters } from 'vuex';
 
@@ -25,12 +21,18 @@ const state = {
 
 const mutations = {
   [ADDING_MEAL](state, meal) {
+    toastr.options.closeButton = true;
+    toastr.success('Great! Your meal was added!');
+
     state.currMeal = meal;
-    // state.latestMeals.push(meal);
-    // console.log('state.latestMeals', state.latestMeals)
+    state.latestMeals.push(meal);
+
     state.isloadingMeal = !state.isloadingMeal;
+    
   },
   [ADDING_MEAL_ERR](state, error) {
+    toastr.options.closeButton = true;
+    toastr.error('There was a problem to add a meal');
     state.error = error;
     state.isloadingMeal = !state.isloadingMeal;
   },
@@ -46,41 +48,12 @@ const mutations = {
   [GET_MEALS_BY_USER_ERROR] ( state, latestMeals ) {
     state.loading = false;
   },
-  // [UPDATE_QUANTITY]( _, { meal, quantity } ) {
-  //   meal.quantity = quantity;
-  // }
-
-  // [CHECKOUT_SUCCESS]( state ) {
-  //   state.items = [];
-  //   state.loading = false;
-  // },
-  // [ADD_TO_CART]( state, item ) {
-  //   let itemExists = state.items.indexOf(item) > -1;
-  //   if( !itemExists ) {
-  //     state.items.push(item);
-  //   }
-  // },
-  // [REMOVE_FROM_CART]( state, item ) {
-  //   item.quantity = 0;
-  //   state.items.splice(state.items.indexOf(item), 1);
-  // },
-  // [CHECKOUT]( state ) {
-  //   state.loading = true;
-  // },
-  // [CHECKOUT_SUCCESS]( state ) {
-  //   state.items = [];
-  //   state.loading = false;
-  // },
-  // [CHECKOUT_ERROR]( state, error ) {
-  //   state.error = error;
-  //   state.loading = false;
-  // }
 
 }
 
 const actions = {
   addMeal({ commit, state }, meal) {
-    commit(ADDING_MEAL, meal);
+    // commit(ADDING_MEAL, meal);
     mealService.submitMeal(meal).then(meal => {
       commit(ADDING_MEAL, meal);
     }).catch(err => {
@@ -104,19 +77,6 @@ const actions = {
       commit(GET_MEALS_BY_USER_ERROR, err);
     });
   }
-  // checkout( { commit } ) {
-  //   commit(CHECKOUT);
-  //   mealService.checkout().then(_ => {
-  //     commit(CHECKOUT_SUCCESS);
-  //     swal({
-  //       title: "Busted!!!!",
-  //       type : "success",
-  //       text : "I took all your money",
-  //     });
-  //   }).catch(err => {
-  //     commit(CHECKOUT_ERROR, err);
-  //   });
-  // },
 
 };
 
