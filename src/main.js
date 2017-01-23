@@ -11,6 +11,7 @@ import router from './routes';
 import MainNav from './components/main-nav';
 import BottomNav from './components/bottom-nav/bottom-nav';
 import ModalFeeling from './components/modal-feeling/modal-feeling';
+import toastr from 'toastr';
 
 if(process.env.NODE_ENV === 'development'){
   Vue.http.options.root = 'http://localhost:3003';
@@ -19,6 +20,7 @@ const app = new Vue({
   router,
   store,
   moment,
+
   components: {
     MainNav,
     BottomNav,

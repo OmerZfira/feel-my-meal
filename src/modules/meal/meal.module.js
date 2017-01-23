@@ -26,6 +26,8 @@ const state = {
 const mutations = {
   [ADDING_MEAL](state, meal) {
     state.currMeal = meal;
+    // state.latestMeals.push(meal);
+    // console.log('state.latestMeals', state.latestMeals)
     state.isloadingMeal = !state.isloadingMeal;
   },
   [ADDING_MEAL_ERR](state, error) {
@@ -121,7 +123,7 @@ const actions = {
 const getters = {
   isloadingMeal: state => state.isloadingMeal,
   latestMeals: state => state.latestMeals,
-  
+  currMeal: state => state.currMeal
   // loading : state => state.loading
   // checkoutPending: state => state.loading,
   // error          : state => state.error,
