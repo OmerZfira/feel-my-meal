@@ -35,6 +35,11 @@ button {
   border: none;
   background-color: transparent;
   cursor: pointer;
-  font-family: var(--primary-font);
+  font-family: Lato;
+  &.fc-button{
+    // background-color: red;
+    // width:50px;
+  }
 }
+
 
