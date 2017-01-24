@@ -6,6 +6,7 @@ export const SAVE_SETTINGS_ERR = 'auth/SAVE_SETTINGS_ERR';
 
 import store from '../../store';
 import authService from '../../services/auth.service';
+import toastr from 'toastr';
 
 const state = {
   isLoggedIn: !!localStorage.getItem('token'),
@@ -14,26 +15,30 @@ const state = {
 };
 
 const mutations = {
-  [SIGN_IN]( state, user ) {
+  [SIGN_IN](state, user) {
     state.isLoggedIn = true;
     state.user = user;
   },
-  [SIGN_OUT]( state ) {
+  [SIGN_OUT](state) {
     state.isLoggedIn = false;
   },
   [SAVING_SETTINGS](state) {
     console.log('now loading new settings');
-    state.isLoadingSettings = true
+    state.isLoadingSettings = true;
   },
   [SAVE_SETTINGS](state, { settings }) {
     console.log('result setting in module: ', settings);
     state.user.settings = { pushTimer: settings.pushTimer, lang: settings.lang };
     state.isLoadingSettings = !state.isLoadingSettings;
+    toastr.options.closeButton = true;
+    toastr.success('Your settings were set!');
     localStorage.setItem('user', JSON.stringify(state.user)); // REMOVE THIS WHEN USING REAL SIGNIN
   },
   [SAVE_SETTINGS_ERR](state, error) {
     state.error = error;
     state.isLoadingSettings = !state.isLoadingSettings;
+    toastr.options.closeButton = true;
+    toastr.error('OOPS.. there was a problem with submmiting your settings');
   },
 }
 

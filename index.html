@@ -9,17 +9,17 @@
   <link rel="manifest" href="/manifest.json">
 
   <!--ios PWA-->
- <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   <meta name="apple-mobile-web-app-title" content="Feel My Meal App">
   <link rel="apple-touch-icon" href="images/icons/icon-152x152.png">
 
   <!--ms PWA-->
-<meta name="msapplication-TileImage" content="images/icons/icon-144x144.png">
+  <meta name="msapplication-TileImage" content="images/icons/icon-144x144.png">
   <meta name="msapplication-TileColor" content="#2F3BA2">
 
 
-<!--<link rel="icon" sizes="128x128" href="niceicon.png">-->
+  <!--<link rel="icon" sizes="128x128" href="niceicon.png">-->
 
   <title>Feel My Meal App</title>
 </head>
@@ -31,7 +31,7 @@
     <modal-feeling v-if="showModal" @close="showModal = false"></modal-feeling>
     <bottom-nav @shoulddisplay="showModal = true"></bottom-nav>
     <transition name="fade" mode="out-in">
-    <router-view></router-view>
+      <router-view></router-view>
     </transition>
   </div>
   <!-- built files will be auto injected -->
@@ -41,4 +41,3 @@
 </body>
 
 </html>
-
