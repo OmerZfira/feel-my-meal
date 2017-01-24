@@ -1,6 +1,6 @@
 # vue
 
-> A Vue.js project
+> Final project at Coding Academy. Full-scale, single-page, progressive web app with Vue.JS
 
 ## Build Setup
 
