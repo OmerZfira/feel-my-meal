@@ -35,23 +35,23 @@
             RangeSlider
         },
         computed: {
-            ...mapGetters(['user', 'settings', 'isLoadingSettings'])
+            ...mapGetters(['user', 'isLoadingSettings'])
         },
         methods: {
             saveSettings() {
                 let pushTimer = (this.shouldPush) ? this.sliderValue : -1;
-                this.$store.dispatch('saveSettings', { pushTimer: pushTimer, lang: null, _id: this.user._id });
+                this.$store.dispatch('saveSettings', { settings: { pushTimer: pushTimer, lang: null }, _id: this.user._id });
             },
         },
         mounted() {
 
             //get settings from db
-            if (this.settings.pushTimer === -1) {
+            if (this.user.settings.pushTimer === -1) {
                 this.shouldPush = false;
                 this.sliderValue = 4;
             } else {
                 this.shouldPush = true;
-                this.sliderValue = this.settings.pushTimer;
+                this.sliderValue = this.user.settings.pushTimer;
             }
         }
     }
@@ -67,7 +67,7 @@
 
 .btn-success {
     margin-top: 30px;
-    min-width: 80px;
+    min-width: 136px;
     width: 30%;
 }
 
