@@ -4,7 +4,7 @@ export const SAVE_SETTINGS_ERR = 'settings/SAVE_SETTINGS_ERR';
 
 import settingsService from '../../services/settings.service';
 import { mapGetters } from 'vuex';
-
+import toastr from 'toastr';
 const state = {
   settings: {
     pushTimer: 4,
@@ -22,10 +22,14 @@ const mutations = {
     console.log('result setting in module: ', {pushTimer, lang});
     state.settings = { pushTimer, lang };
     state.isLoadingSettings = !state.isLoadingSettings;
+    toastr.options.closeButton = true;
+    toastr.success('Your settings were set!');
   },
   [SAVE_SETTINGS_ERR](state, error) {
+    toastr.options.closeButton = true;
+    toastr.error('OOPS.. there was a problem with submmiting your settings');
     state.error = error;
-    state.isLoadingSettings = !state.isLoadingSettings;
+    state.isLoadingSettings = !state.isLoadingSettings; 
   },
 }
 
