@@ -19,7 +19,7 @@ const state = {
 
 const mutations = {
   [ADDING_FEELING](state, feeling) {
-    console.log('toastr.options', toastr);
+    console.log('toastr.options', toastr.options);
     
     toastr.options.closeButton = true;
     toastr.success('Great! Your feeling was added!');
