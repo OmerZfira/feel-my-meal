@@ -19,13 +19,14 @@ const state = {
 }
 
 const mutations = {
+  [ADD_MEAL](state) {
+    state.isloadingMeal = true;
+  },
   [ADDING_MEAL](state, meal) {
     toastr.options.closeButton = true;
     toastr.success('Great! Your meal was added!');
-
     state.currMeal = meal;
     state.latestMeals.push(meal);
-
     state.isloadingMeal = !state.isloadingMeal;
     
   },
@@ -51,7 +52,7 @@ const mutations = {
 
 const actions = {
   addMeal({ commit, state }, meal) {
-    // commit(ADDING_MEAL, meal);
+    commit(ADD_MEAL);
     mealService.submitMeal(meal).then(meal => {
       commit(ADDING_MEAL, meal);
     }).catch(err => {

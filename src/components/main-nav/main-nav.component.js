@@ -13,7 +13,7 @@ export default {
     signout() {
       authService.signout();
       this.$store.commit(SIGN_OUT);
-      this.$router.push('/');
+      this.$router.push('/signin');
     },
     closeMenu() {
       this.checkboxVal = false;

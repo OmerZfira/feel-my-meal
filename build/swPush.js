@@ -38,15 +38,6 @@ self.addEventListener('notificationclick', function (event) {
 
   // Handle actions
   if (event.action === 'later') {
-    // case 'open':
-    //   clients.openWindow(redirectUrl, '_blank');
-    //   break;
-    // case '30min':
-    //   // remindPushMsg.pushTimer = 0.5; // 30min reminder
-    //   remindPushMsg.pushTimer = evNote.data.pushTimer;
-    //   pushNotification(remindPushMsg)
-    //   break;
-    // case :
     let evNote = event.notification
     let remindPushMsg = {
       title: evNote.title,
@@ -59,11 +50,9 @@ Please tell us how do you feel`
       }
     }
     // remindPushMsg.pushTimer = 1; // 1 hour reminder
-    remindPushMsg.pushTimer = evNote.data.pushTimer;
+    remindPushMsg.pushTimer = evNote.data.pushTimer * 2;
     pushNotification(remindPushMsg)
-    break;
-  }
-  clients.openWindow(redirectUrl, '_blank');
+  } else clients.openWindow(redirectUrl, '_blank');
   event.notification.close();
 });
 

@@ -67,11 +67,9 @@ function isLoggedIn() {
  * @returns {promise}
  */
 function saveSettings({ settings, _id }) {
-    console.log('SUBMITTING NEW SETTINGS TO SERVER', { settings, _id });
     return Vue.http.put('data/user', { settings, _id })
         .then(res => res.json())
         .then(user => {
-            console.log('response user in service (updatedUser): ', user);
             return user;  
         });
 }
