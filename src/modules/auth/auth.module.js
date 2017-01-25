@@ -23,11 +23,9 @@ const mutations = {
     state.isLoggedIn = false;
   },
   [SAVING_SETTINGS](state) {
-    console.log('now loading new settings');
     state.isLoadingSettings = true;
   },
   [SAVE_SETTINGS](state, { settings }) {
-    console.log('result setting in module: ', settings);
     state.user.settings = { pushTimer: settings.pushTimer, lang: settings.lang };
     state.isLoadingSettings = !state.isLoadingSettings;
     toastr.options.closeButton = true;

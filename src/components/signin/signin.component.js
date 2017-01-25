@@ -16,7 +16,6 @@ export default {
       if (this.errors.any()) return;
 
       authService.signin(user).then(res => {
-        console.log('user is: ', res);
         // this.$store.commit(SIGN_IN, res);
         this.$store.commit(SIGN_IN, res);
         this.$router.push({ name: 'home' });
