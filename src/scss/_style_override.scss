@@ -1,0 +1,10 @@
+.toast-top-right {
+  top: 102px;
+  right: 12px;
+   @include for-mobile-only {
+    top:62px;
+  }
+}
+.form-control {
+  margin-left: 0px;
+}

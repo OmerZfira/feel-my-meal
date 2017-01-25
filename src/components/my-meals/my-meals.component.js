@@ -101,15 +101,18 @@ export default {
         mounted() {
             
             var prmMeals = this.$store.dispatch('getMealsByUser', this.user).then(meals => {
-                meals.forEach(meal => { 
+            
+                    meals.forEach(meal => { 
                     this.translateMeals(meal);
                 });
+                
             });
             var prmFeelings = this.$store.dispatch('getFeelingsByUser', this.user).then((feelings) => {
+                
                 feelings.forEach((feeling) => {
                     this.translateFeelings(feeling)
                 });
-
+                
             });
             Promise.all([prmMeals, prmFeelings]).then(values => {
                 this.events = this.firstMeals.concat(this.firstFeelings);
