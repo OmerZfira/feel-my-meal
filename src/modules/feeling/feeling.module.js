@@ -43,6 +43,15 @@ const mutations = {
 }
 
 const actions = {
+
+  addFeeling({ commit, state }, feeling) {
+    feelingService.submitFeeling(feeling).then(feeling => {
+      commit(ADDING_FEELING, feeling);
+    }).catch(err => {
+      commit(ADDING_FEELING_ERR, err);
+    });
+  },
+  
   getFeelingsByUser({ commit, state }, user) {
     if (state.feelings.length) {
       commit(GET_FEELINGS_BY_USER_SUCCESS, state.feelings);
@@ -54,14 +63,6 @@ const actions = {
       return feelings;
     }).catch(err => {
       commit(GET_FEELINGS_BY_USER_ERROR, err);
-    });
-  },
-
-  addFeeling({ commit, state }, feeling) {
-    feelingService.submitFeeling(feeling).then(feeling => {
-      commit(ADDING_FEELING, feeling);
-    }).catch(err => {
-      commit(ADDING_FEELING_ERR, err);
     });
   },
 };
