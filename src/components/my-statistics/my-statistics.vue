@@ -2,8 +2,10 @@
     <section class="below-nav">
         <h1> My Statistics Component</h1>
         <h3>Common Foods</h3>
+
         <h2 v-if="loadingStats">LOADING</h2>
         <vue-chart v-else chart-type="PieChart" :columns="[{type: 'string', label: 'Food'},{type: 'number', label: 'Feeling'}]" :rows="[['bread', 3],['pizza', 1],['tomato', 5]]">
+
         </vue-chart>
     </section>
 </template>
@@ -43,6 +45,7 @@
         //                 //remove feeling from feelings if its too back in time and wont relate to any meal anymore
         //                 } else if (feeling.time < meal.time) {
         //                     //TODO
+
 
         //                 //stop iteration when too late time...
         //                 } else if (feeling.time > meal.time) {
