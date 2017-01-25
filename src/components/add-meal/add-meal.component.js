@@ -43,14 +43,14 @@ export default {
         submitFood() {
             if (this.foods.length) {
                 this.$store.dispatch('addMeal', { foods: this.foods, userId: this.user._id });
-                this.pushNotification();
+                if (!(this.user.settings.pushTimer === -1)) this.pushNotification();
                 this.foodsData = [];
                 this.speechElText = '';
             }
         },
         pushNotification() {
             let redirectUrl = (process.env.NODE_ENV === 'development') ? 'http://localhost:8080/#' : 'https://feelmymeal.herokuapp.com/#';
-            let pushObj = { foods: this.foods, user: this.user.username, pushTimer: 0.001, url: redirectUrl };
+            let pushObj = { foods: this.foods, user: this.user.username, pushTimer: this.user.settings.pushTimer / 3600, url: redirectUrl };
             let pushObjAsStr = JSON.stringify(pushObj);
 
             if (!("Notification" in window)) {

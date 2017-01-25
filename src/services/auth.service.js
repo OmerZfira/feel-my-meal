@@ -23,17 +23,17 @@ function signin( {email,password} ) {
  */
 
 function signup({ email: username, password: pass }) {
-    return Vue.http.post('signup', { username , pass })
+    return Vue.http.post('signup', { username , pass , settings: {pushTimer: 4, lang: null}})
         .then(res => res.json())
         .then(user => {
             return user;
         })
         .catch(err =>  {
-          console.warning('stat: ', err.status);
+          console.warn('stat: ', err.status);
           return err.json();
         })
         .then(res => {
-          console.warning('err: ', res.error);
+          console.warn('err: ', res.error);
         });
 }
 
@@ -64,6 +64,18 @@ function isLoggedIn() {
 
 /**
  *
+ * @returns {promise}
+ */
+function saveSettings({ settings, _id }) {
+    return Vue.http.put('data/user', { settings, _id })
+        .then(res => res.json())
+        .then(user => {
+            return user;  
+        });
+}
+
+/**
+ *
  * @param next
  */
 function protectRoute( next ) {
@@ -90,4 +102,5 @@ export default {
   isLoggedIn,
   protectRoute,
   redirectToSignin,
+  saveSettings
 }
