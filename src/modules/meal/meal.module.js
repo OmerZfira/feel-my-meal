@@ -36,8 +36,7 @@ const mutations = {
     state.error = error;
     state.isloadingMeal = !state.isloadingMeal;
   },
-
-
+  
   [GET_MEALS_BY_USER]( state ) {
     state.loading = true;
   },
@@ -51,6 +50,7 @@ const mutations = {
 }
 
 const actions = {
+  
   addMeal({ commit, state }, meal) {
     commit(ADD_MEAL);
     mealService.submitMeal(meal).then(meal => {
@@ -60,7 +60,6 @@ const actions = {
     });
 
   },
-
 
   getMealsByUser({ commit, state }, user) {
     if (state.latestMeals.length) {

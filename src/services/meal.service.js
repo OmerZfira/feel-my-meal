@@ -15,8 +15,8 @@ export function getMealsByUser({user}) {
   return Vue.http.post('getMealByUser',user )
         
         .then(res => res.json())
-        .then(meal => {
-            return meal;   
+        .then(meals => {
+            return meals;   
         });
 }
 
