@@ -1,0 +1,9 @@
+<div class="chat below-nav2">
+    <ul class="messages">
+        <li v-for="chatMsg in chatMsgs">{{chatMsg.nickName}}: {{chatMsg.msg}}</li>
+    </ul>
+    <form class="input-box">
+        <input v-model="chatMsg.msg" />
+        <button @click.prevent="sendMsg">&#187;</button>
+    </form>
+</div>

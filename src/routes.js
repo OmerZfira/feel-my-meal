@@ -9,7 +9,7 @@ import Contacts from './components/admin/contact/contact';
 import MyMeals from './components/my-meals';
 import Settings from './components/settings/settings';
 import MyStatistics from './components/my-statistics/my-statistics.vue';
-import Chat from './components/chat/chat.vue';
+import Chat from './components/chat';
 
 const routes = [{
   path: '/',
