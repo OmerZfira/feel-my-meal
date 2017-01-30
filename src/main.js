@@ -4,7 +4,6 @@ import './vue-plugins';
 import './sw-init';
 
 import Vue from 'vue';
-
 import moment from 'moment';
 import store from './store';
 import router from './routes';
@@ -21,7 +20,7 @@ const app = new Vue({
   router,
   store,
   moment,
-
+  
   components: {
     MainNav,
     BottomNav,
