@@ -9,6 +9,7 @@ import Contacts from './components/admin/contact/contact';
 import MyMeals from './components/my-meals';
 import Settings from './components/settings/settings';
 import MyStatistics from './components/my-statistics/my-statistics.vue';
+import Chat from './components/chat/chat.vue';
 
 const routes = [{
   path: '/',
@@ -38,6 +39,11 @@ const routes = [{
   path: '/my-statistics',
   name: 'my-statistics',
   component: MyStatistics
+},
+{
+  path: '/chat',
+  name: 'chat',
+  component: Chat
 },
 {
   path: '/admin',
