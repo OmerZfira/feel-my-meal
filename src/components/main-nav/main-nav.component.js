@@ -6,7 +6,8 @@ export default {
   name: 'main-nav',
   data() {
     return {
-      checkboxVal: false
+      checkboxVal: false,
+      shouldGetHigher: false
     }
   },
   methods: {
@@ -18,6 +19,7 @@ export default {
     closeMenu() {
       this.checkboxVal = false;
     },
+    
   },
   computed: {
     ...mapGetters({
@@ -26,4 +28,9 @@ export default {
     }
     ),
   },
+  watch: {
+    shouldGetHigher() {
+      console.log('changed', this.shouldGetHigher);
+    }
+  }
 }

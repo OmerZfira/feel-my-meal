@@ -42,3 +42,19 @@ form button {
          margin-top: 70px;
     }
 }
+@media (max-width: 750px) {
+    .bottom-nav__fixed-button {
+        bottom: 75px;
+        width: 70px;
+        height: 70px;
+    }
+
+    .add-feeling { 
+        left: 25px;
+    }
+
+    .nav-record { 
+        right: 25px;
+    } 
+
+}
