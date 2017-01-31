@@ -1,5 +1,6 @@
 'use strict'
 import io from 'socket.io-client';
+import { GET_HIGHER, store } from '../../modules/chat/chat.module';
 
 export default {
   name: 'chat',
@@ -29,5 +30,11 @@ export default {
     this.socket.on('chat message', chatMsg => {
       this.chatMsgs.push(chatMsg);   
     })
+  },
+  mounted() {
+    this.$store.commit(GET_HIGHER); 
+  },
+  destroyed() {
+    this.$store.commit(GET_HIGHER); 
   }
 }

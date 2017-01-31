@@ -1,12 +1,12 @@
 <template>
 
     <nav class="bottom-nav">
-        <router-link class="bottom-nav__fixed-button nav-record" :to="{name: 'home'}" v-show="$route.name !== 'home'">
+        <router-link class="bottom-nav__fixed-button nav-record" :to="{name: 'home'}" v-show="$route.name !== 'home'" :class="{ higher: isChangeStyle }">
             <!--<div class="record">-->
             <div class="fa fa-microphone fa-2x" aria-hidden="true"></div>
             <!--</div>-->
         </router-link>
-        <div class="bottom-nav__fixed-button add-feeling" @click="$emit('shoulddisplay')">
+        <div class="bottom-nav__fixed-button add-feeling" :class="{ higher2: isChangeStyle }" @click="$emit('shoulddisplay')">
             <div class="fa fa-heart fa-2x" aria-hidden="true"></div>
         </div>
     </nav>
@@ -14,13 +14,26 @@
 </template>
 
 <script>
+    import { mapGetters } from 'vuex';
 
     export default {
         name: 'bottom-nav',
+        
         data() {
             return {
+                isChangeStyle: false
             }
         },
+        computed: {
+            ...mapGetters(['shouldGetHigher']),
+
+        }, 
+        watch: {
+            shouldGetHigher(){
+                this.isChangeStyle = this.shouldGetHigher;
+                console.log('isChangeStyle', this.isChangeStyle); 
+            }
+        }
     }
 </script>
 
@@ -94,8 +107,16 @@
     .nav-record { 
         right: 25px;
     } 
-
+    .higher {
+        bottom: 75px;  
+    }
+    .higher2 {
+        bottom: 155px;  
+        margin-right: 0;
+        right: 25px;
+    }
 }
+
 
 
 </style>
