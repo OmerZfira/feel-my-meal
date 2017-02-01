@@ -49,7 +49,7 @@ export default {
             }
         },
         pushNotification() {
-            let redirectUrl = (process.env.NODE_ENV === 'development') ? 'http://localhost:8080/#' : 'https://feelmymeal.herokuapp.com/#';
+            let redirectUrl = (process.env.NODE_ENV === 'development') ? 'http://localhost:8080/#' : 'https://coding-academy.net/feelmymeal/app';
             let pushObj = { foods: this.foods, user: this.user.username, pushTimer: this.user.settings.pushTimer / 3600, url: redirectUrl };
             let pushObjAsStr = JSON.stringify(pushObj);
 

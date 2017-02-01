@@ -8,7 +8,6 @@ export default {
     return {
       socket: null,
       chatMsgs: [],
-
       chatMsg: {
         nickName: 'Guest',
         msg: ''
@@ -24,11 +23,20 @@ export default {
     }
   },
   created () {
+    let socketPath;
     const nickName = window.prompt('Please enter a nickname:');
     this.chatMsg.nickName = nickName || this.chatMsg.nickName;
-    this.socket = io.connect('http://localhost:3003');
+    if (process.env.NODE_ENV === 'development') {
+      socketPath = 'http://localhost:3003';
+    } else socketPath = '/feelmymeal/app/socket.io';
+
+    this.socket = io.connect({ path: socketPath });
+    
+    // this.socket = io.connect('http://localhost:3003');
+
     this.socket.on('chat message', chatMsg => {
       this.chatMsgs.push(chatMsg);   
+      console.log('chatMsg recieved', chatMsg);
     })
   },
   mounted() {
