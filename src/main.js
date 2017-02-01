@@ -15,6 +15,8 @@ import toastr from 'toastr';
 if (process.env.NODE_ENV === 'development') {
   Vue.http.options.root = 'http://localhost:3003';
 } else console.log(process.env.NODE_ENV);
+Vue.http.options.root = 'https://coding-academy.net/feelmymeal/app';
+
 
 const app = new Vue({
   router,
@@ -30,7 +32,8 @@ const app = new Vue({
     showModal: false
   },
   mounted() {
-    let path = (process.env.NODE_ENV === 'development') ? 'http://localhost:8080' : 'https://feelmymeal.herokuapp.com';
+    //let path = (process.env.NODE_ENV === 'development') ? 'http://localhost:8080' : 'https://feelmymeal.herokuapp.com';
+    let path = 'https://coding-academy.net/feelmymeal/';
     if (window.location.href === (path + '/#')) this.showModal = true;
   }
 }).$mount('#app');
