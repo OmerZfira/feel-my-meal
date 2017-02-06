@@ -1,5 +1,4 @@
 import Vue from 'vue';
-import moment from 'moment';
 
 function submitMeal({ foods, userId }) {
     return Vue.http.post('data/meal', { foods, userId, time: Date.now() })

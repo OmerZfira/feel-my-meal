@@ -5,7 +5,8 @@ import authService from '../../services/auth.service';
 import {SIGN_IN} from '../../modules/auth/auth.module';
 import filtercom from '../filter/filter.component';
 import toastr from 'toastr';
-const TIME_DIFF = 1600000;
+
+const ONE_HOUR = 3600000;
 const dayOfTheWeek = moment().day();
 
 
@@ -71,14 +72,19 @@ export default {
             }
         },
         setFeelingColor(rating) {
-            let colors = ['', 'red', 'yellow', 'orange', 'blue', 'green'];
+            const colors = ['', 'red', 'orange', 'yellow', '#99ff33', 'green'];
             return colors[rating];
+        },
+        //fix fullcalander.js automatically using timestamps as UTC
+        convertTimeToLocal(timestamp) {
+            console.log('converted: ', timestamp + moment().utcOffset() / 60 * ONE_HOUR);
+            return timestamp + moment().utcOffset() / 60 * ONE_HOUR
         },
         translateMeals(meal) {
             
             let newMeal = {};
-            newMeal['start'] = meal.time;
-            newMeal['end'] = meal.time - TIME_DIFF;
+            newMeal['start'] = this.convertTimeToLocal(meal.time) - (ONE_HOUR / 2);
+            newMeal['end'] = this.convertTimeToLocal(meal.time) + (ONE_HOUR / 2);
             newMeal['title'] = meal.foods.join();
             newMeal['textColor'] = 'white'
             this.firstMeals.push(newMeal);
@@ -86,8 +92,8 @@ export default {
         translateFeelings(feeling) {
             let newFeeling = {};
             newFeeling['title'] = 'Feeling rating: ' + feeling.rating;
-            newFeeling['start'] = feeling.time;
-            newFeeling['end'] = feeling.time;
+            newFeeling['start'] = this.convertTimeToLocal(feeling.time) - (ONE_HOUR * 4);
+            newFeeling['end'] = this.convertTimeToLocal(feeling.time);
             newFeeling['textColor'] = 'black';
             newFeeling['backgroundColor'] = this.setFeelingColor(feeling.rating);
             this.firstFeelings.push(newFeeling);
@@ -116,7 +122,8 @@ export default {
             });
             Promise.all([prmMeals, prmFeelings]).then(values => {
                 this.events = this.firstMeals.concat(this.firstFeelings);
-                // console.log('this.events in pormise all', this.events)
+                console.log('this.this.firstMeals', this.firstMeals)
+                console.log('this.this.firstFeelings', this.firstFeelings)
                 let daysToShow = (dayOfTheWeek > 3)? [0,1,2] : [4,5,6];
                 let self = this;
                     
@@ -173,6 +180,10 @@ export default {
                         },
                         
                         events: this.events,
+                        // TODO : make this show tooltip with info
+                        eventMouseover: function (event) {
+                            console.log('title: ', event.title);
+                        },
                         defaultView: 'agendaWeek'
                     })
                 

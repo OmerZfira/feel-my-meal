@@ -7,7 +7,7 @@
             <!--</div>-->
         </router-link>
         <div class="bottom-nav__fixed-button add-feeling" :class="{ higher2: isChangeStyle }" @click="$emit('shoulddisplay')">
-            <div class="fa fa-heart fa-2x" aria-hidden="true"></div>
+            <span class="small-text">How do you feel?</span> <div class="fa fa-smile-o fa-3x" aria-hidden="true"></div>
         </div>
     </nav>
 
@@ -75,6 +75,16 @@
   &:active, &:hover {
       text-decoration: none;
   }
+}
+
+.small-text {
+    font-size: 0.6em;
+    font-weight: 700;
+    position: absolute;
+    top: 15%;
+    background-color: rgba(255,255,255,0.6);
+    border-radius: 5px;
+    /*border: black 1px solid;*/
 }
 
 @media (max-width: 1000px) {

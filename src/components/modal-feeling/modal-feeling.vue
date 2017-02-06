@@ -6,7 +6,7 @@
 
                     <div class="modal-header">
                         <slot name="header">
-                            Add Your Feeling
+                            <h3><strong>Please tell us how do you feel: <br/>(From 1 to 5)</strong></h3>
                         </slot>
                     </div>
 
@@ -94,7 +94,7 @@
 
 .modal-header h3 {
   margin-top: 0;
-  color: #42b983;
+  /*color: #42b983;*/
 }
 
 .modal-body {
