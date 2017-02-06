@@ -12,18 +12,15 @@
   border: none;
   border-radius: 0;
   height: 100px;
-//   padding-top:25px;
-
   position: fixed;
   width:100%;
   top: 0;
   z-index: 1000;
-
 }
 
 .nav-bar_container {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
     flex-grow: 1 ;
     z-index: 9998;
     align-items: center;
@@ -53,6 +50,12 @@
 
 // .close-menu-mask {
 //     opacity: 1;
+// }
+
+// @media (min-width: 1001px) {
+//     .navbar-right {
+//         : flex-end;
+//     }
 // }
 
 .wrapper {
