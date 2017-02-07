@@ -15,7 +15,12 @@ import Chat from './components/chat';
 const routes = [{
   path: '/',
   name: 'home',
-  component: Home
+  component: Home,
+  alias: '/feeling'
+// }, {
+//   path: '/feeling',
+//   name: 'add-feeling',
+//   component: Home
 }, {
   path: '/signin',
   name: 'signin',

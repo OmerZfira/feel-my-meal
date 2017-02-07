@@ -32,9 +32,9 @@ const app = new Vue({
     showModal: false
   },
   mounted() {
-    //let path = (process.env.NODE_ENV === 'development') ? 'http://localhost:8080' : 'https://feelmymeal.herokuapp.com';
-    let path = 'https://coding-academy.net/feelmymeal/';
-    if (window.location.href === (path + '/#')) this.showModal = true;
+    let path = (process.env.NODE_ENV === 'development') ? 'http://localhost:8080' : 'https://coding-academy.net/feelmymeal';
+    // let path = 'https://coding-academy.net/feelmymeal/';
+    if (window.location.href === (path + '/feeling')) this.showModal = true;
   }
 }).$mount('#app');
 

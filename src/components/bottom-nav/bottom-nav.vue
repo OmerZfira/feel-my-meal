@@ -84,7 +84,6 @@
     top: 15%;
     background-color: rgba(255,255,255,0.6);
     border-radius: 5px;
-    /*border: black 1px solid;*/
 }
 
 @media (max-width: 1000px) {
