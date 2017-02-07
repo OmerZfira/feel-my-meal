@@ -11,7 +11,7 @@
                     v-bind:id="$index+1"
                     v-bind:disabled="disabled"
                     v-model="value">
-            <div class="fa fa-heart" aria-hidden="true"></div>
+            <div class="fa" :class="{'fa-frown-o': (rating === 1), 'fa-meh-o': (rating > 1 && rating < 5), 'fa-smile-o': (rating === 5)}" aria-hidden="true"></div>
         </label>
     </div>
 </template>
