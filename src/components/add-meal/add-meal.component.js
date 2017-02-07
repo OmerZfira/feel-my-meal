@@ -49,8 +49,13 @@ export default {
             }
         },
         pushNotification() {
-            let redirectUrl = (process.env.NODE_ENV === 'development') ? 'http://localhost:8080/#' : 'https://coding-academy.net/feelmymeal/app';
-            let pushObj = { foods: this.foods, user: this.user.username, pushTimer: this.user.settings.pushTimer / 3600, url: redirectUrl };
+            let redirectUrl = (process.env.NODE_ENV === 'development') ? 'http://localhost:8080/feeling' : 'https://coding-academy.net/feelmymeal/feeling';
+            let pushObj = {
+                            foods: this.foods,
+                            user: this.user.username,
+                            pushTimer: this.user.settings.pushTimer / 3600,
+                            url: redirectUrl
+                          };
             let pushObjAsStr = JSON.stringify(pushObj);
 
             if (!("Notification" in window)) {
@@ -58,7 +63,7 @@ export default {
             } else if (Notification.permission === "granted") {
                 if (this.checkSwController()) initSwReg.swActive().postMessage(pushObjAsStr);
             } else if (Notification.permission !== 'denied') {
-                Notification.requestPermission().then(function (res) {
+                Notification.requestPermission().then( res => {
                     if (res === "granted") {
                         if (this.checkSwController()) initSwReg.swActive().postMessage(pushObjAsStr);
                     }

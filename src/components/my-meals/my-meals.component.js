@@ -77,7 +77,6 @@ export default {
         },
         //fix fullcalander.js automatically using timestamps as UTC
         convertTimeToLocal(timestamp) {
-            console.log('converted: ', timestamp + moment().utcOffset() / 60 * ONE_HOUR);
             return timestamp + moment().utcOffset() / 60 * ONE_HOUR
         },
         translateMeals(meal) {
@@ -122,8 +121,6 @@ export default {
             });
             Promise.all([prmMeals, prmFeelings]).then(values => {
                 this.events = this.firstMeals.concat(this.firstFeelings);
-                console.log('this.this.firstMeals', this.firstMeals)
-                console.log('this.this.firstFeelings', this.firstFeelings)
                 let daysToShow = (dayOfTheWeek > 3)? [0,1,2] : [4,5,6];
                 let self = this;
                     
