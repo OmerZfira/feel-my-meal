@@ -10,7 +10,6 @@ function signin( {email,password} ) {
   return Vue.http.post('login', {username: email, pass: password} )
     .then(res => res.json())
     .then(({token, user}) => {
-      console.log('authservice user:', user);
       setSession(token, user);
       return user;
     })
@@ -42,8 +41,6 @@ function signup({ email: username, password: pass }) {
  * @param token
  */
 function setSession( token, user ) {
-  console.log('user', JSON.stringify(user));
-  
   localStorage.setItem('token', token);
   localStorage.setItem('user', JSON.stringify(user));
 }
