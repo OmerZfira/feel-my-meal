@@ -16,11 +16,10 @@ const routes = [{
   path: '/',
   name: 'home',
   component: Home,
-  alias: '/feeling'
-// }, {
-//   path: '/feeling',
-//   name: 'add-feeling',
-//   component: Home
+}, {
+  path: '/add-feeling',
+  name: 'add-feeling',
+  component: Home
 }, {
   path: '/signin',
   name: 'signin',
@@ -72,7 +71,7 @@ const routes = [{
 { path: '*', redirect: { name: 'home' } }];
 
 const router = new VueRouter({
-  mode: 'history',
+  // mode: 'history',
   routes,
 
   // scrollBehavior (to, from, savedPosition) {
