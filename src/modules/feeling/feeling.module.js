@@ -1,9 +1,10 @@
 export const ADD_FEELING = 'feeling/ADD_FEELING';
 export const ADDING_FEELING = 'feeling/ADDING_FEELING';
 export const ADDING_FEELING_ERR = 'feeling/ADDING_FEELING_ERR';
-export const GET_FEELINGS_BY_USER = 'meal/GET_FEELINGS_BY_USER';
-export const GET_FEELINGS_BY_USER_SUCCESS = 'meal/GET_FEELINGS_BY_USER_SUCCESS';
-export const GET_FEELINGS_BY_USER_ERROR = 'meal/GET_FEELINGS_BY_USER_ERROR';
+export const GET_FEELINGS_BY_USER = 'feeling/GET_FEELINGS_BY_USER';
+export const GET_FEELINGS_BY_USER_SUCCESS = 'feeling/GET_FEELINGS_BY_USER_SUCCESS';
+export const GET_FEELINGS_BY_USER_ERROR = 'feeling/GET_FEELINGS_BY_USER_ERROR';
+export const CLEAR_FEELINGS_CACHE = 'feeling/CLEAR_FEELINGS_CACHE';
 
 import feelingService from '../../services/feeling.service';
 import { mapGetters } from 'vuex';
@@ -31,16 +32,19 @@ const mutations = {
     state.error = error;
     state.isloadingFeeling = !state.isloadingFeeling;
   },
-  [GET_FEELINGS_BY_USER]( state ) {
+  [GET_FEELINGS_BY_USER](state) {
     state.loading = true;
   },
-  [GET_FEELINGS_BY_USER_SUCCESS] ( state, feelings ) {
+  [GET_FEELINGS_BY_USER_SUCCESS](state, feelings) {
     state.feelings = feelings;
     state.loading = false;
   },
-  [GET_FEELINGS_BY_USER_ERROR] ( state, feelings ) {
+  [GET_FEELINGS_BY_USER_ERROR](state, feelings) {
     state.loading = false;
-  }
+  },
+  [CLEAR_FEELINGS_CACHE](state) {
+    state.feelings = [];
+  },
 }
 
 const actions = {
@@ -52,14 +56,14 @@ const actions = {
       commit(ADDING_FEELING_ERR, err);
     });
   },
-  
+
   getFeelingsByUser({ commit, state }, user) {
     if (state.feelings.length) {
       commit(GET_FEELINGS_BY_USER_SUCCESS, state.feelings);
       return state.feelings;
     }
     commit(GET_FEELINGS_BY_USER);
-    return feelingService.getFeelingsByUser({user}).then(feelings => {
+    return feelingService.getFeelingsByUser({ user }).then(feelings => {
       commit(GET_FEELINGS_BY_USER_SUCCESS, feelings);
       return feelings;
     }).catch(err => {

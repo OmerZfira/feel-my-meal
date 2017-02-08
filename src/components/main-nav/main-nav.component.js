@@ -1,6 +1,8 @@
 import { mapMutations, mapGetters } from 'vuex';
 import authService from '../../services/auth.service';
 import { SIGN_OUT } from '../../modules/auth/auth.module';
+import { CLEAR_FEELINGS_CACHE } from '../../modules/feeling/feeling.module';
+import { CLEAR_MEALS_CACHE } from '../../modules/meal/meal.module';
 
 export default {
   name: 'main-nav',
@@ -14,6 +16,8 @@ export default {
     signout() {
       authService.signout();
       this.$store.commit(SIGN_OUT);
+      this.$store.commit(CLEAR_FEELINGS_CACHE);
+      this.$store.commit(CLEAR_MEALS_CACHE);
       this.$router.push('/signin');
     },
     closeMenu() {
