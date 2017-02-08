@@ -1,18 +1,18 @@
 
- import addContact from '../add-contact';
- import addMeal from '../add-meal';
- import clockMeal from '../utils/clock-meal/clock-meal';
+import addContact from '../add-contact';
+import addMeal from '../add-meal';
+import clockMeal from '../utils/clock-meal/clock-meal';
 
- import authService from '../../services/auth.service';
- 
+import authService from '../../services/auth.service';
 
-export default  {
+
+export default {
   data: () => {
     return {
 
     }
   },
-  methods : {
+  methods: {
   },
   components: {
     addContact,

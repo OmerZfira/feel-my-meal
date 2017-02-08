@@ -29,8 +29,12 @@ export default {
     ...mapGetters({
       isLoggedIn: 'isLoggedIn',
       user: 'user'
+    }),
+    logoSrc() {
+      let src = (this.isLoggedIn) ? require('../../assets/img/logo-sporty-transparent.png') : require('../../assets/img/logo.png');
+      
+      return src
     }
-    ),
   },
   watch: {
     shouldGetHigher() {

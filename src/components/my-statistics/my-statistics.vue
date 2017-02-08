@@ -156,7 +156,6 @@
             Promise.all([PrmMealsByUser, PrmFeelingsByUser]).then(values => {
                 this.loadingStats = false;
                 let relatedData = this.relateFeelingsToMeals(...values);
-                console.log('returned meals: ', relatedData);
                 this.stats = this.reduceMealsToFoodsObj(relatedData);
             });
         },
