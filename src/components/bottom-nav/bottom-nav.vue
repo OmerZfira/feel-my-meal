@@ -3,11 +3,13 @@
     <nav class="bottom-nav">
         <router-link class="bottom-nav__fixed-button nav-record" :to="{name: 'home'}" v-show="$route.name !== 'home'" :class="{ higher: isChangeStyle }">
             <!--<div class="record">-->
-            <div class="fa fa-microphone fa-2x" aria-hidden="true"></div>
+            <!--<div class="fa fa-microphone fa-2x" aria-hidden="true"></div>-->
+            <img class="microphone" src="../../assets/img/microphone.png"></img>
             <!--</div>-->
         </router-link>
         <div class="bottom-nav__fixed-button add-feeling" :class="{ higher2: isChangeStyle }" @click="$emit('shoulddisplay')">
-            <span class="small-text">How do you feel?</span> <div class="fa fa-smile-o fa-3x" aria-hidden="true"></div>
+            <span class="small-text">How do you feel?</span> 
+            <img class="smiley" src="../../assets/img/smiley.png"></img>
         </div>
     </nav>
 
@@ -39,7 +41,13 @@
 
 
 <style scoped lang="scss">
-
+.microphone {
+    height: 44px;
+    -webkit-filter: brightness(150%); 
+}
+.smiley {
+    height: 50%;
+}
 .bottom-nav__fixed-button {
     display: block;
     position: fixed;

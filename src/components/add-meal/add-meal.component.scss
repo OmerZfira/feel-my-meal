@@ -12,7 +12,10 @@
     flex: 1 0;
 
 }
-
+.microphone2 {
+    height: 82px;
+    -webkit-filter: brightness(130%); 
+}
 .record { 
     width: 200px;
     height: 200px;
@@ -132,7 +135,9 @@
         width: 120px;
         height: 120px;
     }
-
+    .microphone2 {
+        height: 50px;
+    }
     .recControls-cont {
         flex-direction: column;
  

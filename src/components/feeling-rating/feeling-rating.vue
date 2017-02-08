@@ -11,7 +11,8 @@
                     v-bind:id="$index+1"
                     v-bind:disabled="disabled"
                     v-model="value">
-            <div class="fa" :class="{'fa-frown-o': (rating === 1), 'fa-meh-o': (rating > 1 && rating < 5), 'fa-smile-o': (rating === 5)}" aria-hidden="true"></div>
+            <div class="fa"  @click="isActive = !isActive" :class="{'under-line': isActive,'confounded': (rating === 1), 'worried': (rating === 2), 'neutral_face': (rating === 3), 'relieved': (rating === 4), 'smiley': (rating === 5)}" aria-hidden="true"></div>
+            
         </label>
     </div>
 </template>
@@ -23,7 +24,8 @@
             return {
                 temp_value: null,
                 ratings: 5,
-                value: null
+                value: null,
+                isActive: false,
             };
         },
         props: {
@@ -60,26 +62,27 @@
 
 <style>
 
-    .star-rating__checkbox {
-        position: absolute;
-        overflow: hidden;
-        clip: rect(0 0 0 0);
-        height: 1px;
-        width: 1px;
-        margin: -1px;
-        padding: 0;
-        border: 0;
-    }
-    .star-rating__star {
-        display: inline-block;
-        padding: 4px;
-        vertical-align: middle;
-        line-height: 1;
-        font-size: 4em;
-        color: #ABABAB;
-        -webkit-transition: color;
-        transition: color .8s ease;
-    }
+.star-rating__checkbox {
+    position: absolute;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    height: 1px;
+    width: 1px;
+    margin: -1px;
+    padding: 0;
+    border: 0;
+}
+.star-rating__star {
+    display: inline-block;
+    padding: 4px;
+    vertical-align: middle;
+    line-height: 1;
+    font-size: 4em;
+    color: #ABABAB;
+    -webkit-transition: color;
+    transition: color .8s ease;
+}
+
 @media (max-width: 640px) {
     .star-rating__star {
         font-size: 2.8em;
