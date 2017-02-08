@@ -3,7 +3,8 @@
     <section class="add-meal" v-show="!isloadingMeal">
         <div @touchstart="startSpeechReco" @touchend="stopSpeechReco" @touchcancel="stopSpeechReco" @mousedown="startSpeechReco"
             @mouseup="stopSpeechReco" @mouseleave="stopSpeechReco" class="record" :class="{recording : isRec}">
-            <div class="fa fa-microphone fa-4x" aria-hidden="true"></div>
+            <!--<div class="fa fa-microphone fa-4x" aria-hidden="true"></div>-->
+            <img class="microphone2" src="../../assets/img/microphone.png"></img>
         </div>
         <div class="recControls-cont">
             <input type="text" v-model="speechElText" @keyup.enter="addFood" class="recInput" placeholder="Next Food Item">

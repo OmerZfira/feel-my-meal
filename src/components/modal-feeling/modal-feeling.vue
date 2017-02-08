@@ -11,9 +11,27 @@
                     </div>
 
                     <div class="modal-body">
-                        <slot name="body">
-                            <feeling-rating @submitRating="currRating = $event"></feeling-rating>
-                        </slot>
+                        <!--<slot name="body">-->
+                            <!--<feeling-rating @submitRating="currRating = $event"></feeling-rating>-->
+                        <!--</slot>-->
+                        <!--<div class="fa"  :class="{'confounded': (rating === 1), 'worried': (rating === 2), 'neutral_face': (rating === 3), 'relieved': (rating === 4), 'smiley': (rating === 5)}" aria-hidden="true"></div>-->
+                        <form class="modal-body" action="#" method="post">
+                            <input type="radio" class="radio" name="example" id="ex1" value="ex1" checked>
+                            <label for="ex1" class="fa confounded" @click="selected(1)"></label>
+                            
+                            <input type="radio" class="radio" name="example" id="ex2" value="ex2" />
+                            <label for="ex2" class="fa worried" @click="selected(2)"></label>
+                            
+                            <input type="radio" class="radio" name="example" id="ex3" value="ex3" />
+                            <label for="ex3" class="fa neutral_face" @click="selected(3)"></label>
+
+                            <input type="radio" class="radio" name="example" id="ex4" value="ex4" />
+                            <label for="ex4" class="fa relieved" @click="selected(4)"></label>
+
+                             <input type="radio" class="radio" name="example" id="ex5" value="ex5" />
+                            <label for="ex5" class="fa smiley" @click="selected(5)"></label>
+                        </form>
+                        <!--<div class="emoji-footer"></div>-->
                     </div>
 
                     <div class="modal-footer">
@@ -44,7 +62,8 @@
         },
         data() {
             return {
-                currRating: 0
+                currRating: 0,
+
             }
         },
         computed: {
@@ -56,13 +75,52 @@
                     this.$store.dispatch('addFeeling', { rating: this.currRating, userId: this.user._id });
                 }
                 this.$emit('close');
+            },
+            selected(rating) {
+                this.currRating = rating;               
             }
         }
     }
 </script>
 
 <style scoped lang="scss">
-    
+.fa {
+    cursor: pointer;
+    width: 75px;
+    height: 75px;
+    overflow: hidden;
+    background-repeat: no-repeat;
+} 
+.fa:hover {
+    border-bottom: solid 2px darkorange;   
+}
+.radio {
+    opacity: 0;
+    /*position: absolute;*/
+}
+
+.confounded {
+    background-image: url('../../assets/img/confounded.png');
+}
+.worried {
+    background-image: url('../../assets/img/worried.png');
+
+}
+.neutral_face {
+    background-image: url('../../assets/img/neutral_face.png');
+
+}
+.relieved {
+    background-image: url('../../assets/img/relieved.png');
+
+}
+.smiley {
+    background-image: url('../../assets/img/smiley.png');
+
+}
+input[type="radio"]:checked + label {
+    border: 5px solid darkorange;
+}
 
 .modal-mask {
   position: fixed;
@@ -131,4 +189,23 @@
   -webkit-transform: scale(1.1);
   transform: scale(1.1);
 }
+ @media (max-width: 640px) {
+    .modal-body{
+        padding: 0;
+    }
+    .modal-container {
+        padding: 5px 5px;
+    }
+    label {
+        background-size: 35px 35px;
+        
+    }
+    .fa {
+        width: 44px;
+        height: 44px;
+    }
+    input[type="radio"]:checked + label {
+        border: 5px solid darkorange;
+    }   
+}   
 </style>

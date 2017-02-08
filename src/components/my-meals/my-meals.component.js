@@ -29,6 +29,7 @@ export default {
     methods: {
 
         changeDays(diff) {
+        
             if (this.currView === 'week') {
 
                 if (diff === 'prev' && this.daysStack === 1) {
@@ -82,7 +83,6 @@ export default {
             return timestamp + moment().utcOffset() / 60 * ONE_HOUR
         },
         translateMeals(meal) {
-
             let newMeal = {};
             newMeal['start'] = this.convertTimeToLocal(meal.time) - (ONE_HOUR / 2);
             newMeal['end'] = this.convertTimeToLocal(meal.time) + (ONE_HOUR / 2);
@@ -145,22 +145,21 @@ export default {
                     weekButton: {
                         text: 'Week',
                         click: function () {
-                            self.changeView('agendaWeek');
                             self.dayView = false;
+                            self.changeView('agendaWeek');
                         }
                     },
                     monthButton: {
                         text: 'Month',
                         click: function () {
-                            self.changeView('month');
                             self.dayView = false;
+                            self.changeView('month');
                         }
                     },
                     nextButton: {
                         text: 'Next >',
                         click: function () {
                             if (!self.dayView) self.changeDays('next');
-
                         }
                     },
                     prevButton: {
@@ -188,7 +187,7 @@ export default {
                 events: this.events,
                 // TODO : make this show tooltip with info
                 eventMouseover: function (event) {
-                    console.log('title: ', event.title);
+                    console.log('title: ', event);
                 },
                 defaultView: 'agendaWeek'
             })
@@ -207,6 +206,8 @@ export default {
     watch: {
         // re-render meals if filtered and feelings if added
         filteredMeals: function () {
+            console.log('active');
+            
             this.firstMeals = [];
             this.filteredMeals.forEach((meal) => {
                 this.translateMeals(meal);
@@ -215,16 +216,21 @@ export default {
             $('.calendar').fullCalendar('removeEvents');
             $('.calendar').fullCalendar('renderEvents', this.events);
         },
-        feelings: function () {
-           
-            if(this.isMounted) {
-                this.isMounted = false;
-            } else {
-                this.translateFeelings(this.feelings[this.feelings.length-1]); 
-                this.events = this.firstMeals.concat(this.firstFeelings);
-                $('.calendar').fullCalendar('removeEvents');
-                $('.calendar').fullCalendar('renderEvents', this.events);
-            }
-        }
+            // feelings: function () {
+            //     console.log('active');
+            
+            //     if(this.isMounted) {
+            //         this.isMounted = false;
+            //     } else {                
+            //         this.translateFeelings(this.feelings[this.feelings.length-1]); 
+            //         this.events = this.firstMeals.concat(this.firstFeelings);
+            //         console.log('this.events', this.events);
+        
+            //         $('.calendar').fullCalendar('removeEvents');
+            //         $('.calendar').fullCalendar('renderEvents', this.events);
+            //         // $('.calendar').fullCalendar( 'updateEvents', this.events )
+                    
+            //     }
+        // }
     }
 }
