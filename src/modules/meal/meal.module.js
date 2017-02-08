@@ -4,6 +4,7 @@ export const ADDING_MEAL_ERR = 'meal/ADDING_MEAL_ERR';
 export const GET_MEALS_BY_USER = 'meal/GET_MEALS_BY_USER';
 export const GET_MEALS_BY_USER_SUCCESS = 'meal/GET_MEALS_BY_USER_SUCCESS';
 export const GET_MEALS_BY_USER_ERROR = 'meal/GET_MEALS_BY_USER_ERROR';
+export const CLEAR_MEALS_CACHE = 'meal/CLEAR_MEALS_CACHE';
 
 import toastr from 'toastr';
 import mealService from '../../services/meal.service';
@@ -28,7 +29,7 @@ const mutations = {
     state.currMeal = meal;
     state.latestMeals.push(meal);
     state.isloadingMeal = !state.isloadingMeal;
-    
+
   },
   [ADDING_MEAL_ERR](state, error) {
     toastr.options.closeButton = true;
@@ -36,21 +37,24 @@ const mutations = {
     state.error = error;
     state.isloadingMeal = !state.isloadingMeal;
   },
-  
-  [GET_MEALS_BY_USER]( state ) {
+
+  [GET_MEALS_BY_USER](state) {
     state.loading = true;
   },
-  [GET_MEALS_BY_USER_SUCCESS] ( state, latestMeals ) {
+  [GET_MEALS_BY_USER_SUCCESS](state, latestMeals) {
     state.latestMeals = latestMeals;
     state.loading = false;
   },
-  [GET_MEALS_BY_USER_ERROR] ( state, latestMeals ) {
+  [GET_MEALS_BY_USER_ERROR](state, latestMeals) {
     state.loading = false;
+  },
+  [CLEAR_MEALS_CACHE](state) {
+    state.latestMeals = [];
   },
 }
 
 const actions = {
-  
+
   addMeal({ commit, state }, meal) {
     commit(ADD_MEAL);
     mealService.submitMeal(meal).then(meal => {
@@ -67,8 +71,8 @@ const actions = {
       return state.latestMeals;
     }
     commit(GET_MEALS_BY_USER);
-    
-    return mealService.getMealsByUser({user}).then(latestMeals => {
+
+    return mealService.getMealsByUser({ user }).then(latestMeals => {
       commit(GET_MEALS_BY_USER_SUCCESS, latestMeals);
       return latestMeals;
     }).catch(err => {

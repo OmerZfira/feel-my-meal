@@ -74,7 +74,7 @@ export default {
             }
         },
         setFeelingColor(rating) {
-            const colors = ['', 'red', 'orange', 'yellow', '#99ff33', 'green'];
+            const colors = ['', 'red', 'orange', 'yellow', '#80c000', 'green'];
             return colors[rating];
         },
         //fix fullcalander.js automatically using timestamps as UTC

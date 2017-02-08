@@ -1,15 +1,29 @@
 <template>
     <section class="below-nav">
-        <h1> My Statistics Component</h1>
-        <h3>Common Foods</h3>
+        <h1>My Statistics</h1>
+        
 
         <h2 v-if="loadingStats">LOADING</h2>
-        <vue-chart v-else chart-type="BubbleChart" 
+        <div class="wrapper flex flex-column justify-center align-center" v-else>
+        <!--MAKE INSTRUCTION APEAR ON TRANSITION-->
+        <p class="chart-instructions">
+            How to tell which foods are recommended for you? <br/>
+            <span class="bad-food-a">Red </span>
+            <span class="bad-food-b">foods are</span> 
+            <span class="bad-food-c">less recommended</span> and <br class="break-line-mobile"/> 
+            <span class="good-food-a">green</span>  
+            <span class="good-food-b">foods are</span>
+            <span class="good-food-c">more recommended</span>.<br/>
+            Size indicates the number of times you have consumed this food.
+        </p>
+        <vue-chart chart-type="BubbleChart" 
                 :columns="chartColumns" 
                 :rows="chartRows"
                 :options="options">
 
         </vue-chart>
+
+        </div>
     </section>
 </template>
 
@@ -27,21 +41,33 @@
                     pizza: {feelingAvg: 1.5, popularity: 10 },
                     tomato: {feelingAvg: 4.5, popularity: 2 }
                 },
-                tempstats: {},
+                
+                //remove after meetup
+                mockRandom: [8, 3, 5, 10, 9, ,6 ,1, 7, 8, 9],
+                mockCounter: 1,
+                ///////
+
                 chartColumns: [
                     {type: 'string', label: 'Food'},
-                    {type: 'number', label: 'X'},
-                    {type: 'number', label: 'Y'},
-                    {type: 'number', label: 'temp'},
-                    {type: 'number', label: 'pop'}
+                    {type: 'number', label: ''},
+                    {type: 'number', label: ''},
+                    {type: 'number', label: 'Avarage Feeling'},
+                    {type: 'number', label: 'Popularity'}
                 ],
                 options: {
-                    // title: 'Most Popular Foods',
-                    height: 350,
-                    animation: {duration: 1000, easing: 'inAndOut', startup: true},
-                    colorAxis: {minValue: 1, maxValue: 5, colors: ['red', 'yellow', 'green']},
+                    height: 400,
+                    // animation: {duration: 1000, easing: 'inAndOut', startup: true},
+                    colorAxis: {minValue: 1, maxValue: 5, colors: ['red', 'yellow', 'green'], legend: {}},
                     sizeAxis: {maxSize: 40, minSize: 10},
-                    chartArea:{top:40,width:'80%',height:'80%'}
+                    chartArea:{top:40,width: '100%', height:'100%'},
+                    vAxis: {textPosition: 'none', textStyle: {color: 'white'}, baselineColor: 'white', 
+                        ticks: [-2,12], gridlines: {color: 'white', count: 4}},
+                    hAxis: {textPosition: 'none', textStyle: {color: 'white'}, baselineColor: 'white', 
+                        ticks: [0,6], gridlines: {color: 'white', count: 4}},
+                        tooltip: {trigger: 'none'},
+                    explorer: {zoomDelta: 1.2},
+                     
+                    
                 }
             }
         },
@@ -84,11 +110,9 @@
                     if (!!meal.feelingAvg) {
                         meal.foods.forEach(food => {
                             if (!!stats[food]) {
-                        console.log('old food !!');
                                 stats[food].feelingAvg += meal.feelingAvg;
                                 stats[food].popularity++;
                             } else {
-                        console.log('new food !!');
                                 stats[food] = {};
                                 stats[food].feelingAvg = meal.feelingAvg;
                                 stats[food].popularity = 1;
@@ -97,46 +121,157 @@
                     }
                 });
 
+                // divide the feleing by popularity to get avarage
+                for (let food in stats) {
+                    stats[food].feelingAvg = stats[food].feelingAvg / stats[food].popularity;
+                }
                 return stats
             }
         },
         computed: {
             ...mapGetters([ 'feelings', 'user', 'currMeal']),
             chartRows() {
-
-                //  tomato: { name: 'tomato', feelingAvg: 5, popularity: 2 }
-                // :rows="[['bread', 5, 1,5,26],['pizza', 1, 2,3,4],['tomato', 5,5,5,10]]"
-
-                // let data = this.stats.map( (foodObj, idx) => {
                 let rows = [];
                 for (let food in this.stats) {
                     let temp = [];
                     temp.push(food);
-                    temp.push(Math.random());
-                    temp.push(Math.random());
+                    temp.push(this.stats[food].feelingAvg);
+                    temp.push(this.mockCounter); //set back to random after meetup
+                    this.mockCounter++;
+
                     temp.push(this.stats[food].feelingAvg);
                     temp.push(this.stats[food].popularity);
                     rows.push(temp);
                 }
                 return rows
-            }
+            },
+            foodCount() {
+                return Object.keys(this.stats).length
+            },
         },
         mounted() {
             let PrmFeelingsByUser = this.getFeelingsByUser(this.user);
             let PrmMealsByUser = this.getMealsByUser(this.user);
 
             Promise.all([PrmMealsByUser, PrmFeelingsByUser]).then(values => {
-                // console.log('data is : ', values);
                 this.loadingStats = false;
                 let relatedData = this.relateFeelingsToMeals(...values);
                 console.log('returned meals: ', relatedData);
                 this.stats = this.reduceMealsToFoodsObj(relatedData);
-                console.log('this tempstats: ', this.tempstats);
             });
         },
     }
 </script>
 
 <style lang="scss" scoped>
+section{
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	padding: 125px 100px;
 
+    h3.title {
+        color: #414a4f;
+        text-transform: capitalize; 
+        font: bold 32px 'Open Sans', sans-serif;
+        margin-bottom: 20px;
+        text-align: center;
+    }
+}
+
+.chart-instructions {
+    font-weight: 700;
+    span {
+        text-shadow:     -1px -1px 0 #000,
+    1px -1px 0 #000,
+    -1px 1px 0 #000,
+    1px 1px 0 #000; 
+    }
+}
+.good-food-a {
+    color: #99ff33;
+}
+.good-food-b {
+    color: #66ff33;
+}
+.good-food-c {
+    color: #00cc00;
+}
+.bad-food-a {
+    color: red;
+}
+.bad-food-b {
+    color: #ff8c1a;
+}
+.bad-food-c {
+    color: #ffbf00;
+}
+
+.wrapper {
+    width: 100%;
+}
+
+.break-line-mobile {
+    display: none;
+}
+
+@media (max-width: 1000px){
+	section{
+		padding: 100px 50px;
+
+	}
+}
+
+@media (max-width: 600px){
+	section{
+		padding: 80px 30px;
+        h1 {
+		    font-size: 32px;
+	    }
+        .chart-instructions {
+		    font-size: 11px;
+	    }
+        
+	}
+
+    .chart-instructions {
+        span {
+            text-shadow: 1px 1px #333;
+        }
+}
+}
+@media (max-width: 500px){
+	section{
+		padding: 80px 30px;
+        h1 {
+		    font-size: 26px;
+	    }
+        .break-line-mobile {
+            display: block;
+        }      
+	}
+}
+
+.hero h1{
+		font-size: 42px;
+	}
+
+	.hero h3{
+		font-size: 20px;
+	}
+
+
+.vue-chart-container {
+    width: 100%;
+    cursor: move;
+    cursor: grab;
+    &:active {
+        cursor: grabbing;
+    }
+
+}
+.vue-chart {
+    width: 100%;
+
+}
 </style>
