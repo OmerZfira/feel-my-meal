@@ -30,7 +30,7 @@
     <main-nav></main-nav>
     <!--<img src="~assets/logo.png" alt="">-->
     <modal-feeling v-if="showModal" @close="showModal = false"></modal-feeling>
-    <bottom-nav @shoulddisplay="showModal = true"></bottom-nav>
+    <bottom-nav v-show="isLoggedIn" @shoulddisplay="showModal = true"></bottom-nav>
     <transition name="fade" mode="out-in">
       <router-view></router-view>
     </transition>
