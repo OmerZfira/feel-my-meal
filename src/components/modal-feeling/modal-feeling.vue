@@ -16,13 +16,13 @@
                         <!--</slot>-->
                         <!--<div class="fa"  :class="{'confounded': (rating === 1), 'worried': (rating === 2), 'neutral_face': (rating === 3), 'relieved': (rating === 4), 'smiley': (rating === 5)}" aria-hidden="true"></div>-->
                         <form class="modal-body" action="#" method="post">
-                            <input type="radio" class="radio" name="example" id="ex1" value="ex1" checked>
+                            <input type="radio" class="radio" name="example" id="ex1" value="ex1" />
                             <label for="ex1" class="fa confounded" @click="selected(1)"></label>
                             
                             <input type="radio" class="radio" name="example" id="ex2" value="ex2" />
                             <label for="ex2" class="fa worried" @click="selected(2)"></label>
                             
-                            <input type="radio" class="radio" name="example" id="ex3" value="ex3" />
+                            <input type="radio" class="radio" name="example" id="ex3" value="ex3" checked/>
                             <label for="ex3" class="fa neutral_face" @click="selected(3)"></label>
 
                             <input type="radio" class="radio" name="example" id="ex4" value="ex4" />

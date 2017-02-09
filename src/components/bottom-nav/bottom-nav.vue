@@ -41,6 +41,7 @@
 
 
 <style scoped lang="scss">
+ 
 .microphone {
     height: 44px;
     -webkit-filter: brightness(150%); 
@@ -93,8 +94,13 @@
     background-color: rgba(255,255,255,0.6);
     border-radius: 5px;
 }
-
+  .higher, .higher2 {
+        bottom: 75px;
+         width: 100px;
+        height: 100px;
+    }
 @media (max-width: 1000px) {
+    
     .bottom-nav__fixed-button {
         bottom: 35px;
         width: 90px;
@@ -108,6 +114,9 @@
     .nav-record { 
         right: 35px;
     } 
+    .higher, .higher2 {
+        bottom: 75px;
+    }
 }
 
 @media (max-width: 750px) {
