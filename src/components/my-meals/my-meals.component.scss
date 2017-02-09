@@ -1,4 +1,9 @@
-
+.tooltip {
+    // position: absolute;
+    justify-content: center;
+    color: red;
+    
+}
 .calendar {
     margin: 0 30px;
     @media (max-width: 620px) {

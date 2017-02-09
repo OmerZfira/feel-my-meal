@@ -23,7 +23,11 @@ export default {
             isMounted: false,
             events: [],
             firstMeals: [],
-            firstFeelings: []
+            firstFeelings: [],
+            // marksData: '',
+            // elCal: null,
+            // tooltipX: 0,
+            // tooltipX: 0
         }
     },
     methods: {
@@ -186,9 +190,15 @@ export default {
 
                 events: this.events,
                 // TODO : make this show tooltip with info
-                eventMouseover: function (event) {
-                    console.log('title: ', event);
-                },
+                // eventMouseover: function (event, element) {
+                //     self.marksData = event.title;
+                //     self.tooltipX = element.clientX;
+                //     self.tooltipy = element.clientY;
+                //     console.log( element.clientX + ', ' + element.clientY);    
+                // },
+                // eventMouseout: function(calEvent, jsEvent) {
+                    // $(self.elCal).removeClass('tooltip');
+                // },
                 defaultView: 'agendaWeek'
             })
         });
@@ -216,6 +226,7 @@ export default {
             $('.calendar').fullCalendar('removeEvents');
             $('.calendar').fullCalendar('renderEvents', this.events);
         },
+   
             // feelings: function () {
             //     console.log('active');
             
