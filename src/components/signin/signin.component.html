@@ -4,7 +4,7 @@
       <h1 class="text-center login-title">Sign in to continue (pass: 123456)</h1>
       <div class="account-wall">
         <img class="profile-img"
-             src="https://www.gravatar.com/avatar?d=monsterid"
+             src="../../assets/img/logo-sporty.png"
              alt="">
         <form class="form-signin" novalidate @submit.prevent="signin(user)">
 
@@ -26,9 +26,9 @@
           <p class="text-danger error"
              v-if="error">{{error}}</p>
         </form>
-      </div>
-      <router-link :to="{ name: 'signup' }" class="text-center new-account" style="color:blue">Dont have an account yet? Create one!
+              <router-link :to="{ name: 'signup' }" class="text-center new-account" style="color:blue">Dont have an account yet? Create one!
       </router-link>
+      </div>
     </div>
   </div>
 </div>
