@@ -6,7 +6,7 @@ export default {
   },
   data() {
     return {
-      user: { email: 'w@w.com', password: '123456' },
+      user: { email: '', password: '' },
       error: ""
     }
   },

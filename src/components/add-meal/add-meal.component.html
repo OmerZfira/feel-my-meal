@@ -1,6 +1,6 @@
 <div class="wrapper">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <section class="add-meal" v-show="!isloadingMeal">
+    <section class="add-meal" >
         <div @touchstart="startSpeechReco" @touchend="stopSpeechReco" @touchcancel="stopSpeechReco" @mousedown="startSpeechReco"
             @mouseup="stopSpeechReco" @mouseleave="stopSpeechReco" class="record" :class="{recording : isRec}">
             <!--<div class="fa fa-microphone fa-4x" aria-hidden="true"></div>-->
