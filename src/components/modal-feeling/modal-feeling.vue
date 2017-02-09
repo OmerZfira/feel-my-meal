@@ -6,7 +6,7 @@
 
                     <div class="modal-header">
                         <slot name="header">
-                            <h3><strong>Please tell us how do you feel: <br/>(From 1 to 5)</strong></h3>
+                            <h3><strong>Please tell us how do you feel:</strong></h3>
                         </slot>
                     </div>
 

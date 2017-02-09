@@ -2,10 +2,11 @@
     <section class="below-nav">
         <h1>My Statistics</h1>
         
-
-        <h2 v-if="loadingStats">LOADING</h2>
-        <div class="wrapper flex flex-column justify-center align-center" v-else>
-        <!--MAKE INSTRUCTION APEAR ON TRANSITION-->
+        <!--<transition name="fade" mode="out-in">-->
+        <loader-pan v-show="loadingStats || loadingChart"></loader-pan>
+        <!--</transition>-->
+        <div class="wrapper flex flex-column justify-center align-center" v-show="!loadingChart && !loadingStats">
+        <!--TODO: MAKE INSTRUCTION APEAR ON TRANSITION-->
         <p class="chart-instructions">
             How to tell which foods are recommended for you? <br/>
             <span class="bad-food-a">Red </span>
@@ -17,6 +18,7 @@
             Size indicates the number of times you have consumed this food.
         </p>
         <vue-chart chart-type="BubbleChart" 
+                :chart-events="chartEvents"
                 :columns="chartColumns" 
                 :rows="chartRows"
                 :options="options">
@@ -29,12 +31,17 @@
 
 <script>   
     import { mapGetters, mapActions } from 'vuex';
+    import loaderPan from '../utils/loader-pan/loader-pan.vue';
 
     const FOUR_HOURS = 14400000;
 
     export default {
+        components: {
+            loaderPan
+        },
         data: () => {
             return {
+                loadingChart: true,
                 loadingStats: true,
                 stats: {
                     bread: { feelingAvg: 3, popularity: 5 },
@@ -130,6 +137,17 @@
         },
         computed: {
             ...mapGetters([ 'feelings', 'user', 'currMeal']),
+            // loadingChart(isLoading = true) {
+            //     return isLoading
+            // },
+            chartEvents() {
+                return {
+                    'ready': () => { 
+                                        this.loadingChart = false;
+                                    } 
+
+                        }
+                },
             chartRows() {
                 let rows = [];
                 for (let food in this.stats) {
