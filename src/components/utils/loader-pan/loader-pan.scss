@@ -5,20 +5,22 @@ $peak: 40%; // pancake's highest level, obviously ;)
 // $color_back: #ffde6b; // background
 $color: #333; // the rest
 
+.pan-wrapper {
+  width: 100%;
+}
 
 h3 {
   text-align: center;
   color: $color;
   opacity: .75;
-  animation: pulse 2.5s linear infinite;
+  animation: pulse-loader 2.5s linear infinite;
 }
-.wrapper {
-  
-}
+
 
 @media (min-width: 600px) {
 
   #cooking {
+    display: block;
     position: relative;
     // margin: 0 auto;
     top: -140px;
@@ -226,7 +228,7 @@ h3 {
   }
 }
 
-@keyframes pulse {
+@keyframes pulse-loader {
   0% {
     transform: scale(1, 1);
     opacity: .25;
