@@ -68,7 +68,9 @@ self.addEventListener('activate', function (event) {
 function pushNotification({title, options, pushTimer}) {
   setTimeout(function () {
     self.registration.showNotification(title, options)
-  }, (pushTimer * ONE_HOUR));
+      }, (6000)); //FOR LOCAL TEST ONLY -> FIXED 6sec 
+
+  // }, (pushTimer * ONE_HOUR));
 }
 
 // self.addEventListener('push', function(event) {

@@ -2,6 +2,10 @@
 import { mapGetters, mapActions } from 'vuex';
 import initSwReg from '../../sw-init';
 
+// const sounds = [ new Audio('../../assets/sound/rec-start.mp3'), new Audio('../../assets/sound/rec-end.mp3')];
+// const src = 
+// const x = ;
+
 export default {
     data() {
         return {
@@ -9,7 +13,11 @@ export default {
             isRec: false,
             speechElText: '',
             foodsData: [],
-            recFb: true
+            recFb: true,
+            sounds: [ 
+                    new Audio(require('file-loader!../../assets/sound/rec-start.mp3')),
+                    new Audio(require('file-loader!../../assets/sound/rec-end.mp3')) 
+                    ]
         }
     },
     computed: {
@@ -20,12 +28,26 @@ export default {
     },
     methods: {
         startSpeechReco() {
-            this.isRec = true;
-            this.recognition.start();
+             if (!this.isRec) {
+                this.isRec = true;
+                this.playSound(0);
+                this.recognition.start();
+            }
         },
         stopSpeechReco() {
-            this.recognition.stop();
+            if (this.isRec && TouchList.length === 0) {
+                // console.log('touch list: ', );
+                this.recognition.stop();
+                this.playSound(1);
+            }
             this.isRec = false;
+        },
+        playSound(i) {
+            let otherNoteIdx = (i === 0)? 1 : 0;
+            this.sounds[otherNoteIdx].pause();
+            this.sounds[otherNoteIdx].currentTime = 0;
+            this.sounds[i].play();
+            window.navigator.vibrate(100);
         },
         addFood() {
             this.recognition.stop();
@@ -53,7 +75,7 @@ export default {
             let pushObj = {
                             foods: this.foods,
                             user: this.user.username,
-                            pushTimer: this.user.settings.pushTimer / 3600,
+                            pushTimer: this.user.settings.pushTimer,
                             url: redirectUrl
                           };
             let pushObjAsStr = JSON.stringify(pushObj);
@@ -101,7 +123,7 @@ export default {
         } else {
             this.recognition = new webkitSpeechRecognition();
             // this.recognition.continuous = true;
-            // this.recognition.lang = 'en-us';
+            this.recognition.lang = 'he';
             this.recognition.interimResults = true;
 
             this.recognition.onstart = () => {

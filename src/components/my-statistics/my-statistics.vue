@@ -3,9 +3,9 @@
         <h1>My Statistics</h1>
         
         <!--<transition name="fade" mode="out-in">-->
-        <loader-pan v-show="loadingStats || loadingChart"></loader-pan>
+        <!--<loader-pan v-show="loadingStats || loadingChart"></loader-pan>-->
         <!--</transition>-->
-        <div class="wrapper flex flex-column justify-center align-center" v-show="!loadingChart && !loadingStats">
+        <div class="wrapper flex flex-column justify-center align-center" v-if="!loadingStats">
         <!--TODO: MAKE INSTRUCTION APEAR ON TRANSITION-->
         <p class="chart-instructions">
             How to tell which foods are recommended for you? <br/>
@@ -71,7 +71,7 @@
                         ticks: [-2,12], gridlines: {color: 'white', count: 4}},
                     hAxis: {textPosition: 'none', textStyle: {color: 'white'}, baselineColor: 'white', 
                         ticks: [0,6], gridlines: {color: 'white', count: 4}},
-                        tooltip: {trigger: 'none'},
+                    // tooltip: {trigger: 'none'},
                     explorer: {zoomDelta: 1.2},
                      
                     

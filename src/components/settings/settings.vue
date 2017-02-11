@@ -3,15 +3,15 @@
         <div class="wrapper flex-column flex-center">
 
             <h2>Settings</h2>
-            <h3 class="title">Enable notifications:</h3>
+            <h3 class="title">Remind me to report my feeling after every meal</h3>
             <label class="custom-check">
                 <input v-model="shouldPush" type="checkbox" name="onOff">
                 <i></i> 
                 <span></span>
             </label>
-            <h3 class="title">Notification delay after every meal:</h3>
-            <range-slider v-model="sliderValue" :disabled="!shouldPush" :class="{isdisabled : !shouldPush}" class="slider" min="1" max="10"
-                step="1"></range-slider>
+            <h3 class="title">Reminder delay (in hours)</h3>
+            <range-slider v-model="sliderValue" :disabled="!shouldPush" :class="{isdisabled : !shouldPush}" 
+                          class="slider" min="2" max="4" step="0.5"></range-slider>
             <span class="slider-value"> {{sliderValue}} </span>
             <button @click="saveSettings" @touch="saveSettings" class="btn btn-success btn-lg">Save Settings</button>
         </div>
@@ -45,7 +45,7 @@
         },
         mounted() {
 
-            //get settings from db
+            //display settings from db
             if (this.user.settings.pushTimer === -1) {
                 this.shouldPush = false;
                 this.sliderValue = 4;

@@ -1,7 +1,9 @@
 <template>
-    <div class="wrapper flex flex-column justify-center align-center">
-    <h3>Cooking your data ...</h3>
-    <div id="cooking">
+    <!--<div class="wrapper-pan flex flex-column justify-center align-center">-->
+    <div class="pan-wrapper">
+        <h3>Cooking your data ...</h3>
+        </div>
+    <!--<div id="cooking">
         <div class="bubble"></div>
         <div class="bubble"></div>
         <div class="bubble"></div>
@@ -16,8 +18,8 @@
                 <div id="pastry"></div>
             </div>
         </div>
-    </div>
-    </div>
+    </div>-->
+    <!--</div>-->
 </template>
 
 <script>
