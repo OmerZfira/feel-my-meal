@@ -27,6 +27,8 @@ self.addEventListener('message', function (event) {
     body:
     `Hi ${pushObj.user}!
 Please tell us how do you feel`,
+    icon: './images/icons/icon-196x196.png',
+    badge: './images/icons/badge-96x96.png'
 
   };
 
@@ -49,8 +51,8 @@ self.addEventListener('notificationclick', function (event) {
 Please tell us how do you feel`
       }
     }
-    // remindPushMsg.pushTimer = 1; // 1 hour reminder
-    remindPushMsg.pushTimer = evNote.data.pushTimer * 2;
+    remindPushMsg.pushTimer = 0.5; // 30min reminder
+    // remindPushMsg.pushTimer = evNote.data.pushTimer * 2;
     pushNotification(remindPushMsg)
   } else clients.openWindow(redirectUrl, '_blank');
   event.notification.close();
@@ -68,9 +70,8 @@ self.addEventListener('activate', function (event) {
 function pushNotification({title, options, pushTimer}) {
   setTimeout(function () {
     self.registration.showNotification(title, options)
-      }, (6000)); //FOR LOCAL TEST ONLY -> FIXED 6sec 
-
-  // }, (pushTimer * ONE_HOUR));
+  // }, (12000)); //FOR MEETUP ONLY -> FIXED 30sec 
+  }, (pushTimer * ONE_HOUR));
 }
 
 // self.addEventListener('push', function(event) {
