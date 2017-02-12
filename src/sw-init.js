@@ -90,6 +90,7 @@ if ('serviceWorker' in navigator && 'PushManager' in window) {
     // console.log('Service Worker and Push is supported');
     navigator.serviceWorker.register('swPush.js')
         .then(function (swReg) {
+            swReg.update();
             swRegistration = swReg;
         });
 

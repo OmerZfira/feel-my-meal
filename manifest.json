@@ -1,6 +1,7 @@
 {
   "name": "Feel My Meal",
   "short_name": "Feel My Meal",
+  "version": 1.0,
   "icons": [{
     "src": "./images/icons/icon-196x196.png",
       "sizes": "128x128",
@@ -22,7 +23,7 @@
       "sizes": "256x256",
       "type": "image/png"
     }],
-  "start_url": "./index.html",
+  "scope": "./",
   "display": "standalone",
   "background_color": "#2C3E50",
   "theme_color": "#90ee90"
