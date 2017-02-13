@@ -1,0 +1,37 @@
+.wrapper {
+    width: 75%;
+    display:flex;
+    justify-content: center;
+    color: #333;
+}
+
+.video-chat {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    flex: 1 0;
+}
+
+.video-display {
+    width: 100px;
+    height: 100px;
+    background-color: #ddd;
+}
+.video-display-incoming {
+    width: 500px;
+    height: 400px;
+    background-color: #ddd;
+}
+
+@media (max-width: 1000px) {
+    .wrapper {
+        width: 85%;
+    }
+}
+
+@media (max-width: 750px) {
+    .wrapper {
+        width: 95%;
+    }
+}

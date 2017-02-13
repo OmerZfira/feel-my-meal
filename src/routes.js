@@ -10,6 +10,7 @@ import MyMeals from './components/my-meals';
 import Settings from './components/settings/settings';
 import MyStatistics from './components/my-statistics/my-statistics.vue';
 import Chat from './components/chat';
+import VideoChat from './components/video-chat';
 
 
 const routes = [{
@@ -49,6 +50,11 @@ const routes = [{
   path: '/chat',
   name: 'chat',
   component: Chat
+},
+{
+  path: '/video-chat',
+  name: 'video-chat',
+  component: VideoChat
 },
 // {
 //   path: '/admin',
