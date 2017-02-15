@@ -12,7 +12,7 @@ import MainNav from './components/main-nav';
 import BottomNav from './components/bottom-nav/bottom-nav';
 import ModalFeeling from './components/modal-feeling/modal-feeling';
 import toastr from 'toastr';
-import Peer from 'peerjs/dist/peer.js';
+import  'peerjs/lib/exports.js';
 
 if (process.env.NODE_ENV === 'development') {
   Vue.http.options.root = 'http://localhost:3003';
