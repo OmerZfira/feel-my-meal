@@ -12,19 +12,22 @@ import MainNav from './components/main-nav';
 import BottomNav from './components/bottom-nav/bottom-nav';
 import ModalFeeling from './components/modal-feeling/modal-feeling';
 import toastr from 'toastr';
-import  'peerjs/lib/exports.js';
+import 'peerjs/lib/exports.js';
 
+
+console.log(process.env.NODE_ENV);
 if (process.env.NODE_ENV === 'development') {
   Vue.http.options.root = 'http://localhost:3003';
-} else console.log(process.env.NODE_ENV);
-Vue.http.options.root = 'https://coding-academy.net/feelmymeal/app';
+} else {
+  Vue.http.options.root = 'https://coding-academy.net/feelmymeal/app';
+}
 
 
 const app = new Vue({
   router,
   store,
   moment,
-  
+
   components: {
     MainNav,
     BottomNav,
@@ -33,11 +36,11 @@ const app = new Vue({
   data: {
     showModal: false
   },
-    computed: {
+  computed: {
     ...mapGetters({
       isLoggedIn: 'isLoggedIn',
     })
-    },
+  },
   mounted() {
     let path = (process.env.NODE_ENV === 'development') ? 'http://localhost:8080/add-feeling#/' : 'https://coding-academy.net/feelmymeal/#/add-feeling';
     // let path = 'https://coding-academy.net/feelmymeal/';
