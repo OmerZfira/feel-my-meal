@@ -15,9 +15,10 @@ import toastr from 'toastr';
 
 if (process.env.NODE_ENV === 'development') {
   Vue.http.options.root = 'http://localhost:3003';
-} else console.log(process.env.NODE_ENV);
-Vue.http.options.root = 'https://coding-academy.net/feelmymeal/app';
-
+} else {
+  console.log(process.env.NODE_ENV);
+  Vue.http.options.root = 'https://coding-academy.net/feelmymeal/app';
+}
 
 const app = new Vue({
   router,

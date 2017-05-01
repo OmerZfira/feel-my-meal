@@ -1,8 +1,8 @@
 {
-  "name": "coding-acadmy-vue",
+  "name": "Feel-My-Meal",
   "version": "1.0.0",
-  "description": "CodingAcadmy vue js",
-  "author": "Omer Zfira",
+  "description": "Food-Tarck app",
+  "author": "Mark Fridman",
   "private": true,
   "scripts": {
     "dev": "node build/dev-server.js",
@@ -18,6 +18,7 @@
     "fullcalendar": "^3.1.0",
     "jquery": "^3.1.1",
     "moment": "^2.17.1",
+    "node-sass": "^3.13.1",
     "socket.io": "^1.7.2",
     "sweetalert": "^1.1.3",
     "toastr": "^2.1.2",

@@ -27,7 +27,7 @@ export default {
     const nickName = window.prompt('Please enter a nickname:');
     this.chatMsg.nickName = nickName || this.chatMsg.nickName;
     if (process.env.NODE_ENV === 'development') {
-      socketPath = 'http://localhost:3003';
+      socketPath = 'http://localhost:3003/#/';
     } else socketPath = '/feelmymeal/app/socket.io';
 
     this.socket = io.connect({ path: socketPath });
