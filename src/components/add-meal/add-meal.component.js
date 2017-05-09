@@ -71,7 +71,7 @@ export default {
             }
         },
         pushNotification() {
-            let redirectUrl = (process.env.NODE_ENV === 'development') ? 'http://localhost:8080/add-feeling' : 'https://coding-academy.net/feelmymeal/#/add-feeling';
+            let redirectUrl = (process.env.NODE_ENV === 'development') ? 'http://localhost:8080/add-feeling' : 'https://feel-my-meal.herokuapp.com/#/add-feeling';
             let pushObj = {
                             foods: this.foods,
                             user: this.user.username,

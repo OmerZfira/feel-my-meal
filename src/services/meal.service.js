@@ -11,7 +11,9 @@ function submitMeal({ foods, userId }) {
 
 
 export function getMealsByUser({user}) {
-  return Vue.http.post('getMealByUser',user )
+    console.log('user', user);
+    
+  return Vue.http.post('getMealByUser', user )
         
         .then(res => res.json())
         .then(meals => {

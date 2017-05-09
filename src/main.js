@@ -13,12 +13,13 @@ import BottomNav from './components/bottom-nav/bottom-nav';
 import ModalFeeling from './components/modal-feeling/modal-feeling';
 import toastr from 'toastr';
 
-if (process.env.NODE_ENV === 'development') {
-  Vue.http.options.root = 'http://localhost:3003';
-} else {
-  console.log(process.env.NODE_ENV);
-  Vue.http.options.root = 'https://coding-academy.net/feelmymeal/app';
-}
+// if (process.env.NODE_ENV === 'development') {
+//   Vue.http.options.root = 'http://localhost:3003';
+// } else {
+//   console.log(process.env.NODE_ENV);
+//   Vue.http.options.root = 'https://coding-academy.net/feelmymeal/app';
+// }
+  // Vue.http.options.root = 'https://feel-my-meal.herokuapp.com';
 
 const app = new Vue({
   router,
@@ -39,7 +40,7 @@ const app = new Vue({
     })
     },
   mounted() {
-    let path = (process.env.NODE_ENV === 'development') ? 'http://localhost:8080/add-feeling#/' : 'https://coding-academy.net/feelmymeal/#/add-feeling';
+    let path = (process.env.NODE_ENV === 'development') ? 'http://localhost:8080/add-feeling#/' : 'https://feel-my-meal.herokuapp.com/#/add-feeling';
     // let path = 'https://coding-academy.net/feelmymeal/';
     if (window.location.href === (path)) this.showModal = true;
   }

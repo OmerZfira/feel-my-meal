@@ -9,10 +9,10 @@ export const CLEAR_MEALS_CACHE = 'meal/CLEAR_MEALS_CACHE';
 import toastr from 'toastr';
 import mealService from '../../services/meal.service';
 import { mapGetters } from 'vuex';
+import store from '../../store';
 
 const state = {
   latestMeals: [],
-  userId: '',
   currMeal: {},
   isloadingMeal: false,
   loading: false,
@@ -66,6 +66,8 @@ const actions = {
   },
 
   getMealsByUser({ commit, state }, user) {
+    console.log('user', user);
+    
     if (state.latestMeals.length) {
       commit(GET_MEALS_BY_USER_SUCCESS, state.latestMeals);
       return state.latestMeals;

@@ -7,6 +7,7 @@ import Vue from 'vue';
  * @returns {Promise}
  */
 function signin( {email,password} ) {
+  console.log('signing with ', email)
   return Vue.http.post('login', {username: email, pass: password} )
     .then(res => res.json())
     .then(({token, user}) => {

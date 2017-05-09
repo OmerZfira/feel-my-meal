@@ -113,15 +113,19 @@ export default {
 
         var prmMeals = this.$store.dispatch('getMealsByUser', this.user).then(meals => {
 
-            meals.forEach(meal => {
-                this.translateMeals(meal);
-            });
+            if(meals) {
+                    meals.forEach(meal => {
+                    this.translateMeals(meal);
+                });
+            }
         });
         var prmFeelings = this.$store.dispatch('getFeelingsByUser', this.user).then((feelings) => {
 
-            feelings.forEach((feeling) => {
-                this.translateFeelings(feeling)
-            });
+            if(feelings) {
+                    feelings.forEach((feeling) => {
+                    this.translateFeelings(feeling)
+                });
+            }
 
         });
         Promise.all([prmMeals, prmFeelings]).then(values => {
