@@ -1,11 +1,11 @@
 <!--<div class="wrapper">
     <meta name="viewport" content="width=device-width, initial-scale=1">-->
     <section class="video-chat below-nav">
-
     <h4>Who do you want to call to?</h4>
     <input type="text" v-model="targetUser">
     <button @click="connectRTC()" class="btn btn-success">Hello {{user.username}}, place your call!</button>
-        <video class="video-display" ref="videoDisplay"></video>
+    <button @click="mutedOut = !mutedOut" class="btn btn-warning">mute me</button>
+				<video class="video-display" ref="videoDisplay" :muted="mutedOut"></video>
         <video class="video-display-incoming" ref="videoDisplayInc"></video>
     </section>
 <!--</div>-->

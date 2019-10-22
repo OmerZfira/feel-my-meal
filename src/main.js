@@ -12,19 +12,21 @@ import MainNav from './components/main-nav';
 import BottomNav from './components/bottom-nav/bottom-nav';
 import ModalFeeling from './components/modal-feeling/modal-feeling';
 import toastr from 'toastr';
-import Peer from 'peerjs/dist/peer.js';
+// import Peer from 'peerjs';
 
 if (process.env.NODE_ENV === 'development') {
-  Vue.http.options.root = 'http://localhost:3003';
-} else console.log(process.env.NODE_ENV);
-Vue.http.options.root = 'https://coding-academy.net/feelmymeal/app';
+	Vue.http.options.root = 'http://localhost:3003';
+} else {
+	console.log('env: ', process.env.NODE_ENV);
+	Vue.http.options.root = 'https://feelmymeal.herokuapp.com/';
+}
 
 
 const app = new Vue({
   router,
   store,
   moment,
-  
+
   components: {
     MainNav,
     BottomNav,

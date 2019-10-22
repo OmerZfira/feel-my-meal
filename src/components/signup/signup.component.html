@@ -6,11 +6,11 @@
         <img class="profile-img"
              src="../../assets/img/logo-sporty.png"
              alt="">
-        <form class="form-signin" novalidate @submit.prevent="signup(user)">
+        <form class="form-signin"  @submit.prevent="signup(user)">
 
           <div class="form-group" :class="{'has-error': errors.has('user.email') }">
             <input type="email" class="form-control" placeholder="Email" autofocus v-model="user.email"
-                   v-validate.initial="user.email" data-vv-rules="required|email">
+                   >
             <span class="text-danger"
                   v-if="errors.has('user.email')">Email please</span>
           </div>
@@ -20,7 +20,7 @@
             <input class="form-control" placeholder="Password"
                    type="password"
                    v-model="user.password"
-                   v-validate.initial="user.password" data-vv-rules="required|min:6|max:12">
+                   >
             <span class="text-danger"
                   v-if="errors.has('user.password:min')">The field must be at least 6 characters.</span>
             <span class="text-danger"

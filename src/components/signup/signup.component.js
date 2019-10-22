@@ -10,8 +10,8 @@ export default  {
   },
   methods: {
     signup( user ) {
-      this.$validator.validateAll();
-      if( this.errors.any() ) return;
+      // this.$validator.validateAll();
+      // if( this.errors.any() ) return;
 
       authService.signup(user).then(res => {
         // this.$store.commit(SIGN_IN);
