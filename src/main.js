@@ -12,7 +12,6 @@ import MainNav from './components/main-nav';
 import BottomNav from './components/bottom-nav/bottom-nav';
 import ModalFeeling from './components/modal-feeling/modal-feeling';
 import toastr from 'toastr';
-// import Peer from 'peerjs';
 
 if (process.env.NODE_ENV === 'development') {
 	Vue.http.options.root = 'http://localhost:3003';
@@ -42,7 +41,6 @@ const app = new Vue({
     },
   mounted() {
     let path = (process.env.NODE_ENV === 'development') ? 'http://localhost:8080/add-feeling#/' : 'https://coding-academy.net/feelmymeal/#/add-feeling';
-    // let path = 'https://coding-academy.net/feelmymeal/';
     if (window.location.href === (path)) this.showModal = true;
   }
 }).$mount('#app');
