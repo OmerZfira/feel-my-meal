@@ -15,13 +15,17 @@ export default {
 			myUser: '',
             targetUser: 'w',
 			outStream: null,
-			mutedOut: false, //test microphone for self getUserMedia on nexus5
+			isMutedOut: false, //test microphone for self getUserMedia on nexus5
 		}
     },
     computed: {
         ...mapGetters(['user']),
     },
     methods: {
+		toggleMuteOut() {
+			this.isMutedOut = !this.isMutedOut;
+			this.outStream.getAudioTracks()[0].enabled = this.isMutedOut;
+		}
         // connectRTC() {
         //     console.log('target: ', this.targetUser);
         //     console.log('peer is: ', this.peer);
