@@ -92,7 +92,7 @@ export default {
 		})
 
 		peer.on('stream', stream => {
-			this.$refs.videoDisplayInc.src = window.URL.createObjectURL(stream);
+			this.$refs.videoDisplayInc.srcObject = stream;
 			this.$refs.videoDisplayInc.play();
 		});
 
@@ -105,7 +105,7 @@ export default {
 			navigator.mediaDevices.getUserMedia(mediaConfig)
 				.then(stream => {
 					this.outStream = stream;
-					this.$refs.videoDisplay.src = window.URL.createObjectURL(stream);
+					this.$refs.videoDisplay.srcObject = stream;
 					this.$refs.videoDisplay.play();
 					if (peerConnected) {
 						peer.addStream(stream)
