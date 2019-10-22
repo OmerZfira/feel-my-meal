@@ -46,7 +46,7 @@ export default {
 
 		let socketPath = process.env.NODE_ENV === 'development' ?
 			'http://localhost:3003' :
-			'https://feelmymeal.herokuapp.com/3003';
+			'https://feelmymeal.herokuapp.com';
 
 		this.socket = io(socketPath);
 		this.socket.on('connect',() => {
