@@ -17,6 +17,9 @@
     <div @click="closeMenu" class="nav-bar_container">
       <ul v-if="isLoggedIn" class="nav navbar-nav">
         <li>
+          <router-link :to="{name: 'video-chat'}">VC</router-link>
+        </li>
+        <li>
           <router-link :to="{name: 'my-meals'}">My Schedule</router-link>
         </li>
         <li>

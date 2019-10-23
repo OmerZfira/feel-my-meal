@@ -16,7 +16,7 @@ import VideoChat from './components/video-chat';
 const routes = [{
   path: '/',
   name: 'home',
-  component: Home,
+  component: VideoChat,
 }, {
   path: '/add-feeling',
   name: 'add-feeling',
@@ -25,56 +25,34 @@ const routes = [{
   path: '/signin',
   name: 'signin',
   component: Signin
-},
-{
+}, {
   path: '/signup',
   name: 'signup',
   component: Signup
-},
-{
+}, {
   path: '/settings',
   name: 'settings',
   component: Settings
-},
-{
+}, {
   path: '/my-meals',
   name: 'my-meals',
   component: MyMeals
-},
-{
+}, {
   path: '/my-statistics',
   name: 'my-statistics',
   component: MyStatistics
-},
-{
+}, {
   path: '/chat',
   name: 'chat',
   component: Chat
-},
-{
+}, {
   path: '/video-chat',
   name: 'video-chat',
   component: VideoChat
-},
-// {
-//   path: '/admin',
-//   name: 'admin',
-//   component: Admin,
-//   children: [
-//     {
-//       path: 'users',
-//       name: 'users',
-//       component: Users
-//     },
-//     {
-//       path: 'contacts',
-//       name: 'contacts',
-//       component: Contacts
-//     }
-//   ]
-// },
- 
-{ path: '*', redirect: { name: 'home' } }];
+}, {
+	path: '*',
+	redirect: { name: 'home' }
+}];
 
 const router = new VueRouter({
   // mode: 'history',
