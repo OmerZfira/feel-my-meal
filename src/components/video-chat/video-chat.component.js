@@ -10,14 +10,21 @@ export default {
 			socket: null,
 			socketReady: false,
 			peer: null,
+			targetUser: 'w',
+			userSuffix: 'W50hyPy2Cl',
 			myUser: '',
-            targetUser: 'w',
 			outStream: null,
 			isMutedOut: false, //test microphone for self getUserMedia on nexus5
 		}
     },
     computed: {
-        ...mapGetters(['user']),
+		...mapGetters(['user']),
+		socketTargetUser() {
+			return this.targetUser + this.userSuffix;
+		},
+		myUser() {
+			return this.user.username[0] + this.userSuffix;
+		},
     },
     methods: {
 		toggleMuteOut() {
@@ -26,9 +33,6 @@ export default {
 		}
     },
     mounted() {
-		this.myUser = this.user.username.slice(0, 1) === 'w' ? 'W50hyPy2Cl' : 'eVHJlpt7Ac';
-		this.targetUser = this.user.username.slice(0, 1) === 'w' ? 'eVHJlpt7Ac' : 'W50hyPy2Cl';
-
 		let socketPath = process.env.NODE_ENV === 'development' ?
 			'http://localhost:3003' :
 			'https://feelmymeal.herokuapp.com';
@@ -38,43 +42,44 @@ export default {
 			this.socketReady = true;
 		});
 		this.socket.on('rtc offer', msg => {
-			if (msg.to === this.myUser && msg.data.type === 'offer') {
-				peer.signal(msg.data)
-			} else if (msg.to === this.myUser && msg.data.type === 'answer') {
+			if (msg.to === this.myUser && ['offer', 'answer'].includes(msg.data.type)) {
 				peer.signal(msg.data)
 			}
 		});
 
+		let peerConnected = false;
 		const peer = new Peer({
 			initiator: this.user.username.slice(0, 1) === 'w',
 			trickle: false
-		})
-		peer.on('error', err => console.log('error', err))
+		});
+
+		peer.on('error', err => {
+			console.log('error', err);
+			peerConnected = false;
+		});
 
 		peer.on('signal', data => {
 			console.log('SIGNAL', data);
 
 			if (this.socketReady) {
 				console.log('this.socketReady is: ', this.socketReady);
-				this.socket.emit('rtc offer', {from:  this.myUser, to: this.targetUser, data});
+				this.socket.emit('rtc offer', {from: this.myUser, to: this.socketTargetUser, data});
 			} else {
 				setTimeout(() => {
-					this.socket.emit('rtc offer', {from:  this.myUser, to: this.targetUser, data});
+					this.socket.emit('rtc offer', {from: this.myUser, to: this.socketTargetUser, data});
 				}, 2000);
 			}
+		});
 
-		})
-
-		let peerConnected = false;
 		peer.on('connect', () => {
 			console.log('CONNECT')
 			peerConnected = true;
 			peer.send('whatever' + Math.random())
-		})
+		});
 
 		peer.on('data', data => {
 			console.log('data: ' + data)
-		})
+		});
 
 		peer.on('stream', stream => {
 			this.$refs.videoDisplayInc.srcObject = stream;
