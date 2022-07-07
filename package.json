@@ -17,7 +17,7 @@
     "font-awesome": "^4.7.0",
     "fullcalendar": "^3.1.0",
     "jquery": "^3.1.1",
-    "moment": "^2.17.1",
+    "moment": "^2.29.4",
     "peerjs": "^1.1.0",
     "simple-peer": "^9.6.0",
     "socket.io": "^1.7.2",
